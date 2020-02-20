@@ -16,6 +16,5 @@ DONE 5) Make a login page with react js
 2) create questions content
 3) cannot fix the name of undefined bug
 
-18/2/2020
-1) 
+Use 'npm dev run' command to start up the web app and server
 
