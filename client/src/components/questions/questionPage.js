@@ -47,48 +47,19 @@ class QuestionPage extends Component {
 
         return (
           <Grid
-  container
-  spacing={0}
-  direction="column"
-  alignItems="center"
-  justify="center"
-  style={{ minHeight: '100vh' }}
-> 
-<Grid item xs={3}>
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={{ minHeight: '100vh' }}
+          > 
+          <Grid item xs={3}>
           <div className={classes.root}>
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend"></FormLabel>
-            <RadioGroup
-              aria-label="Gender"
-              name="gender1"
-              className={classes.group}
-              value={this.state.value}
-              onChange={this.handleChange}
-            >
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
-            </RadioGroup>
-          </FormControl>
-          <br/>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend"></FormLabel>
-            <RadioGroup
-              aria-label="Gender"
-              name="gender1"
-              className={classes.group}
-              value={this.state.value}
-              onChange={this.handleChange}
-            >
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
-            </RadioGroup>
-          </FormControl>
-          <br/>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend"></FormLabel>
-            <RadioGroup
+            <FormLabel component="legend">Gender</FormLabel>
+            <RadioGroup 
+              row
               aria-label="Gender"
               name="gender1"
               className={classes.group}
@@ -102,6 +73,47 @@ class QuestionPage extends Component {
           </FormControl>
         </div>
         </Grid>
+
+        <Grid item xs={3}>
+          <div className={classes.root}>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">Gender</FormLabel>
+            <RadioGroup 
+              row
+              aria-label="Gender"
+              name="gender1"
+              className={classes.group}
+              value={this.state.value}
+              onChange={this.handleChange}
+            >
+              <FormControlLabel value="female" control={<Radio />} label="Female" />
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel value="other" control={<Radio />} label="Other" />
+            </RadioGroup>
+          </FormControl>
+        </div>
+        </Grid>
+
+        <Grid item xs={3}>
+          <div className={classes.root}>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">Gender</FormLabel>
+            <RadioGroup 
+              row
+              aria-label="Gender"
+              name="gender1"
+              className={classes.group}
+              value={this.state.value}
+              onChange={this.handleChange}
+            >
+              <FormControlLabel value="female" control={<Radio />} label="Female" />
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel value="other" control={<Radio />} label="Other" />
+            </RadioGroup>
+          </FormControl>
+        </div>
+        </Grid>
+        
         </Grid>
         )
     };
