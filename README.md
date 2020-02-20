@@ -9,6 +9,9 @@ DONE 5) Make a login page with react js
     - need to make a form for rendering 
     - make the form fetch api/userlogin
     - set up connection to db so that the username and score is stored in db
+    - fixed username insertion issue by adding body parser module for json data
+6) Display questions in the front page
+    - need to set up controller to query emotion type question from db
 
 
 17/2/2020

@@ -5,10 +5,11 @@ import FormLabel from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   formControl: {
     margin: theme.spacing.unit * 3,
@@ -21,21 +22,21 @@ const styles = theme => ({
 class QuestionPage extends Component {
 
     // it runs automatically when the component is mounted
-    // componentDidMount() {
-    //     fetch('/api/question')
-    //         .then(res => res.json())
-    //         .then(questions => this.setState({questions}, () => console.log('Questions fetched...', questions)));
-    // }
-
-    // state = {
-    //   content: '',
-    //   correctAnswer: '',
-    //   possibleAnswer: ''
-    // }
+    componentDidMount() {
+        fetch('/api/question')
+            .then(res => res.json())
+            .then(questions => this.setState({questions}, () => console.log('Questions fetched...', questions)));
+    }
 
     state = {
-      value: 'female',
-    };
+      content: '',
+      correctAnswer: '',
+      possibleAnswer: ''
+    }
+
+    // state = {
+    //   value: 'female',
+    // };
 
     handleChange = event => {
       this.setState({ value: event.target.value });
@@ -45,9 +46,48 @@ class QuestionPage extends Component {
         const { classes } = this.props;
 
         return (
+          <Grid
+  container
+  spacing={0}
+  direction="column"
+  alignItems="center"
+  justify="center"
+  style={{ minHeight: '100vh' }}
+> 
+<Grid item xs={3}>
           <div className={classes.root}>
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Gender</FormLabel>
+            <FormLabel component="legend"></FormLabel>
+            <RadioGroup
+              aria-label="Gender"
+              name="gender1"
+              className={classes.group}
+              value={this.state.value}
+              onChange={this.handleChange}
+            >
+              <FormControlLabel value="female" control={<Radio />} label="Female" />
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel value="other" control={<Radio />} label="Other" />
+            </RadioGroup>
+          </FormControl>
+          <br/>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend"></FormLabel>
+            <RadioGroup
+              aria-label="Gender"
+              name="gender1"
+              className={classes.group}
+              value={this.state.value}
+              onChange={this.handleChange}
+            >
+              <FormControlLabel value="female" control={<Radio />} label="Female" />
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel value="other" control={<Radio />} label="Other" />
+            </RadioGroup>
+          </FormControl>
+          <br/>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend"></FormLabel>
             <RadioGroup
               aria-label="Gender"
               name="gender1"
@@ -61,6 +101,8 @@ class QuestionPage extends Component {
             </RadioGroup>
           </FormControl>
         </div>
+        </Grid>
+        </Grid>
         )
     };
 
