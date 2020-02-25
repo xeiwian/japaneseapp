@@ -21,39 +21,40 @@ const styles = theme => ({
 
 class QuestionPage extends Component {
 
-    // it runs automatically when the component is mounted
-    // componentDidMount() {
-    //     fetch('/api/question')
-    //         .then(res => res.json())
-    //         .then(questions => this.setState({questions}, () => console.log('Questions fetched...', questions)));
-    // }
-
     state = {
       content: '',
       correctAnswer: '',
       possibleAnswer: ''
     }
 
-    componentDidMount = () => {
-      this.fetchData();
-    }
+    // componentDidMount = () => {
+    //   this.fetchData();
+    // }
 
-    fetchData = () => {
-      fetch('api/question')
-      .then(res => res.json())
-      .then(parsedJSON => console.log(parsedJSON.map(questions => (
-        {
-          content: `${questions.content}`,
-          // correctAnswer: `${questions.correctAnswer}`,
-          // possibleAnswer: `${questions.possibleAnswer[0]}, ${questions.possibleAnswer[1]}, ${questions.possibleAnswer[2]}`
-        }
-      ))))
-      .then(questions => this.setState(
-        {
-          questions
-        }
-      ))
-      .catch(error => console.log('parsing failed', error))
+    // fetchData = () => {
+    //   fetch('api/question')
+    //   .then(res => res.json())
+    //   .then(parsedJSON => console.log(parsedJSON.map(questions => (
+    //     {
+    //       content: `${questions.content}`,
+    //       correctAnswer: `${questions.correctAnswer}`,
+    //       possibleAnswer: `${questions.possibleAnswer}`
+    //     }
+    //   ))))
+    //   .then(questions => this.setState(
+    //     {
+    //       questions
+    //     }
+    //   ))
+    //   .catch(error => console.log('parsing failed', error))
+    // }
+
+    componentDidMount = async () => {
+      const url = 'api/question';
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+      this.setState({content: data.content, correctAnswer: data.correctAnswer, possibleAnswer: data.possibleAnswer})
     }
 
     handleChange = event => {
@@ -62,7 +63,6 @@ class QuestionPage extends Component {
   
     render() {
         const { classes } = this.props;
-        const { questions } = this.state;
 
         return (
           <Grid

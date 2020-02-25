@@ -23,6 +23,7 @@ DONE 5) Make a login page with react js
 
 Use 'npm dev run' command to start up the web app and server
 
+this link is useful for fetching API data for react js => https://www.youtube.com/watch?v=T3Px88x_PsA
 21/2/2020
 
 
