@@ -22,9 +22,15 @@ const styles = theme => ({
 class QuestionPage extends Component {
 
     state = {
-      content: '',
-      correctAnswer: '',
-      possibleAnswer: ''
+      emotionContent: '',
+      correctEmotionAnswer: '',
+      possibleEmotionAnswer: '',
+      familyContent: '',
+      correctFamilyAnswer: '',
+      possibleFamilyAnswer: '',
+      foodContent: '',
+      correctFoodAnswer: '',
+      possibleFoodAnswer: '',
     }
 
     // componentDidMount = () => {
@@ -49,13 +55,35 @@ class QuestionPage extends Component {
     //   .catch(error => console.log('parsing failed', error))
     // }
 
-    componentDidMount = async () => {
-      const url = 'api/question';
+    componentDidMount = () => {
+      this.fetchEmotionQuestion();
+      this.fetchFamilyQuestion();
+      this.fetchFoodQuestion();
+    }
+
+    fetchEmotionQuestion = async () => {
+      const url = 'api/question/emotion';
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
-      this.setState({content: data.content, correctAnswer: data.correctAnswer, possibleAnswer: data.possibleAnswer})
-    }
+      this.setState({emotionContent: data.content, correctEmotionAnswer: data.correctAnswer, possibleEmotionAnswer: data.possibleAnswer})
+    } 
+
+    fetchFamilyQuestion = async () => {
+      const url = 'api/question/family';
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+      this.setState({familyContent: data.content, correctFamilyAnswer: data.correctAnswer, possibleFamilyAnswer: data.possibleAnswer})
+    } 
+
+    fetchFoodQuestion = async () => {
+      const url = 'api/question/food';
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+      this.setState({foodContent: data.content, correctFoodAnswer: data.correctAnswer, possibleFoodAnswer: data.possibleAnswer})
+    } 
 
     handleChange = event => {
       this.setState({ value: event.target.value });
@@ -76,7 +104,7 @@ class QuestionPage extends Component {
           <Grid item xs={3}>
             <div className={classes.root}>
             <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend">{this.state.content}</FormLabel>
+              <FormLabel component="legend">{this.state.emotionContent}</FormLabel>
               <RadioGroup 
                 row
                 aria-label="Gender"
@@ -85,9 +113,9 @@ class QuestionPage extends Component {
                 value={this.state.value}
                 onChange={this.handleChange}
               >
-                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                <FormControlLabel value="other" control={<Radio />} label="Other" />
+                <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio />} label={this.state.possibleEmotionAnswer[0]} />
+                <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio />} label={this.state.possibleEmotionAnswer[1]} />
+                <FormControlLabel value={this.state.possibleEmotionAnswer[2]} control={<Radio />} label={this.state.possibleEmotionAnswer[2]} />
               </RadioGroup>
             </FormControl>
           </div>
@@ -96,7 +124,7 @@ class QuestionPage extends Component {
         <Grid item xs={3}>
           <div className={classes.root}>
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Gender</FormLabel>
+            <FormLabel component="legend">{this.state.familyContent}</FormLabel>
             <RadioGroup 
               row
               aria-label="Gender"
@@ -105,9 +133,9 @@ class QuestionPage extends Component {
               value={this.state.value}
               onChange={this.handleChange}
             >
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
+              <FormControlLabel value={this.state.possibleFamilyAnswer[0]} control={<Radio />} label={this.state.possibleFamilyAnswer[0]} />
+              <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio />} label={this.state.possibleFamilyAnswer[1]} />
+              <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio />} label={this.state.possibleFamilyAnswer[2]}/>
             </RadioGroup>
           </FormControl>
         </div>
@@ -116,7 +144,7 @@ class QuestionPage extends Component {
         <Grid item xs={3}>
           <div className={classes.root}>
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Gender</FormLabel>
+            <FormLabel component="legend">{this.state.foodContent}</FormLabel>
             <RadioGroup 
               row
               aria-label="Gender"
@@ -125,9 +153,9 @@ class QuestionPage extends Component {
               value={this.state.value}
               onChange={this.handleChange}
             >
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
+              <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio />} label={this.state.possibleFoodAnswer[0]} />
+              <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio />} label={this.state.possibleFoodAnswer[1]} />
+              <FormControlLabel value={this.state.possibleFoodAnswer[2]} control={<Radio />} label={this.state.possibleFoodAnswer[2]} />
             </RadioGroup>
           </FormControl>
         </div>

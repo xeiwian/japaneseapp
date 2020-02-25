@@ -5,6 +5,8 @@ const models = require("./model");
 const Survey = models.Survey;
 
 // route.get("/", controller.ListQuestionController);
-route.get("/", controller.QueryEmotionQuestionController);
+route.get("/emotion", controller.QueryEmotionQuestionController);
+route.get("/family", controller.QueryFamilyQuestionController);
+route.get("/food", controller.QueryFoodQuestionController);
 
 module.exports = route;
