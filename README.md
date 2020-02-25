@@ -10,8 +10,10 @@ DONE 5) Make a login page with react js
     - make the form fetch api/userlogin
     - set up connection to db so that the username and score is stored in db
     - fixed username insertion issue by adding body parser module for json data
-6) Display questions in the front page
+6) Display 3 questions in the front page 4 times
+    - display them in radio buttons style
     - need to set up controller to query emotion type question from db
+    - extract the question content from the query and display it on the radio buttons
 
 
 17/2/2020
@@ -20,4 +22,7 @@ DONE 5) Make a login page with react js
 3) cannot fix the name of undefined bug
 
 Use 'npm dev run' command to start up the web app and server
+
+21/2/2020
+
 

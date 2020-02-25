@@ -22,11 +22,11 @@ const styles = theme => ({
 class QuestionPage extends Component {
 
     // it runs automatically when the component is mounted
-    componentDidMount() {
-        fetch('/api/question')
-            .then(res => res.json())
-            .then(questions => this.setState({questions}, () => console.log('Questions fetched...', questions)));
-    }
+    // componentDidMount() {
+    //     fetch('/api/question')
+    //         .then(res => res.json())
+    //         .then(questions => this.setState({questions}, () => console.log('Questions fetched...', questions)));
+    // }
 
     state = {
       content: '',
@@ -34,9 +34,27 @@ class QuestionPage extends Component {
       possibleAnswer: ''
     }
 
-    // state = {
-    //   value: 'female',
-    // };
+    componentDidMount = () => {
+      this.fetchData();
+    }
+
+    fetchData = () => {
+      fetch('api/question')
+      .then(res => res.json())
+      .then(parsedJSON => console.log(parsedJSON.map(questions => (
+        {
+          content: `${questions.content}`,
+          // correctAnswer: `${questions.correctAnswer}`,
+          // possibleAnswer: `${questions.possibleAnswer[0]}, ${questions.possibleAnswer[1]}, ${questions.possibleAnswer[2]}`
+        }
+      ))))
+      .then(questions => this.setState(
+        {
+          questions
+        }
+      ))
+      .catch(error => console.log('parsing failed', error))
+    }
 
     handleChange = event => {
       this.setState({ value: event.target.value });
@@ -44,6 +62,7 @@ class QuestionPage extends Component {
   
     render() {
         const { classes } = this.props;
+        const { questions } = this.state;
 
         return (
           <Grid
@@ -53,25 +72,25 @@ class QuestionPage extends Component {
           alignItems="center"
           justify="center"
           style={{ minHeight: '100vh' }}
-          > 
+          >
           <Grid item xs={3}>
-          <div className={classes.root}>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Gender</FormLabel>
-            <RadioGroup 
-              row
-              aria-label="Gender"
-              name="gender1"
-              className={classes.group}
-              value={this.state.value}
-              onChange={this.handleChange}
-            >
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
-            </RadioGroup>
-          </FormControl>
-        </div>
+            <div className={classes.root}>
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">{this.state.content}</FormLabel>
+              <RadioGroup 
+                row
+                aria-label="Gender"
+                name="gender1"
+                className={classes.group}
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel value="female" control={<Radio />} label="Female" />
+                <FormControlLabel value="male" control={<Radio />} label="Male" />
+                <FormControlLabel value="other" control={<Radio />} label="Other" />
+              </RadioGroup>
+            </FormControl>
+          </div>
         </Grid>
 
         <Grid item xs={3}>
