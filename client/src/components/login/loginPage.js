@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { useHistory } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import QuestionPage from "../questions/questionPage"; 
 
 // set the styles for loginPage
 const style = theme => ({
+  root: {
+    display: 'flex',
+    // justifyContent: "center"
+  },
   titleText: {
-    fontSize: 36,
-    // fontWeight: 600,
-    marginTop: 56
+    fontSize: 36
   },
   form: {
     padding: 16
   },
   formItems: {
     marginTop: 16,
-    marginBottom: 12
+    marginBottom: 12,
   },
   formControl: {
     margin: theme.spacing(1),
@@ -27,15 +31,7 @@ const style = theme => ({
 });
 
 class LoginPage extends Component {
-    // constructor(props){
-    //     super(props);
-    //     this.state={
-    //       username:'',
-    //       age:'',
-    //       score:''
-    //     }
-    // }
-    
+
     // create a new student record 
     createStudent = async data => {
       console.log(data);
@@ -76,37 +72,39 @@ class LoginPage extends Component {
       const { classes } = this.props;
       return (
         <Grid item xs={12}>
-          <Typography variant="h6" className={classes.titleText}>
-          Welcome boys and girls!
-          </Typography>
-          <form className={classes.form}>
-            <TextField
-                id="username"
-                label="Username"
-                value={this.state.username}
-                // handleChange={this.handleChange}
-                // onChange = {(event, value) => this.setState({username:value})}
-                onChange={this.handleChange('username')}
-                margin="normal"
-                placeholder="Enter a username"
-                required
-                InputLabelProps={{
-                  shrink: true
-                }}
-                className={classes.formItems}
-                helperText={this.state.nameErrorMsg}
-                error={this.state.nameError}
-            />       
-            <br/>
-            <Button
-              color="primary"
-              variant="contained"
-              className={classes.formItems}
-              onClick={this.proceedNext}
-            >
-              Begin Lesson
-            </Button>
-          </form> 
+          <div className={classes.root}>
+            <Typography variant="h6" className={classes.titleText}>
+            Welcome boys and girls!
+            </Typography>
+            <form className={classes.form}>
+              <TextField
+                  id="username"
+                  label="Username"
+                  value={this.state.username}
+
+                  onChange={this.handleChange('username')}
+                  margin="normal"
+                  placeholder="Enter a username"
+                  required
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  className={classes.formItems}
+                  helperText={this.state.nameErrorMsg}
+                  error={this.state.nameError}
+              />       
+              <br/>
+                <Button
+                  component={ Link } to="/question"
+                  color="primary"
+                  variant="contained"
+                  className={classes.formItems}
+                  onClick={this.proceedNext}
+                >
+                  Begin Lesson
+                </Button>
+            </form> 
+          </div>
         </Grid>
       );
     }

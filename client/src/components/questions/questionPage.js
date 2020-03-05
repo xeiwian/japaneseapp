@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import Grid from '@material-ui/core/Grid';
+import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -22,38 +25,16 @@ const styles = theme => ({
 class QuestionPage extends Component {
 
     state = {
-      emotionContent: '',
+      emotionQuestion: '',
       correctEmotionAnswer: '',
       possibleEmotionAnswer: '',
-      familyContent: '',
+      familyQuestion: '',
       correctFamilyAnswer: '',
       possibleFamilyAnswer: '',
-      foodContent: '',
+      foodQuestion: '',
       correctFoodAnswer: '',
       possibleFoodAnswer: '',
     }
-
-    // componentDidMount = () => {
-    //   this.fetchData();
-    // }
-
-    // fetchData = () => {
-    //   fetch('api/question')
-    //   .then(res => res.json())
-    //   .then(parsedJSON => console.log(parsedJSON.map(questions => (
-    //     {
-    //       content: `${questions.content}`,
-    //       correctAnswer: `${questions.correctAnswer}`,
-    //       possibleAnswer: `${questions.possibleAnswer}`
-    //     }
-    //   ))))
-    //   .then(questions => this.setState(
-    //     {
-    //       questions
-    //     }
-    //   ))
-    //   .catch(error => console.log('parsing failed', error))
-    // }
 
     componentDidMount = () => {
       this.fetchEmotionQuestion();
@@ -66,7 +47,7 @@ class QuestionPage extends Component {
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
-      this.setState({emotionContent: data.content, correctEmotionAnswer: data.correctAnswer, possibleEmotionAnswer: data.possibleAnswer})
+      this.setState({emotionQuestion: data.question, correctEmotionAnswer: data.correctAnswer, possibleEmotionAnswer: data.possibleAnswer})
     } 
 
     fetchFamilyQuestion = async () => {
@@ -74,7 +55,7 @@ class QuestionPage extends Component {
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
-      this.setState({familyContent: data.content, correctFamilyAnswer: data.correctAnswer, possibleFamilyAnswer: data.possibleAnswer})
+      this.setState({familyQuestion: data.question, correctFamilyAnswer: data.correctAnswer, possibleFamilyAnswer: data.possibleAnswer})
     } 
 
     fetchFoodQuestion = async () => {
@@ -82,7 +63,7 @@ class QuestionPage extends Component {
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
-      this.setState({foodContent: data.content, correctFoodAnswer: data.correctAnswer, possibleFoodAnswer: data.possibleAnswer})
+      this.setState({foodQuestion: data.question, correctFoodAnswer: data.correctAnswer, possibleFoodAnswer: data.possibleAnswer})
     } 
 
     handleChange = event => {
@@ -101,10 +82,13 @@ class QuestionPage extends Component {
           justify="center"
           style={{ minHeight: '100vh' }}
           >
+            <Typography>
+            Please answer these 3 questions and select the next button to continue
+            </Typography>
           <Grid item xs={3}>
             <div className={classes.root}>
             <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend">{this.state.emotionContent}</FormLabel>
+              <FormLabel component="legend">{this.state.emotionQuestion}</FormLabel>
               <RadioGroup 
                 row
                 aria-label="Gender"
@@ -124,7 +108,7 @@ class QuestionPage extends Component {
         <Grid item xs={3}>
           <div className={classes.root}>
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">{this.state.familyContent}</FormLabel>
+            <FormLabel component="legend">{this.state.familyQuestion}</FormLabel>
             <RadioGroup 
               row
               aria-label="Gender"
@@ -144,7 +128,7 @@ class QuestionPage extends Component {
         <Grid item xs={3}>
           <div className={classes.root}>
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">{this.state.foodContent}</FormLabel>
+            <FormLabel component="legend">{this.state.foodQuestion}</FormLabel>
             <RadioGroup 
               row
               aria-label="Gender"
@@ -160,7 +144,14 @@ class QuestionPage extends Component {
           </FormControl>
         </div>
         </Grid>
-        
+        <Button
+          component={ Link } to="/learning"
+          color="primary"
+          variant="contained"
+          className={classes.formItems}
+        >
+          Next
+        </Button>
         </Grid>
         )
     };

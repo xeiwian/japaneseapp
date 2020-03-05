@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const QuestionSchema = new Schema({
     type: String,
     content: String,
+    question: String,
     correctAnswer: String,
     possibleAnswer: Array
 });
