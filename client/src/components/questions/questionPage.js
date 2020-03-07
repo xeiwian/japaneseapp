@@ -85,73 +85,73 @@ class QuestionPage extends Component {
             <Typography>
             Please answer these 3 questions and select the next button to continue
             </Typography>
+            <Grid item xs={3}>
+              <div className={classes.root}>
+                <FormControl component="fieldset" className={classes.formControl}>
+                  <FormLabel component="legend">{this.state.emotionQuestion}</FormLabel>
+                  <RadioGroup 
+                    row
+                    aria-label="Gender"
+                    name="gender1"
+                    className={classes.group}
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                  >
+                    <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio />} label={this.state.possibleEmotionAnswer[0]} />
+                    <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio />} label={this.state.possibleEmotionAnswer[1]} />
+                    <FormControlLabel value={this.state.possibleEmotionAnswer[2]} control={<Radio />} label={this.state.possibleEmotionAnswer[2]} />
+                  </RadioGroup>
+                </FormControl>
+              </div>
+            </Grid>
+
+            <Grid item xs={3}>
+              <div className={classes.root}>
+                <FormControl component="fieldset" className={classes.formControl}>
+                  <FormLabel component="legend">{this.state.familyQuestion}</FormLabel>
+                  <RadioGroup 
+                    row
+                    aria-label="Gender"
+                    name="gender1"
+                    className={classes.group}
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                  >
+                    <FormControlLabel value={this.state.possibleFamilyAnswer[0]} control={<Radio />} label={this.state.possibleFamilyAnswer[0]} />
+                    <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio />} label={this.state.possibleFamilyAnswer[1]} />
+                    <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio />} label={this.state.possibleFamilyAnswer[2]}/>
+                  </RadioGroup>
+                </FormControl>
+              </div>
+            </Grid>
+
           <Grid item xs={3}>
             <div className={classes.root}>
-            <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend">{this.state.emotionQuestion}</FormLabel>
-              <RadioGroup 
-                row
-                aria-label="Gender"
-                name="gender1"
-                className={classes.group}
-                value={this.state.value}
-                onChange={this.handleChange}
-              >
-                <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio />} label={this.state.possibleEmotionAnswer[0]} />
-                <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio />} label={this.state.possibleEmotionAnswer[1]} />
-                <FormControlLabel value={this.state.possibleEmotionAnswer[2]} control={<Radio />} label={this.state.possibleEmotionAnswer[2]} />
-              </RadioGroup>
-            </FormControl>
-          </div>
-        </Grid>
-
-        <Grid item xs={3}>
-          <div className={classes.root}>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">{this.state.familyQuestion}</FormLabel>
-            <RadioGroup 
-              row
-              aria-label="Gender"
-              name="gender1"
-              className={classes.group}
-              value={this.state.value}
-              onChange={this.handleChange}
-            >
-              <FormControlLabel value={this.state.possibleFamilyAnswer[0]} control={<Radio />} label={this.state.possibleFamilyAnswer[0]} />
-              <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio />} label={this.state.possibleFamilyAnswer[1]} />
-              <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio />} label={this.state.possibleFamilyAnswer[2]}/>
-            </RadioGroup>
-          </FormControl>
-        </div>
-        </Grid>
-
-        <Grid item xs={3}>
-          <div className={classes.root}>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">{this.state.foodQuestion}</FormLabel>
-            <RadioGroup 
-              row
-              aria-label="Gender"
-              name="gender1"
-              className={classes.group}
-              value={this.state.value}
-              onChange={this.handleChange}
-            >
-              <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio />} label={this.state.possibleFoodAnswer[0]} />
-              <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio />} label={this.state.possibleFoodAnswer[1]} />
-              <FormControlLabel value={this.state.possibleFoodAnswer[2]} control={<Radio />} label={this.state.possibleFoodAnswer[2]} />
-            </RadioGroup>
-          </FormControl>
-        </div>
-        </Grid>
-        <Button
-          component={ Link } to="/learning"
-          color="primary"
-          variant="contained"
-          className={classes.formItems}
-        >
-          Next
-        </Button>
+              <FormControl component="fieldset" className={classes.formControl}>
+                <FormLabel component="legend">{this.state.foodQuestion}</FormLabel>
+                <RadioGroup 
+                  row
+                  aria-label="Gender"
+                  name="gender1"
+                  className={classes.group}
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                >
+                  <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio />} label={this.state.possibleFoodAnswer[0]} />
+                  <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio />} label={this.state.possibleFoodAnswer[1]} />
+                  <FormControlLabel value={this.state.possibleFoodAnswer[2]} control={<Radio />} label={this.state.possibleFoodAnswer[2]} />
+                </RadioGroup>
+              </FormControl>
+            </div>
+          </Grid>
+          <Button
+            component={ Link } to="/learning"
+            color="primary"
+            variant="contained"
+            className={classes.formItems}
+          >
+            Next
+          </Button>
         </Grid>
         )
     };

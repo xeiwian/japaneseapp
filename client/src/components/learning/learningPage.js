@@ -6,29 +6,34 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
-    root: {
-        // padding: theme.spacing(3, 2),
-        // height: 200,
-        display: "flex",
-        flexDirection: "column",
-        // justifyContent: "center"
-    },
-    formControl: {
-      margin: theme.spacing.unit * 3,
-      fontSize: 26
-    },
-    group: {
-      margin: `${theme.spacing.unit}px 0`,
-    },
+  root: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3,
+    fontSize: 26
+  },
+  group: {
+    margin: `${theme.spacing.unit}px 0`
+  }
 });
 
 class LearningPage extends Component {
 
     state = {
+      counter: 0,
       emotionContent: '',
       familyContent: '',
       foodContent: ''
     }
+
+    // randomNum = () => {
+    //   const min = 0;
+    //   const max = 5;
+    //   const rand = min + Math.random() * (max - min);
+    //   return rand;
+    // }
 
     componentDidMount = () => {
       this.fetchEmotionQuestion();
@@ -40,8 +45,8 @@ class LearningPage extends Component {
       const url = 'api/question/emotion';
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
-      this.setState({emotionContent: data.content})
+      // console.log(data);
+      this.setState({emotionContent: data[0].content})
     } 
 
     fetchFamilyQuestion = async () => {
@@ -49,7 +54,7 @@ class LearningPage extends Component {
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
-      this.setState({familyContent: data.content})
+      this.setState({familyContent: data[0].content})
     } 
 
     fetchFoodQuestion = async () => {
@@ -57,8 +62,19 @@ class LearningPage extends Component {
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
-      this.setState({foodContent: data.content})
+      this.setState({foodContent: data[0].content})
     } 
+
+    // setNextContent() {
+    //   const counter = this.state.counter+1;
+
+    //   this.setState({
+    //     counter: counter,
+    //     emotionContent: data[counter].content,
+    //     familyContent: data[counter].content,
+    //     foodContent: data[counter].content
+    //   });
+    // }
 
     handleChange = event => {
       this.setState({ value: event.target.value });
@@ -92,8 +108,8 @@ class LearningPage extends Component {
                   variant="contained"
                   className={classes.formItems}
                   onClick={this.proceedNext}
-                >
-                  Next
+            >
+            Next
             </Button>
         </Grid>
         )

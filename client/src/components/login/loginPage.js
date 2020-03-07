@@ -95,7 +95,7 @@ class LoginPage extends Component {
               />       
               <br/>
                 <Button
-                  component={ Link } to="/question"
+                  component={ Link } to="/learning"
                   color="primary"
                   variant="contained"
                   className={classes.formItems}

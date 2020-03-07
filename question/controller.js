@@ -2,7 +2,7 @@ const models = require("./model");
 const Question = models.Question;
 
 async function QueryEmotionContentController(req, res, next) {
-    let query = Question.findOne({ type: 'Emotion'});
+    let query = Question.find({ type: 'Emotion'});
     try {
         let data = await query.exec();
         res.status(200).json(data);
