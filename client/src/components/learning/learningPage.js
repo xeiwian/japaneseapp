@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import quizQuestions from '../questions';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -22,59 +23,51 @@ const styles = theme => ({
 class LearningPage extends Component {
 
     state = {
-      counter: 0,
+      emotioncounter: 0,
+      // familycounter: 6,
+      // foodcounter: 12,
       emotionContent: '',
-      familyContent: '',
-      foodContent: ''
+      // familyContent: '',
+      // foodContent: ''
     }
-
-    // randomNum = () => {
-    //   const min = 0;
-    //   const max = 5;
-    //   const rand = min + Math.random() * (max - min);
-    //   return rand;
-    // }
 
     componentDidMount = () => {
-      this.fetchEmotionQuestion();
-      this.fetchFamilyQuestion();
-      this.fetchFoodQuestion();
+      this.setState({
+        emotionContent: quizQuestions[0].content,
+      });
+
+      // this.fetchEmotionQuestion();
+      // this.fetchFamilyQuestion();
+      // this.fetchFoodQuestion();
     }
 
-    fetchEmotionQuestion = async () => {
-      const url = 'api/question/emotion';
-      const response = await fetch(url);
-      const data = await response.json();
-      // console.log(data);
-      this.setState({emotionContent: data[0].content})
-    } 
+    nextContentHandler = () => {
+      const { emotionContent } = this.state;
+    }
 
-    fetchFamilyQuestion = async () => {
-      const url = 'api/question/family';
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data);
-      this.setState({familyContent: data[0].content})
-    } 
+    // fetchEmotionQuestion = async () => {
+    //   const url = 'api/question/emotion';
+    //   const response = await fetch(url);
+    //   const data = await response.json();
+    //   // console.log(data);
+    //   this.setState({emotionContent: data[0].content})
+    // } 
 
-    fetchFoodQuestion = async () => {
-      const url = 'api/question/food';
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data);
-      this.setState({foodContent: data[0].content})
-    } 
+    // fetchFamilyQuestion = async () => {
+    //   const url = 'api/question/family';
+    //   const response = await fetch(url);
+    //   const data = await response.json();
+    //   console.log(data);
+    //   this.setState({familyContent: data[0].content})
+    // } 
 
-    // setNextContent() {
-    //   const counter = this.state.counter+1;
-
-    //   this.setState({
-    //     counter: counter,
-    //     emotionContent: data[counter].content,
-    //     familyContent: data[counter].content,
-    //     foodContent: data[counter].content
-    //   });
-    // }
+    // fetchFoodQuestion = async () => {
+    //   const url = 'api/question/food';
+    //   const response = await fetch(url);
+    //   const data = await response.json();
+    //   console.log(data);
+    //   this.setState({foodContent: data[0].content})
+    // } 
 
     handleChange = event => {
       this.setState({ value: event.target.value });
@@ -98,16 +91,16 @@ class LearningPage extends Component {
             <Grid item xs={3}>
                 <div className={classes.root}>
                     <Typography className={classes.formControl}>{this.state.emotionContent}</Typography>
-                    <Typography className={classes.formControl}>{this.state.familyContent}</Typography>
-                    <Typography className={classes.formControl}>{this.state.foodContent}</Typography>
+                    {/* <Typography className={classes.formControl}>{this.state.familyContent}</Typography>
+                    <Typography className={classes.formControl}>{this.state.foodContent}</Typography> */}
                 </div>
             </Grid>  
             <Button
-                  component={ Link } to="/question"
+                  component={ Link } to="/learning"
                   color="primary"
                   variant="contained"
                   className={classes.formItems}
-                  onClick={this.proceedNext}
+                  onClick={this.setNextContent}
             >
             Next
             </Button>
