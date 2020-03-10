@@ -10,11 +10,13 @@ DONE 5) Make a login page with react js
     - make the form fetch api/userlogin
     - set up connection to db so that the username and score is stored in db
     - fixed username insertion issue by adding body parser module for json data
-6) Display 3 contents in the front page 4 times
+DONE 6) Display 3 contents in the front page 4 times
     - display them in radio buttons style
     - need to set up controller to query emotion type question from db
     - extract the question content from the query and display it on the radio buttons
     - need to make next button so user can go to next page of questions
+7) make the questionpage and learningpage save the states after user press next button
+    - To restore a previous state after a page reload in browser, you have to save state locally (localstorage/IndexedDB)
 
 
 17/2/2020

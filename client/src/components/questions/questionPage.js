@@ -3,8 +3,6 @@ import quizQuestions from '../questions';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
@@ -33,7 +31,7 @@ const styles = theme => ({
 class QuestionPage extends Component {
 
     state = {
-      myAnswer: null,
+      myAnswer: '',
       emotioncounter: 0,
       familycounter: 6,
       foodcounter: 12,
@@ -66,14 +64,13 @@ class QuestionPage extends Component {
     }
 
     nextQuestionHandler = () => {
-      // console.log('test')
-      const { myAnswer, EmotionAnswer, score } = this.state;
+      const { myAnswer, correctEmotionAnswer } = this.state;
   
-      if (myAnswer === EmotionAnswer) {
+      if (myAnswer === correctEmotionAnswer) {
         this.setState({
-          score: score + 1
-        });
-      }
+          score: this.state.score + 1
+        }, () => { console.log('i am score', this.state.score, myAnswer, correctEmotionAnswer); });
+      } 
   
       this.setState({
         emotioncounter: this.state.emotioncounter + 1,
@@ -102,19 +99,10 @@ class QuestionPage extends Component {
         });
       }
     }
-
-    // check answer
-    checkAnswer = answer => {
-      this.setState({ myAnswer: answer });
-    };
-
-    handleChange = event => {
-      this.setState({ value: event.target.value });
-    };
   
     render() {
         const { classes } = this.props;
-        const { myAnswer, possibleEmotionAnswer, selected, onChange } = this.state;
+        // const { myAnswer, possibleEmotionAnswer, selected, onChange } = this.state;
 
         return (
           <Grid
@@ -136,58 +124,58 @@ class QuestionPage extends Component {
               <Typography className={classes.questionfont}>
                 {this.state.emotionQuestion}
               </Typography>
-              
-              {possibleEmotionAnswer.map((possibleEmotionAnswer, index) => (
-                <label key={index}>
-                  <input
-                    type="radio"
-                    name="vote"
-                    value={possibleEmotionAnswer.value}
-                    key={index}
-                    checked={selected === possibleEmotionAnswer.value}
-                    onChange={onChange}
-                  />
-                  {possibleEmotionAnswer}
-                </label>
-              ))}
-            </Grid>
+              <RadioGroup 
+                row
+                aria-label="Emotion"
+                name="emotionQuestion"
+                className={classes.group}
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio />} label={this.state.possibleEmotionAnswer[0]}/>
+                <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio />} label={this.state.possibleEmotionAnswer[1]}/>
+                <FormControlLabel value={this.state.possibleEmotionAnswer[2]} control={<Radio />} label={this.state.possibleEmotionAnswer[2]}/>
+              </RadioGroup>
+            </Grid> <br/>
 
-            <Grid item xs={6}>
-              <div >
-                <Typography className={classes.questionfont}>
-                  {this.state.familyQuestion}
-                </Typography>
-                <Button variant="contained" color="primary" className={classes.button}>
-                  {this.state.possibleFamilyAnswer[0]}
-                </Button>
-                <Button variant="contained" color="primary" className={classes.button}>
-                  {this.state.possibleFamilyAnswer[1]}
-                </Button>
-                <Button variant="contained" color="primary" className={classes.button}>
-                  {this.state.possibleFamilyAnswer[2]}
-                </Button>
-                </div>
-            </Grid>
+            <Grid item xs={6}>        
+              <Typography className={classes.questionfont}>
+                {this.state.familyQuestion}
+              </Typography>
+              <RadioGroup 
+                row
+                aria-label="Family"
+                name="familyQuestion"
+                className={classes.group}
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel value={this.state.possibleFamilyAnswer[0]} control={<Radio />} label={this.state.possibleFamilyAnswer[0]}/>
+                <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio />} label={this.state.possibleFamilyAnswer[1]}/>
+                <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio />} label={this.state.possibleFamilyAnswer[2]}/>
+              </RadioGroup>
+            </Grid> <br/>
 
-          <Grid item xs={6}>
-                <div >
-                  <Typography className={classes.questionfont}>
-                    {this.state.foodQuestion}
-                  </Typography>
-                  <Button variant="contained" color="primary" className={classes.button}>
-                    {this.state.possibleFoodAnswer[0]}
-                  </Button>
-                  <Button variant="contained" color="primary" className={classes.button}>
-                    {this.state.possibleFoodAnswer[1]}
-                  </Button>
-                  <Button variant="contained" color="primary" className={classes.button}>
-                    {this.state.possibleFoodAnswer[2]}
-                  </Button>
-                </div>
-          </Grid>
-          <br/>
+            <Grid item xs={6}>        
+              <Typography className={classes.questionfont}>
+                {this.state.foodQuestion}
+              </Typography>
+              <RadioGroup 
+                row
+                aria-label="Food"
+                name="foodQuestion"
+                className={classes.group}
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio />} label={this.state.possibleFoodAnswer[0]}/>
+                <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio />} label={this.state.possibleFoodAnswer[1]}/>
+                <FormControlLabel value={this.state.possibleFoodAnswer[2]} control={<Radio />} label={this.state.possibleFoodAnswer[2]}/>
+              </RadioGroup>
+            </Grid> <br/>
+
           <Button
-            // component={ Link } to="/learning"
+            component={ Link } to="/learning"
             color="primary"
             variant="contained"
             className={classes.formItems}
