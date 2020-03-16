@@ -3,8 +3,6 @@ import quizQuestions from '../questions';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
@@ -33,47 +31,54 @@ const styles = theme => ({
 class QuestionPage extends Component {
 
     state = {
-      myAnswer: null,
-      emotioncounter: 0,
-      familycounter: 6,
-      foodcounter: 12,
-      emotionQuestion: '',
-      correctEmotionAnswer: '',
-      possibleEmotionAnswer: [],
-      familyQuestion: '',
-      correctFamilyAnswer: '',
-      possibleFamilyAnswer: [],
-      foodQuestion: '',
-      correctFoodAnswer: '',
-      possibleFoodAnswer: [],
       score: 0,
-      disabled: true
+      disabled: true,
+      emotioncounter: 0,
+      myEmotionAnswer: '',
+      emotionQuestion: '',
+      possibleEmotionAnswer: [],
+      correctEmotionAnswer: '',
+      familycounter: 6,
+      myFamilyAnswer: '',
+      familyQuestion: '',
+      possibleFamilyAnswer: [],
+      correctFamilyAnswer: '',
+      foodcounter: 12,
+      myFoodAnswer: '',
+      foodQuestion: '',
+      possibleFoodAnswer: [],
+      correctFoodAnswer: ''
     }
 
     componentDidMount = () => {
-      this.setState({
-        emotionQuestion: quizQuestions[0].question,
-        correctEmotionAnswer: quizQuestions[0].correctAnswer,
-        possibleEmotionAnswer: quizQuestions[0].possibleAnswer,
-        familyQuestion: quizQuestions[6].question,
-        correctFamilyAnswer: quizQuestions[6].correctAnswer,
-        possibleFamilyAnswer: quizQuestions[6].possibleAnswer,
-        foodQuestion: quizQuestions[12].question,
-        correctFoodAnswer: quizQuestions[12].correctAnswer,
-        possibleFoodAnswer: quizQuestions[12].possibleAnswer,
-        disabled: true
-      });
+        // this.setState({
+        //   emotioncounter: this.documentData.emotioncounter,
+        //   familycounter: this.documentData.familycounter,
+        //   foodcounter: this.documentData.foodcounter,
+        // });
+   
+        this.setState({
+          emotionQuestion: quizQuestions[this.state.emotioncounter].question,
+          correctEmotionAnswer: quizQuestions[this.state.emotioncounter].correctAnswer,
+          possibleEmotionAnswer: quizQuestions[this.state.emotioncounter].possibleAnswer,
+          familyQuestion: quizQuestions[this.state.familycounter].question,
+          correctFamilyAnswer: quizQuestions[this.state.familycounter].correctAnswer,
+          possibleFamilyAnswer: quizQuestions[this.state.familycounter].possibleAnswer,
+          foodQuestion: quizQuestions[this.state.foodcounter].question,
+          correctFoodAnswer: quizQuestions[this.state.foodcounter].correctAnswer,
+          possibleFoodAnswer: quizQuestions[this.state.foodcounter].possibleAnswer,
+          disabled: true
+        });
     }
 
     nextQuestionHandler = () => {
-      // console.log('test')
-      const { myAnswer, EmotionAnswer, score } = this.state;
+      const { myEmotionAnswer, correctEmotionAnswer, score } = this.state;
   
-      if (myAnswer === EmotionAnswer) {
+      if (myEmotionAnswer !== correctEmotionAnswer) {
         this.setState({
           score: score + 1
-        });
-      }
+        }, () => { console.log('i am score', this.state.score, myEmotionAnswer, correctEmotionAnswer); });
+      } 
   
       this.setState({
         emotioncounter: this.state.emotioncounter + 1,
@@ -83,10 +88,10 @@ class QuestionPage extends Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
-      if (this.state.emotioncounter !== prevState.emotioncounter) {
+      if (this.state.emotioncounter !== prevState.emotioncounter || this.state.familycounter !== prevState.familycounter || this.state.foodcounter !== prevState.foodcounter) {
         this.setState(() => {
           return {
-            disabled: true,
+            // disabled: true,
             emotionQuestion: quizQuestions[this.state.emotioncounter].question,
             correctEmotionAnswer: quizQuestions[this.state.emotioncounter].correctAnswer,
             possibleEmotionAnswer: quizQuestions[this.state.emotioncounter].possibleAnswer,
@@ -102,19 +107,10 @@ class QuestionPage extends Component {
         });
       }
     }
-
-    // check answer
-    checkAnswer = answer => {
-      this.setState({ myAnswer: answer });
-    };
-
-    handleChange = event => {
-      this.setState({ value: event.target.value });
-    };
   
     render() {
         const { classes } = this.props;
-        const { myAnswer, possibleEmotionAnswer, selected, onChange } = this.state;
+        // const { myAnswer, possibleEmotionAnswer, selected, onChange } = this.state;
 
         return (
           <Grid
@@ -132,62 +128,62 @@ class QuestionPage extends Component {
             Please answer these 3 questions and select the next button to continue
             </Typography> <br/>
 
-            <Grid item xs={6}>        
+            <Grid item xs={12}>        
               <Typography className={classes.questionfont}>
                 {this.state.emotionQuestion}
               </Typography>
-              
-              {possibleEmotionAnswer.map((possibleEmotionAnswer, index) => (
-                <label key={index}>
-                  <input
-                    type="radio"
-                    name="vote"
-                    value={possibleEmotionAnswer.value}
-                    key={index}
-                    checked={selected === possibleEmotionAnswer.value}
-                    onChange={onChange}
-                  />
-                  {possibleEmotionAnswer}
-                </label>
-              ))}
-            </Grid>
+              <RadioGroup 
+                row
+                aria-label="Emotion"
+                name="emotionQuestion"
+                className={classes.group}
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio />} label={this.state.possibleEmotionAnswer[0]}/>
+                <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio />} label={this.state.possibleEmotionAnswer[1]}/>
+                <FormControlLabel value={this.state.possibleEmotionAnswer[2]} control={<Radio />} label={this.state.possibleEmotionAnswer[2]}/>
+              </RadioGroup>
+            </Grid> <br/>
 
-            <Grid item xs={6}>
-              <div >
-                <Typography className={classes.questionfont}>
-                  {this.state.familyQuestion}
-                </Typography>
-                <Button variant="contained" color="primary" className={classes.button}>
-                  {this.state.possibleFamilyAnswer[0]}
-                </Button>
-                <Button variant="contained" color="primary" className={classes.button}>
-                  {this.state.possibleFamilyAnswer[1]}
-                </Button>
-                <Button variant="contained" color="primary" className={classes.button}>
-                  {this.state.possibleFamilyAnswer[2]}
-                </Button>
-                </div>
-            </Grid>
+            <Grid item xs={12}>        
+              <Typography className={classes.questionfont}>
+                {this.state.familyQuestion}
+              </Typography>
+              <RadioGroup 
+                row
+                aria-label="Family"
+                name="familyQuestion"
+                className={classes.group}
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel value={this.state.possibleFamilyAnswer[0]} control={<Radio />} label={this.state.possibleFamilyAnswer[0]}/>
+                <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio />} label={this.state.possibleFamilyAnswer[1]}/>
+                <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio />} label={this.state.possibleFamilyAnswer[2]}/>
+              </RadioGroup>
+            </Grid> <br/>
 
-          <Grid item xs={6}>
-                <div >
-                  <Typography className={classes.questionfont}>
-                    {this.state.foodQuestion}
-                  </Typography>
-                  <Button variant="contained" color="primary" className={classes.button}>
-                    {this.state.possibleFoodAnswer[0]}
-                  </Button>
-                  <Button variant="contained" color="primary" className={classes.button}>
-                    {this.state.possibleFoodAnswer[1]}
-                  </Button>
-                  <Button variant="contained" color="primary" className={classes.button}>
-                    {this.state.possibleFoodAnswer[2]}
-                  </Button>
-                </div>
-          </Grid>
-          <br/>
+            <Grid item xs={12}>        
+              <Typography className={classes.questionfont}>
+                {this.state.foodQuestion}
+              </Typography>
+              <RadioGroup 
+                row
+                aria-label="Food"
+                name="foodQuestion"
+                className={classes.group}
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio />} label={this.state.possibleFoodAnswer[0]}/>
+                <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio />} label={this.state.possibleFoodAnswer[1]}/>
+                <FormControlLabel value={this.state.possibleFoodAnswer[2]} control={<Radio />} label={this.state.possibleFoodAnswer[2]}/>
+              </RadioGroup>
+            </Grid> <br/>
+
           <Button
-            // component={ Link } to="/learning"
+            component={ Link } to="/question"
             color="primary"
             variant="contained"
             className={classes.formItems}
