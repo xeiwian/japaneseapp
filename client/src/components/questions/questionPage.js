@@ -72,21 +72,45 @@ class QuestionPage extends Component {
         });
     }
 
-    handleOnChange(e) {
+    handleOnChangeEmotion(e) {
       console.log('selected option', e.target.value);
-      this.setState({ myAnswer: e.target.value});
+      this.setState({ myEmotionAnswer: e.target.value});
+    }
+
+    handleOnChangeFamily(e) {
+      console.log('selected option', e.target.value);
+      this.setState({ myFamilyAnswer: e.target.value});
+    }
+
+    handleOnChangeFood(e) {
+      console.log('selected option', e.target.value);
+      this.setState({ myFoodAnswer: e.target.value});
     }
 
     nextQuestionHandler = () => {
-      const { myAnswer, correctEmotionAnswer } = this.state;
+      const { myEmotionAnswer, correctEmotionAnswer, myFamilyAnswer, correctFamilyAnswer, myFoodAnswer, correctFoodAnswer } = this.state;
   
-      if (myAnswer === correctEmotionAnswer) {
-        this.setState({
-          score: this.state.score + 1
-        }, () => { console.log('i am score', this.state.score, myAnswer, correctEmotionAnswer); });
-      } else {
-        console.log('i am score haha', this.state.score, myAnswer, correctEmotionAnswer)
+      if (myEmotionAnswer === correctEmotionAnswer) {
+        // this.setState({
+        //   score: this.state.score + 1
+        // }, () => { console.log('i am score', this.state.score, myEmotionAnswer, correctEmotionAnswer); });
+        this.state.score += 1;
       }
+
+      if (myFamilyAnswer === correctFamilyAnswer) {
+        // this.setState({
+        //   score: this.state.score + 1
+        // }, () => { console.log('i am score', this.state.score, myFamilyAnswer, correctFamilyAnswer); });
+        this.state.score += 1;
+      }
+
+      if (myFoodAnswer === correctFoodAnswer) {
+        // this.setState({
+        //   score: this.state.score + 1
+        // }, () => { console.log('i am score', this.state.score, myFoodAnswer, correctFoodAnswer); });
+        this.state.score += 1;
+      }
+      console.log(this.state.score);
   
       this.setState({
         emotioncounter: this.state.emotioncounter + 1,
@@ -146,7 +170,7 @@ class QuestionPage extends Component {
                 name="emotionQuestion"
                 className={classes.group}
                 value={this.state.value}
-                onChange={(value) => this.handleOnChange(value)}
+                onChange={(value) => this.handleOnChangeEmotion(value)}
                 // onChange={this.handleChange}
               >
                 <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio />} label={this.state.possibleEmotionAnswer[0]}/>
@@ -165,7 +189,8 @@ class QuestionPage extends Component {
                 name="familyQuestion"
                 className={classes.group}
                 value={this.state.value}
-                onChange={this.handleChange}
+                onChange={(value) => this.handleOnChangeFamily(value)}
+                // onChange={this.handleChange}
               >
                 <FormControlLabel value={this.state.possibleFamilyAnswer[0]} control={<Radio />} label={this.state.possibleFamilyAnswer[0]}/>
                 <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio />} label={this.state.possibleFamilyAnswer[1]}/>
@@ -183,7 +208,8 @@ class QuestionPage extends Component {
                 name="foodQuestion"
                 className={classes.group}
                 value={this.state.value}
-                onChange={this.handleChange}
+                onChange={(value) => this.handleOnChangeFood(value)}
+                // onChange={this.handleChange}
               >
                 <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio />} label={this.state.possibleFoodAnswer[0]}/>
                 <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio />} label={this.state.possibleFoodAnswer[1]}/>
