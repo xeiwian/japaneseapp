@@ -52,13 +52,28 @@ class QuestionPage extends Component {
     }
 
     componentDidMount = () => {
+
+      this.documentData = JSON.parse(localStorage.getItem('question'));
         // this.setState({
         //   emotioncounter: this.documentData.emotioncounter,
         //   familycounter: this.documentData.familycounter,
         //   foodcounter: this.documentData.foodcounter,
         // });
-   
-        this.setState({
+
+        if (localStorage.getItem('question')) {
+          console.log("Found local storage");
+          this.setState({
+            //  emotionContent: this.documentData.emotionContent,
+            //  familyContent: this.documentData.familyContent,
+            //  foodContent: this.documentData.foodContent,
+            emotioncounter: this.documentData.emotioncounter,
+            familycounter: this.documentData.familycounter,
+            foodcounter: this.documentData.foodcounter,
+            score: this.documentData.score
+          });
+        } else {
+          console.log("Couldn't find local storage");
+          this.setState({
           emotionQuestion: quizQuestions[this.state.emotioncounter].question,
           correctEmotionAnswer: quizQuestions[this.state.emotioncounter].correctAnswer,
           possibleEmotionAnswer: quizQuestions[this.state.emotioncounter].possibleAnswer,
@@ -70,7 +85,22 @@ class QuestionPage extends Component {
           possibleFoodAnswer: quizQuestions[this.state.foodcounter].possibleAnswer,
           disabled: true
         });
-    }
+        }
+
+        // this.setState({
+        //   emotionQuestion: quizQuestions[this.state.emotioncounter].question,
+        //   correctEmotionAnswer: quizQuestions[this.state.emotioncounter].correctAnswer,
+        //   possibleEmotionAnswer: quizQuestions[this.state.emotioncounter].possibleAnswer,
+        //   familyQuestion: quizQuestions[this.state.familycounter].question,
+        //   correctFamilyAnswer: quizQuestions[this.state.familycounter].correctAnswer,
+        //   possibleFamilyAnswer: quizQuestions[this.state.familycounter].possibleAnswer,
+        //   foodQuestion: quizQuestions[this.state.foodcounter].question,
+        //   correctFoodAnswer: quizQuestions[this.state.foodcounter].correctAnswer,
+        //   possibleFoodAnswer: quizQuestions[this.state.foodcounter].possibleAnswer,
+        //   disabled: true
+        // });
+
+      }
 
     handleOnChangeEmotion(e) {
       console.log('selected option', e.target.value);
@@ -112,11 +142,17 @@ class QuestionPage extends Component {
       }
       console.log(this.state.score);
   
-      this.setState({
-        emotioncounter: this.state.emotioncounter + 1,
-        familycounter: this.state.familycounter + 1,
-        foodcounter: this.state.foodcounter + 1,
-      });
+      // this.setState({
+      //   emotioncounter: this.state.emotioncounter + 1,
+      //   familycounter: this.state.familycounter + 1,
+      //   foodcounter: this.state.foodcounter + 1,
+      // });
+
+      this.state.emotioncounter += 1;
+      this.state.familycounter += 1;
+      this.state.foodcounter += 1;
+
+      localStorage.setItem('question', JSON.stringify(this.state));
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -218,7 +254,7 @@ class QuestionPage extends Component {
             </Grid> <br/>
 
           <Button
-            component={ Link } to="/question"
+            component={ Link } to="/learning"
             color="primary"
             variant="contained"
             className={classes.formItems}
