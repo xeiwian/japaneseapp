@@ -34,6 +34,7 @@ class QuestionPage extends Component {
       score: 0,
       disabled: true,
       emotioncounter: 0,
+      myAnswer: '',
       myEmotionAnswer: '',
       emotionQuestion: '',
       possibleEmotionAnswer: [],
@@ -71,14 +72,21 @@ class QuestionPage extends Component {
         });
     }
 
+    handleOnChange(e) {
+      console.log('selected option', e.target.value);
+      this.setState({ myAnswer: e.target.value});
+    }
+
     nextQuestionHandler = () => {
-      const { myEmotionAnswer, correctEmotionAnswer, score } = this.state;
+      const { myAnswer, correctEmotionAnswer } = this.state;
   
-      if (myEmotionAnswer !== correctEmotionAnswer) {
+      if (myAnswer === correctEmotionAnswer) {
         this.setState({
-          score: score + 1
-        }, () => { console.log('i am score', this.state.score, myEmotionAnswer, correctEmotionAnswer); });
-      } 
+          score: this.state.score + 1
+        }, () => { console.log('i am score', this.state.score, myAnswer, correctEmotionAnswer); });
+      } else {
+        console.log('i am score haha', this.state.score, myAnswer, correctEmotionAnswer)
+      }
   
       this.setState({
         emotioncounter: this.state.emotioncounter + 1,
@@ -138,7 +146,8 @@ class QuestionPage extends Component {
                 name="emotionQuestion"
                 className={classes.group}
                 value={this.state.value}
-                onChange={this.handleChange}
+                onChange={(value) => this.handleOnChange(value)}
+                // onChange={this.handleChange}
               >
                 <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio />} label={this.state.possibleEmotionAnswer[0]}/>
                 <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio />} label={this.state.possibleEmotionAnswer[1]}/>
