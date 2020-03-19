@@ -69,11 +69,18 @@ class LoginPage extends Component {
     render() {
       const { classes } = this.props;
       return (
-        <Grid item xs={12}>
-          <div className={classes.root}>
-            <Typography variant="h6" className={classes.titleText}>
-            Welcome boys and girls!
-            </Typography>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={{ minHeight: '60vh' }}
+          >
+
+            <Typography variant="headline" component="h1">
+              Japanese Adaptive Language Learning App
+            </Typography> 
             <form className={classes.form}>
               <TextField
                   id="username"
@@ -102,7 +109,6 @@ class LoginPage extends Component {
                   Begin Lesson
                 </Button>
             </form> 
-          </div>
         </Grid>
       );
     }

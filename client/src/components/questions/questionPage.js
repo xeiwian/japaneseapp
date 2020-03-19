@@ -190,7 +190,7 @@ class QuestionPage extends Component {
           style={{ minHeight: '100vh' }}
           >
             <Typography variant="headline" component="h1">
-            Learning
+            Learning Session
             </Typography> <br/>
             <Typography>
             Please answer these 3 questions and select the next button to continue
