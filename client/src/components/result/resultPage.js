@@ -1,33 +1,35 @@
 import React, { Component } from 'react';
-import './result.css';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import QuestionPage from '../questions/questionPage';
 
 class Result extends Component {
-    constructor() {
-        super();
-        this.state = {
-            user: []
-        }
-    }
-    // it runs automatically when the component is mounted
-    componentDidMount() {
-        fetch('/api/userlogin')
-            .then(res => res.json())
-            .then(user => this.setState({user}, () => console.log('Customers fetched...', user)));
-    }
-
     render() {
         return (
-            <div>
-                <h2>Congrats</h2>
-                <ul>
-                    {this.state.customers.map(customer => 
-                        <li key={customer.id}>{ customer.firstName } { customer.lastName }</li>
-                    )}
-                </ul>
-            </div>
+            <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '60vh' }}
+            >
+                <Typography variant="headline" component="h1">
+                    Early Result
+                </Typography> <br/>
+                <Typography>
+                    I AM SCORE: {this.props.score}
+                </Typography>
+            </Grid>
         )
     };
-
 }
 
-export default Customers;
+// export default EarlyResult;
+export default class EarlyResult extends Component {
+    render() {
+      return (        
+        <Result score={6} />
+      );
+    }
+}

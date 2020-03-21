@@ -15,8 +15,14 @@ DONE 6) Display 3 contents in the front page 4 times
     - need to set up controller to query emotion type question from db
     - extract the question content from the query and display it on the radio buttons
     - need to make next button so user can go to next page of questions
-7) make the questionpage and learningpage save the states after user press next button
+DONE 7) make the questionpage and learningpage save the states after user press next button
     - To restore a previous state after a page reload in browser, you have to save state locally (localstorage/IndexedDB)
+8) Make use of score, and use score to determine category and amount of questions per page
+    - Need to read about props of ReactJS 
+9) Make the query in question controller to get exactly 9 (randomized) japanese words based on score of users
+- need to look into mongoose find using where()
+10) Display the chosen questions in the same way as before (3 questions per page)
+11) Finally, make the quiz page to test the user those 9 words
 
 
 17/2/2020

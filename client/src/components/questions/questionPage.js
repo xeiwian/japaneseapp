@@ -30,26 +30,56 @@ const styles = theme => ({
 
 class QuestionPage extends Component {
 
-    state = {
+  constructor(props) {
+    super(props);
+    this.state = { 
       score: 0,
       disabled: true,
       emotioncounter: 0,
+      emotionscore: 0,
       myAnswer: '',
       myEmotionAnswer: '',
       emotionQuestion: '',
       possibleEmotionAnswer: [],
       correctEmotionAnswer: '',
-      familycounter: 6,
+      familycounter: 9,
+      familyscore: 0,
       myFamilyAnswer: '',
       familyQuestion: '',
       possibleFamilyAnswer: [],
       correctFamilyAnswer: '',
-      foodcounter: 12,
+      foodcounter: 18,
+      foodscore: 0,
       myFoodAnswer: '',
       foodQuestion: '',
       possibleFoodAnswer: [],
       correctFoodAnswer: ''
-    }
+    };
+  }
+
+    // state = {
+    //   score: 0,
+    //   disabled: true,
+    //   emotioncounter: 0,
+    //   emotionscore: 0,
+    //   myAnswer: '',
+    //   myEmotionAnswer: '',
+    //   emotionQuestion: '',
+    //   possibleEmotionAnswer: [],
+    //   correctEmotionAnswer: '',
+    //   familycounter: 9,
+    //   familyscore: 0,
+    //   myFamilyAnswer: '',
+    //   familyQuestion: '',
+    //   possibleFamilyAnswer: [],
+    //   correctFamilyAnswer: '',
+    //   foodcounter: 18,
+    //   foodscore: 0,
+    //   myFoodAnswer: '',
+    //   foodQuestion: '',
+    //   possibleFoodAnswer: [],
+    //   correctFoodAnswer: ''
+    // }
 
     componentDidMount = () => {
 
@@ -61,7 +91,7 @@ class QuestionPage extends Component {
         // });
 
         if (localStorage.getItem('question')) {
-          console.log("Found local storage");
+          console.log("Found local storage and continue with its current state");
           this.setState({
             //  emotionContent: this.documentData.emotionContent,
             //  familyContent: this.documentData.familyContent,
@@ -69,10 +99,13 @@ class QuestionPage extends Component {
             emotioncounter: this.documentData.emotioncounter,
             familycounter: this.documentData.familycounter,
             foodcounter: this.documentData.foodcounter,
-            score: this.documentData.score
+            score: this.documentData.score,
+            emotionscore: this.documentData.emotionscore,
+            familyscore: this.documentData.familyscore,
+            foodscore: this.documentData.foodscore
           });
         } else {
-          console.log("Couldn't find local storage");
+          console.log("Couldn't find local storage and creating new states");
           this.setState({
           emotionQuestion: quizQuestions[this.state.emotioncounter].question,
           correctEmotionAnswer: quizQuestions[this.state.emotioncounter].correctAnswer,
@@ -125,6 +158,7 @@ class QuestionPage extends Component {
         //   score: this.state.score + 1
         // }, () => { console.log('i am score', this.state.score, myEmotionAnswer, correctEmotionAnswer); });
         this.state.score += 1;
+        this.state.emotionscore += 1;
       }
 
       if (myFamilyAnswer === correctFamilyAnswer) {
@@ -132,6 +166,7 @@ class QuestionPage extends Component {
         //   score: this.state.score + 1
         // }, () => { console.log('i am score', this.state.score, myFamilyAnswer, correctFamilyAnswer); });
         this.state.score += 1;
+        this.state.familyscore += 1;
       }
 
       if (myFoodAnswer === correctFoodAnswer) {
@@ -139,8 +174,9 @@ class QuestionPage extends Component {
         //   score: this.state.score + 1
         // }, () => { console.log('i am score', this.state.score, myFoodAnswer, correctFoodAnswer); });
         this.state.score += 1;
+        this.state.foodscore += 1;
       }
-      console.log(this.state.score);
+      console.log(this.state.score, this.state.emotionscore, this.state.familyscore, this.state.foodscore);
   
       // this.setState({
       //   emotioncounter: this.state.emotioncounter + 1,
@@ -260,7 +296,7 @@ class QuestionPage extends Component {
             className={classes.formItems}
             onClick={this.nextQuestionHandler}
           >
-            Next
+            Continue
           </Button>
         </Grid>
         )

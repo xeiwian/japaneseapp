@@ -52,6 +52,27 @@ Question.insertMany(
             possibleAnswer: ["Frown", "Upset", "Embarassed"]
         },
         {
+            type: "Emotion",
+            content: "ほっとした(hotto shita) => Relieved",
+            question: "ほっとした(hotto shita)",
+            correctAnswer: "Relieved",
+            possibleAnswer: ["Relieved", "Relax", "Calm"]
+        },
+        {
+            type: "Emotion",
+            content: "心配する(shinpai suru) => Worried",
+            question: "心配する(shinpai suru)",
+            correctAnswer: "Worried",
+            possibleAnswer: ["Worried", "Anxious", "Confused"]
+        },
+        {
+            type: "Emotion",
+            content: "寂しい(sabishī) => Lonely",
+            question: "寂しい(sabishī)",
+            correctAnswer: "Lonely",
+            possibleAnswer: ["Bored", "Lonely", "Sad"]
+        },
+        {
             type: "Family",
             content: "おじさん(ojisan) => Uncle",
             question: "おじさん(ojisan)",
@@ -94,6 +115,27 @@ Question.insertMany(
             possibleAnswer: ["Niece", "Child", "Son"]
         },
         {
+            type: "Family",
+            content: "娘(musume) => Daughter",
+            question: "娘(musume)",
+            correctAnswer: "Daughter",
+            possibleAnswer: ["Niece", "Daughter", "Child"]
+        },
+        {
+            type: "Family",
+            content: "叔母(obasan) => Aunt",
+            question: "叔母(obasan)",
+            correctAnswer: "Aunt",
+            possibleAnswer: ["Aunt", "Mother", "Grandmother"]
+        },
+        {
+            type: "Family",
+            content: "親戚(shinseki) => Relatives",
+            question: "親戚(shinseki)",
+            correctAnswer: "Relatives",
+            possibleAnswer: ["Parents", "Family", "Relatives"]
+        },
+        {
             type: "Food",
             content: "朝ごはん(asa gohan) => Breakfast",
             question: "朝ごはん(asa gohan)",
@@ -134,6 +176,27 @@ Question.insertMany(
             question: "緑茶(ryokucha)",
             correctAnswer: "Green tea",
             possibleAnswer: ["Black Tea", "Tea", "Green Tea"]
+        },
+        {
+            type: "Food",
+            content: "林檎(ringo) => Apple",
+            question: "林檎(ringo)",
+            correctAnswer: "Apple",
+            possibleAnswer: ["Orange", "Grapes", "Apple"]
+        },
+        {
+            type: "Food",
+            content: "ミルク(miruku) => Milk",
+            question: "ミルク(miruku)",
+            correctAnswer: "Milk",
+            possibleAnswer: ["Cheese", "Milk", "Yogurt"]
+        },
+        {
+            type: "Food",
+            content: "チョコレート(chokoreeto) => Chocolate",
+            question: "チョコレート(chokoreeto)",
+            correctAnswer: "Chocolate",
+            possibleAnswer: ["Chocolate", "Cookies", "Cake"]
         }
     ],
     (err) => {

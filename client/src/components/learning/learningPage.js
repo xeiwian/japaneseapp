@@ -24,8 +24,8 @@ class LearningPage extends Component {
 
     state = {
       emotioncounter: 0,
-      familycounter: 6,
-      foodcounter: 12,
+      familycounter: 9,
+      foodcounter: 18,
       emotionContent: '',
       familyContent: '',
       foodContent: ''
@@ -115,7 +115,7 @@ class LearningPage extends Component {
                   className={classes.formItems}
                   onClick={this.nextContentHandler}
             >
-            Next
+            Continue
             </Button>
         </Grid>
         )
