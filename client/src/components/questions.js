@@ -73,7 +73,7 @@ var quizQuestions = [
         type: "Family",
         content: "兄弟 (kyōdai) => Brothers",
         question: "兄弟 (kyōdai)",
-        correctAnswer: "Brother",
+        correctAnswer: "Brothers",
         possibleAnswer: ["Cousin", "Brothers", "Brother-in-law"]
     },
     {
