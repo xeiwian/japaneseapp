@@ -34,17 +34,19 @@ class QuestionPage extends Component {
       score: 0,
       disabled: true,
       emotioncounter: 0,
-      myAnswer: '',
+      emotionscore: 0,
       myEmotionAnswer: '',
       emotionQuestion: '',
       possibleEmotionAnswer: [],
       correctEmotionAnswer: '',
       familycounter: 9,
+      familyscore: 0,
       myFamilyAnswer: '',
       familyQuestion: '',
       possibleFamilyAnswer: [],
       correctFamilyAnswer: '',
       foodcounter: 18,
+      foodscore: 0,
       myFoodAnswer: '',
       foodQuestion: '',
       possibleFoodAnswer: [],
@@ -92,25 +94,31 @@ class QuestionPage extends Component {
   
       if (myEmotionAnswer === correctEmotionAnswer) {
         // this.setState({
-        //   score: this.state.score + 1
-        // }, () => { console.log('i am score', this.state.score, myEmotionAnswer, correctEmotionAnswer); });
+        //   score: this.state.score + 1,
+        //   emotionscore: this.state.emotionscore + 1
+        // }, () => { console.log('i am score', this.state.score, this.state.emotionscore, myEmotionAnswer, correctEmotionAnswer); });
         this.state.score += 1;
+        this.state.emotionscore += 1
       }
 
       if (myFamilyAnswer === correctFamilyAnswer) {
         // this.setState({
-        //   score: this.state.score + 1
-        // }, () => { console.log('i am score', this.state.score, myFamilyAnswer, correctFamilyAnswer); });
+        //   score: this.state.score + 1,
+        //   familyscore: this.state.familyscore + 1
+        // }, () => { console.log('i am score', this.state.score, this.state.familyscore, myFamilyAnswer, correctFamilyAnswer); });
         this.state.score += 1;
+        this.state.familyscore += 1
       }
 
       if (myFoodAnswer === correctFoodAnswer) {
         // this.setState({
-        //   score: this.state.score + 1
-        // }, () => { console.log('i am score', this.state.score, myFoodAnswer, correctFoodAnswer); });
+        //   score: this.state.score + 1,
+        //   foodscore: this.state.foodscore + 1
+        // }, () => { console.log('i am score', this.state.score, this.state.foodscore, myFoodAnswer, correctFoodAnswer); });
         this.state.score += 1;
+        this.state.foodscore += 1
       }
-      console.log(this.state.score);
+      console.log(this.state.score, this.state.emotionscore, this.state.familyscore, this.state.foodscore);
   
       this.setState({
         emotioncounter: this.state.emotioncounter + 1,
