@@ -30,83 +30,35 @@ const styles = theme => ({
 
 class QuestionPage extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { 
+    state = {
       score: 0,
       disabled: true,
       emotioncounter: 0,
-      emotionscore: 0,
       myAnswer: '',
       myEmotionAnswer: '',
       emotionQuestion: '',
       possibleEmotionAnswer: [],
       correctEmotionAnswer: '',
       familycounter: 9,
-      familyscore: 0,
       myFamilyAnswer: '',
       familyQuestion: '',
       possibleFamilyAnswer: [],
       correctFamilyAnswer: '',
       foodcounter: 18,
-      foodscore: 0,
       myFoodAnswer: '',
       foodQuestion: '',
       possibleFoodAnswer: [],
       correctFoodAnswer: ''
-    };
-  }
-
-    // state = {
-    //   score: 0,
-    //   disabled: true,
-    //   emotioncounter: 0,
-    //   emotionscore: 0,
-    //   myAnswer: '',
-    //   myEmotionAnswer: '',
-    //   emotionQuestion: '',
-    //   possibleEmotionAnswer: [],
-    //   correctEmotionAnswer: '',
-    //   familycounter: 9,
-    //   familyscore: 0,
-    //   myFamilyAnswer: '',
-    //   familyQuestion: '',
-    //   possibleFamilyAnswer: [],
-    //   correctFamilyAnswer: '',
-    //   foodcounter: 18,
-    //   foodscore: 0,
-    //   myFoodAnswer: '',
-    //   foodQuestion: '',
-    //   possibleFoodAnswer: [],
-    //   correctFoodAnswer: ''
-    // }
+    }
 
     componentDidMount = () => {
-
-      this.documentData = JSON.parse(localStorage.getItem('question'));
         // this.setState({
         //   emotioncounter: this.documentData.emotioncounter,
         //   familycounter: this.documentData.familycounter,
         //   foodcounter: this.documentData.foodcounter,
         // });
-
-        if (localStorage.getItem('question')) {
-          console.log("Found local storage and continue with its current state");
-          this.setState({
-            //  emotionContent: this.documentData.emotionContent,
-            //  familyContent: this.documentData.familyContent,
-            //  foodContent: this.documentData.foodContent,
-            emotioncounter: this.documentData.emotioncounter,
-            familycounter: this.documentData.familycounter,
-            foodcounter: this.documentData.foodcounter,
-            score: this.documentData.score,
-            emotionscore: this.documentData.emotionscore,
-            familyscore: this.documentData.familyscore,
-            foodscore: this.documentData.foodscore
-          });
-        } else {
-          console.log("Couldn't find local storage and creating new states");
-          this.setState({
+   
+        this.setState({
           emotionQuestion: quizQuestions[this.state.emotioncounter].question,
           correctEmotionAnswer: quizQuestions[this.state.emotioncounter].correctAnswer,
           possibleEmotionAnswer: quizQuestions[this.state.emotioncounter].possibleAnswer,
@@ -118,22 +70,7 @@ class QuestionPage extends Component {
           possibleFoodAnswer: quizQuestions[this.state.foodcounter].possibleAnswer,
           disabled: true
         });
-        }
-
-        // this.setState({
-        //   emotionQuestion: quizQuestions[this.state.emotioncounter].question,
-        //   correctEmotionAnswer: quizQuestions[this.state.emotioncounter].correctAnswer,
-        //   possibleEmotionAnswer: quizQuestions[this.state.emotioncounter].possibleAnswer,
-        //   familyQuestion: quizQuestions[this.state.familycounter].question,
-        //   correctFamilyAnswer: quizQuestions[this.state.familycounter].correctAnswer,
-        //   possibleFamilyAnswer: quizQuestions[this.state.familycounter].possibleAnswer,
-        //   foodQuestion: quizQuestions[this.state.foodcounter].question,
-        //   correctFoodAnswer: quizQuestions[this.state.foodcounter].correctAnswer,
-        //   possibleFoodAnswer: quizQuestions[this.state.foodcounter].possibleAnswer,
-        //   disabled: true
-        // });
-
-      }
+    }
 
     handleOnChangeEmotion(e) {
       console.log('selected option', e.target.value);
@@ -158,7 +95,6 @@ class QuestionPage extends Component {
         //   score: this.state.score + 1
         // }, () => { console.log('i am score', this.state.score, myEmotionAnswer, correctEmotionAnswer); });
         this.state.score += 1;
-        this.state.emotionscore += 1;
       }
 
       if (myFamilyAnswer === correctFamilyAnswer) {
@@ -166,7 +102,6 @@ class QuestionPage extends Component {
         //   score: this.state.score + 1
         // }, () => { console.log('i am score', this.state.score, myFamilyAnswer, correctFamilyAnswer); });
         this.state.score += 1;
-        this.state.familyscore += 1;
       }
 
       if (myFoodAnswer === correctFoodAnswer) {
@@ -174,21 +109,14 @@ class QuestionPage extends Component {
         //   score: this.state.score + 1
         // }, () => { console.log('i am score', this.state.score, myFoodAnswer, correctFoodAnswer); });
         this.state.score += 1;
-        this.state.foodscore += 1;
       }
-      console.log(this.state.score, this.state.emotionscore, this.state.familyscore, this.state.foodscore);
+      console.log(this.state.score);
   
-      // this.setState({
-      //   emotioncounter: this.state.emotioncounter + 1,
-      //   familycounter: this.state.familycounter + 1,
-      //   foodcounter: this.state.foodcounter + 1,
-      // });
-
-      this.state.emotioncounter += 1;
-      this.state.familycounter += 1;
-      this.state.foodcounter += 1;
-
-      localStorage.setItem('question', JSON.stringify(this.state));
+      this.setState({
+        emotioncounter: this.state.emotioncounter + 1,
+        familycounter: this.state.familycounter + 1,
+        foodcounter: this.state.foodcounter + 1,
+      });
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -226,7 +154,7 @@ class QuestionPage extends Component {
           style={{ minHeight: '100vh' }}
           >
             <Typography variant="headline" component="h1">
-            Learning Session
+            Learning
             </Typography> <br/>
             <Typography>
             Please answer these 3 questions and select the next button to continue
@@ -290,13 +218,13 @@ class QuestionPage extends Component {
             </Grid> <br/>
 
           <Button
-            component={ Link } to="/learning"
+            component={ Link } to="/question"
             color="primary"
             variant="contained"
             className={classes.formItems}
             onClick={this.nextQuestionHandler}
           >
-            Continue
+            Next
           </Button>
         </Grid>
         )
