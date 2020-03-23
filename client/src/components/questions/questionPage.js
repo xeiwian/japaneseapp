@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import quizQuestions from '../questions';
-import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -31,7 +30,7 @@ const styles = theme => ({
 class QuestionPage extends Component {
 
     state = {
-      score: 0,
+      earlyscore: 0,
       disabled: true,
       isEnd: false,
       emotioncounter: 0,
@@ -53,6 +52,20 @@ class QuestionPage extends Component {
       possibleFoodAnswer: [],
       correctFoodAnswer: ''
     }
+
+    getStudent = async (id) => {
+      return await fetch(`${this.API_URL}/userlogin/${id}`);
+    };
+
+    // update new student score 
+    updateStudent = async (id, data) => {
+      console.log(data);
+      return await fetch(`api/userlogin/${id}`, {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        method: 'PUT',
+        body: JSON.stringify(data)  
+      });
+    };
 
     componentDidMount = () => {   
         this.setState({
@@ -88,20 +101,20 @@ class QuestionPage extends Component {
       const { myEmotionAnswer, correctEmotionAnswer, myFamilyAnswer, correctFamilyAnswer, myFoodAnswer, correctFoodAnswer } = this.state;
   
       if (myEmotionAnswer === correctEmotionAnswer) {
-        this.state.score += 1;
+        this.state.earlyscore += 1;
         this.state.emotionscore += 1
       }
 
       if (myFamilyAnswer === correctFamilyAnswer) {
-        this.state.score += 1;
+        this.state.earlyscore += 1;
         this.state.familyscore += 1
       }
 
       if (myFoodAnswer === correctFoodAnswer) {
-        this.state.score += 1;
+        this.state.earlyscore += 1;
         this.state.foodscore += 1
       }
-      console.log(this.state.score, this.state.emotionscore, this.state.familyscore, this.state.foodscore);
+      console.log(this.state.earlyscore, this.state.emotionscore, this.state.familyscore, this.state.foodscore);
   
       this.setState({
         emotioncounter: this.state.emotioncounter + 1,
@@ -114,20 +127,20 @@ class QuestionPage extends Component {
       const { myEmotionAnswer, correctEmotionAnswer, myFamilyAnswer, correctFamilyAnswer, myFoodAnswer, correctFoodAnswer } = this.state;
   
       if (myEmotionAnswer === correctEmotionAnswer) {
-        this.state.score += 1;
+        this.state.earlyscore += 1;
         this.state.emotionscore += 1
       }
 
       if (myFamilyAnswer === correctFamilyAnswer) {
-        this.state.score += 1;
+        this.state.earlyscore += 1;
         this.state.familyscore += 1
       }
 
       if (myFoodAnswer === correctFoodAnswer) {
-        this.state.score += 1;
+        this.state.earlyscore += 1;
         this.state.foodscore += 1
       }
-      console.log(this.state.score, this.state.emotionscore, this.state.familyscore, this.state.foodscore);
+      console.log(this.state.earlyscore, this.state.emotionscore, this.state.familyscore, this.state.foodscore);
   
       this.setState({
         emotioncounter: this.state.emotioncounter + 1,
@@ -139,6 +152,27 @@ class QuestionPage extends Component {
         this.setState({
           isEnd: true
         });
+      }
+
+      let userscoreData = {
+        earlyscore: this.state.earlyscore,
+        emotionscore: this.state.emotionscore,
+        familyscore: this.state.familyscore,
+        foodscore: this.state.foodscore
+      }
+
+      // create user data 
+      const userData = this.getStudent();
+      if (
+        userData['name'] === this.state.name &&
+        userData['id']
+      ) {
+          try {
+            this.updateStudent(userscoreData);
+            console.log('tryna update', userscoreData);
+          } catch (e) {
+            console.log('updating score error', e);
+          }
       }
     }
 
@@ -181,7 +215,16 @@ class QuestionPage extends Component {
                       Early Result
                   </Typography> <br/>
                   <Typography>
-                      I AM SCORE: {this.state.score}
+                      I AM EARLY SCORE: {this.state.earlyscore}
+                  </Typography>
+                  <Typography>
+                      I AM EMOTION SCORE: {this.state.emotionscore}
+                  </Typography>
+                  <Typography>
+                      I AM FAMILY SCORE: {this.state.familyscore}
+                  </Typography>
+                  <Typography>
+                      I AM FOOD SCORE: {this.state.foodscore}
                   </Typography>
               </Grid>
           )

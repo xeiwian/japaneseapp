@@ -3,6 +3,7 @@ const route = express.Router();
 const controller = require("./controller");
 
 route.post("/", controller.CreateUserController);
-route.get("/", controller.RetrieveUserController);
+route.put("/:id", controller.UpdateUserController);
+route.get("/:id", controller.RetrieveUserController);
 
 module.exports = route;

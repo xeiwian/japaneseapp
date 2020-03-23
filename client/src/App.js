@@ -3,15 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LoginPage from './components/login/loginPage';
 import QuestionPage from './components/questions/questionPage';
 import LearningPageNew from './components/learning/learningPagenew';
-import EarlyResult from './components/result/resultPage';
 
 const User = () => {
   return (
       <Switch>
         <Route exact path="/" component={ LoginPage } />
-        <Route exact path="/question" component={QuestionPage} />
-        <Route exact path="/learning" component={LearningPageNew} />
-        <Route exact path="/earlyresult"  component={EarlyResult} />
+        <Route exact path="/question" component={ QuestionPage } />
+        <Route exact path="/learning" component={ LearningPageNew } />
       </Switch>
   );
 };

@@ -30,6 +30,17 @@ const style = theme => ({
 
 class LoginPage extends Component {
 
+    // set the state of loginPage
+    state = {
+      id: '',
+      username: '',
+      earlyscore: 0,
+      emotionscore: 0,
+      familyscore: 0,
+      foodscore: 0,
+      finalscore: 0
+    }
+
     // create a new student record 
     createStudent = async data => {
       console.log(data);
@@ -40,25 +51,31 @@ class LoginPage extends Component {
       });
     };
 
-    // set the state of loginPage
-    state = {
-      username: '',
-      score: 0
-    }
-
     // proceedNext is responsible for saving user data into db
     proceedNext = async () => {
       let userData = {
         name: this.state.username,
-        score: this.state.score
+        earlyscore: this.state.earlyscore,
+        emotionscore: 0,
+        familyscore: 0,
+        foodscore: 0,
+        finalscore: 0
       }
+      
       // create user data 
       try {
-        this.createStudent(userData);
-        console.log(userData);
+        let res = await this.createStudent(userData);
+        if (res.ok) {
+          let data = await res.json();
+          this.setState({
+            id: data['_id']
+          })
+          console.log('i am data', data['_id'],);
+        }
       } catch (e) {
         console.log(e);
       }
+      console.log('i am id',this.state.id);
     }
 
     // handle changes for what user select
@@ -110,6 +127,7 @@ class LoginPage extends Component {
                 </Button>
             </form> 
         </Grid>
+        // <questionPage color={this.state.id} />
       );
     }
   }

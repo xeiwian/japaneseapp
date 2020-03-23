@@ -12,17 +12,27 @@ const User = models;
  */
 async function CreateUserController(req, res, next) {
     let body = req.body;
-    console.log("[WTF]", req.body);
+    // console.log("[WTF]", req.body);
     try {
         let data = await User.create({
             name: body.name,
-            score: body.score
+            earlyscore: body.earlyscore,
+            emotionscore: body.emotionscore,
+            familyscore: body.familyscore,
+            foodscore: body.foodscore,
+            finalscore: body.finalscore
         });
         res.status(201).json({
             _id: data._id,
             name: data.name,
-            score: data.score
+            earlyscore: body.earlyscore,
+            emotionscore: body.emotionscore,
+            familyscore: body.familyscore,
+            foodscore: body.foodscore,
+            finalscore: body.finalscore
         });
+        // res.send(data);
+        // console.log(data);
     } catch (err) {
         res.status(400).json({ err: err.message });
         console.log(err);
@@ -47,7 +57,7 @@ async function UpdateUserController(req, res, next) {
 async function RetrieveUserController(req, res, next) {
     let query = User.findById(
         { _id: req.params.id },
-        "_id name score"
+        "_id name"
     );
     try {
         let data = await query.exec();
