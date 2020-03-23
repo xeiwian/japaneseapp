@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core';
-import questionPage from '../questions/questionPage';
+import LearningPageNew from '../learning/learningPagenew';
 
 // set the styles for loginPage
 const style = theme => ({
@@ -94,7 +94,7 @@ class LoginPage extends Component {
 
       if(login) {
         return (
-          <questionPage id={this.state.id} />
+          <LearningPageNew id = {this.state.id}/>
         )
       } else {
           return (
@@ -129,7 +129,7 @@ class LoginPage extends Component {
                   />       
                   <br/>
                     <Button
-                      component={ Link } to="/learning"
+                      // component={ Link } to="/learning"
                       color="primary"
                       variant="contained"
                       className={classes.formItems}

@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import QuestionPage from '../questions/questionPage';
 
 const styles = theme => ({
   root: {
@@ -25,7 +26,8 @@ class LearningPageNew extends Component {
     state = {
       emotionContent: '',
       familyContent: '',
-      foodContent: ''
+      foodContent: '',
+      done: false
     }
 
     componentDidMount = () => {
@@ -41,52 +43,65 @@ class LearningPageNew extends Component {
           thirdFoodContent: quizQuestions[20].content
         });
     }
+
+    nextContentHandler = () => {
+      this.setState({
+        done: true
+      });
+    }
   
     render() {
         const { classes } = this.props;
+        const { done } = this.state;
 
-        return (
-          <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: '120vh' }}
-          >
-            <Typography variant="headline" component="h1">
-                Learning
-            </Typography> <br/>
-            <Typography>
-                Select the button to continue after you are done memorising the words
-            </Typography> <br/>
+        if(done) {
+          return (
+            <QuestionPage id={this.props.id} />
+          )
+        } else {
+            return (
+              <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              style={{ minHeight: '120vh' }}
+              >
+                <Typography variant="headline" component="h1">
+                    Learning
+                </Typography> <br/>
+                <Typography>
+                    Select the button to continue after you are done memorising the words
+                </Typography> <br/>
 
-            <Grid item xs={6}>
-                <div className={classes.root}>
-                    <Typography className={classes.formControl}>{this.state.firstEmotionContent}</Typography>
-                    <Typography className={classes.formControl}>{this.state.firstFamilyContent}</Typography>
-                    <Typography className={classes.formControl}>{this.state.firstFoodContent}</Typography>
+                <Grid item xs={6}>
+                    <div className={classes.root}>
+                        <Typography className={classes.formControl}>{this.state.firstEmotionContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.firstFamilyContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.firstFoodContent}</Typography>
 
-                    <Typography className={classes.formControl}>{this.state.secondEmotionContent}</Typography>
-                    <Typography className={classes.formControl}>{this.state.secondFamilyContent}</Typography>
-                    <Typography className={classes.formControl}>{this.state.secondFoodContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.secondEmotionContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.secondFamilyContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.secondFoodContent}</Typography>
 
-                    <Typography className={classes.formControl}>{this.state.thirdEmotionContent}</Typography>
-                    <Typography className={classes.formControl}>{this.state.thirdFamilyContent}</Typography>
-                    <Typography className={classes.formControl}>{this.state.thirdFoodContent}</Typography>
-                </div>
-            </Grid>  
-            <Button
-                  component={ Link } to="/question"
-                  color="primary"
-                  variant="contained"
-                  className={classes.formItems}
-                  onClick={this.nextContentHandler}
-            >
-            Continue
-            </Button>
-        </Grid>
-        )
+                        <Typography className={classes.formControl}>{this.state.thirdEmotionContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.thirdFamilyContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.thirdFoodContent}</Typography>
+                    </div>
+                </Grid>  
+                <Button
+                      // component={ Link } to="/question"
+                      color="primary"
+                      variant="contained"
+                      className={classes.formItems}
+                      onClick={this.nextContentHandler}
+                >
+                Continue
+                </Button>
+            </Grid>
+            )
+        }
     };
 
 }

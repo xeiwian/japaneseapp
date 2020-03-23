@@ -36,3 +36,8 @@ this link is useful for fetching API data for react js => https://www.youtube.co
 21/2/2020
 
 
+REACT JS SELF LEARN NOTES
+
+1) component={ Link } to="/learning" 
+    if this line is present, setstate will not set the new states immediately
+
