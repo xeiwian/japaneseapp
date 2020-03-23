@@ -56,7 +56,7 @@ class LearningPageNew extends Component {
 
         if(done) {
           return (
-            <QuestionPage id={this.props.id} />
+            <QuestionPage id={this.props.id} name={this.props.name}/>
           )
         } else {
             return (

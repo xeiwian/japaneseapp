@@ -34,7 +34,7 @@ class LoginPage extends Component {
     // set the state of loginPage
     state = {
       id: 'sixnine',
-      username: '',
+      name: '',
       earlyscore: 0,
       emotionscore: 0,
       familyscore: 0,
@@ -70,9 +70,10 @@ class LoginPage extends Component {
         if (res) {
           let data = await res.json();
           this.setState({
-            id: data['_id']
+            id: data['_id'],
+            name: data['name']
           });
-          console.log('i am id', data['_id'], this.state.id);
+          console.log('i am id', data['_id'], this.state.id, this.state.name);
         }
       } catch (e) {
         console.log(e);
@@ -94,7 +95,7 @@ class LoginPage extends Component {
 
       if(login) {
         return (
-          <LearningPageNew id = {this.state.id}/>
+          <LearningPageNew id = {this.state.id} name = {this.state.name} />
         )
       } else {
           return (

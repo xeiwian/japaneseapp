@@ -54,7 +54,7 @@ class QuestionPage extends Component {
     }
 
     getStudent = async (id) => {
-      return await fetch(`${this.API_URL}/userlogin/${id}`);
+      return await fetch(`api/userlogin/${id}`);
     };
 
     // update new student score 
@@ -123,7 +123,7 @@ class QuestionPage extends Component {
       });
     };
 
-    finishHandler = () => {
+    finishHandler = async () => {
       const { myEmotionAnswer, correctEmotionAnswer, myFamilyAnswer, correctFamilyAnswer, myFoodAnswer, correctFoodAnswer } = this.state;
   
       if (myEmotionAnswer === correctEmotionAnswer) {
@@ -161,21 +161,34 @@ class QuestionPage extends Component {
         foodscore: this.state.foodscore
       }
 
+      // create user data 
+      // try {
+      //   let res = await this.createStudent(userData);
+      //   if (res) {
+      //     let data = await res.json();
+      //     this.setState({
+      //       id: data['_id']
+      //     });
+      //     console.log('i am id', data['_id'], this.state.id);
+      //   }
+      // } catch (e) {
+      //   console.log(e);
+      // }
+
       // update user data 
-      const userData = this.getStudent();
-      if (
-        userData['name'] === this.state.name &&
-        userData['id']
-      ) {
-          try {
-            this.updateStudent(userscoreData);
-            console.log('tryna update', userscoreData);
-          } catch (e) {
-            console.log('updating score error', e);
-          }
-      } else {
-        console.log('not happening')
-      }
+      try {
+        let userData = await this.getStudent(this.props.id);
+        let data = await userData.json();
+        if ( data['name'] === this.props.name && data['_id'] ) {
+              this.updateStudent(this.props.id, userscoreData);
+              console.log('tryna update', data);
+        } else {
+          console.log('not happening', data['name'], this.props.name, this.props.id);
+        }
+      } catch (e){
+        console.log(e);
+      } 
+     
     }
 
     componentDidUpdate(prevProps, prevState) {
