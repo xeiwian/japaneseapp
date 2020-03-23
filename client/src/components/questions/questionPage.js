@@ -161,7 +161,7 @@ class QuestionPage extends Component {
         foodscore: this.state.foodscore
       }
 
-      // create user data 
+      // update user data 
       const userData = this.getStudent();
       if (
         userData['name'] === this.state.name &&
@@ -173,6 +173,8 @@ class QuestionPage extends Component {
           } catch (e) {
             console.log('updating score error', e);
           }
+      } else {
+        console.log('not happening')
       }
     }
 
@@ -198,7 +200,7 @@ class QuestionPage extends Component {
     }
   
     render() {
-        const { classes } = this.props;
+        const { classes, id } = this.props;
         const { isEnd } = this.state;
 
         if (isEnd) {
@@ -225,6 +227,9 @@ class QuestionPage extends Component {
                   </Typography>
                   <Typography>
                       I AM FOOD SCORE: {this.state.foodscore}
+                  </Typography>
+                  <Typography>
+                      I AM ID: {id}
                   </Typography>
               </Grid>
           )

@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core';
+import questionPage from '../questions/questionPage';
 
 // set the styles for loginPage
 const style = theme => ({
@@ -32,13 +33,14 @@ class LoginPage extends Component {
 
     // set the state of loginPage
     state = {
-      id: '',
+      id: 'sixnine',
       username: '',
       earlyscore: 0,
       emotionscore: 0,
       familyscore: 0,
       foodscore: 0,
-      finalscore: 0
+      finalscore: 0,
+      login: false
     }
 
     // create a new student record 
@@ -65,17 +67,20 @@ class LoginPage extends Component {
       // create user data 
       try {
         let res = await this.createStudent(userData);
-        if (res.ok) {
+        if (res) {
           let data = await res.json();
           this.setState({
             id: data['_id']
-          })
-          console.log('i am data', data['_id'],);
+          });
+          console.log('i am id', data['_id'], this.state.id);
         }
       } catch (e) {
         console.log(e);
       }
-      console.log('i am id',this.state.id);
+
+      this.setState({
+        login: true
+      });
     }
 
     // handle changes for what user select
@@ -85,50 +90,57 @@ class LoginPage extends Component {
 
     render() {
       const { classes } = this.props;
-      return (
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: '60vh' }}
-          >
+      const { login } = this.state;
 
-            <Typography variant="headline" component="h1">
-              Japanese Adaptive Language Learning App
-            </Typography> 
-            <form className={classes.form}>
-              <TextField
-                  id="username"
-                  label="Username"
-                  value={this.state.username}
+      if(login) {
+        return (
+          <questionPage id={this.state.id} />
+        )
+      } else {
+          return (
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              style={{ minHeight: '60vh' }}
+              >
 
-                  onChange={this.handleChange('username')}
-                  margin="normal"
-                  placeholder="Enter a username"
-                  required
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  className={classes.formItems}
-                  helperText={this.state.nameErrorMsg}
-                  error={this.state.nameError}
-              />       
-              <br/>
-                <Button
-                  component={ Link } to="/learning"
-                  color="primary"
-                  variant="contained"
-                  className={classes.formItems}
-                  onClick={this.proceedNext}
-                >
-                  Begin Lesson
-                </Button>
-            </form> 
-        </Grid>
-        // <questionPage color={this.state.id} />
-      );
+                <Typography variant="headline" component="h1">
+                  Japanese Adaptive Language Learning App
+                </Typography> 
+                <form className={classes.form}>
+                  <TextField
+                      id="username"
+                      label="Username"
+                      value={this.state.username}
+
+                      onChange={this.handleChange('username')}
+                      margin="normal"
+                      placeholder="Enter a username"
+                      required
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      className={classes.formItems}
+                      helperText={this.state.nameErrorMsg}
+                      error={this.state.nameError}
+                  />       
+                  <br/>
+                    <Button
+                      component={ Link } to="/learning"
+                      color="primary"
+                      variant="contained"
+                      className={classes.formItems}
+                      onClick={this.proceedNext}
+                    >
+                      Begin Lesson
+                    </Button>
+                </form> 
+            </Grid>
+          );
+      }
     }
   }
 
