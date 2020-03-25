@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core';
-import LearningPageNew from '../learning/learningPagenew';
+import LearningPage from '../learning/learningPage';
 
 // set the styles for loginPage
 const style = theme => ({
@@ -95,7 +94,7 @@ class LoginPage extends Component {
 
       if(login) {
         return (
-          <LearningPageNew id = {this.state.id} name = {this.state.name} />
+          <LearningPage id = {this.state.id} name = {this.state.name} />
         )
       } else {
           return (
@@ -130,7 +129,6 @@ class LoginPage extends Component {
                   />       
                   <br/>
                     <Button
-                      // component={ Link } to="/learning"
                       color="primary"
                       variant="contained"
                       className={classes.formItems}

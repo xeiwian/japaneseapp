@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import quizQuestions from '../questions';
-import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import QuestionPage from '../questions/questionPage';
 
 const styles = theme => ({
   root: {
@@ -13,7 +13,7 @@ const styles = theme => ({
   },
   formControl: {
     margin: theme.spacing.unit * 3,
-    fontSize: 26
+    fontSize: 18
   },
   group: {
     margin: `${theme.spacing.unit}px 0`
@@ -23,104 +23,85 @@ const styles = theme => ({
 class LearningPage extends Component {
 
     state = {
-      emotioncounter: 0,
-      familycounter: 9,
-      foodcounter: 18,
       emotionContent: '',
       familyContent: '',
-      foodContent: ''
+      foodContent: '',
+      done: false
     }
 
     componentDidMount = () => {
-      this.documentData = JSON.parse(localStorage.getItem('content'));
-
-      if (localStorage.getItem('content')) {
-        console.log("Found local storage");
         this.setState({
-          //  emotionContent: this.documentData.emotionContent,
-          //  familyContent: this.documentData.familyContent,
-          //  foodContent: this.documentData.foodContent,
-          emotioncounter: this.documentData.emotioncounter,
-          familycounter: this.documentData.familycounter,
-          foodcounter: this.documentData.foodcounter,
+          firstEmotionContent: quizQuestions[0].content,
+          firstFamilyContent: quizQuestions[9].content,
+          firstFoodContent: quizQuestions[18].content,
+          secondEmotionContent: quizQuestions[1].content,
+          secondFamilyContent: quizQuestions[10].content,
+          secondFoodContent: quizQuestions[19].content,
+          thirdEmotionContent: quizQuestions[2].content,
+          thirdFamilyContent: quizQuestions[11].content,
+          thirdFoodContent: quizQuestions[20].content
         });
-      } else {
-        console.log("Couldn't find local storage");
-        this.setState({
-          emotionContent: quizQuestions[this.state.emotioncounter].content,
-          familyContent: quizQuestions[this.state.familycounter].content,
-          foodContent: quizQuestions[this.state.foodcounter].content,
-        });
-      }
     }
 
-    // increment the counter for all questions
     nextContentHandler = () => {
-      // this.setState({
-      //   emotioncounter: this.state.emotioncounter + 1,
-      //   familycounter: this.state.familycounter + 1,
-      //   foodcounter: this.state.foodcounter + 1,
-      // });
-
-      this.state.emotioncounter += 1;
-      this.state.familycounter += 1;
-      this.state.foodcounter += 1;
-
-      localStorage.setItem('content', JSON.stringify(this.state));
-    }
-
-    // update the UI with new states (need to wrap it in a condition to check for state changes)
-    componentDidUpdate(prevProps, prevState) {
-      if (this.state.emotioncounter !== prevState.emotioncounter || this.state.familycounter !== prevState.familycounter || this.state.foodcounter !== prevState.foodcounter) {
-        this.setState(() => {
-          return {
-            emotionContent: quizQuestions[this.state.emotioncounter].content,
-            familyContent: quizQuestions[this.state.familycounter].content,
-            foodContent: quizQuestions[this.state.foodcounter].content,
-          };
-        });
-      }
+      this.setState({
+        done: true
+      });
     }
   
     render() {
         const { classes } = this.props;
+        const { done } = this.state;
 
-        return (
-          <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: '100vh' }}
-          >
-            <Typography variant="headline" component="h1">
-            Learning
-            </Typography> <br/>
-            <Typography>
-            Please memorise these 3 questions and select the next button to continue
-            </Typography> <br/>
+        if(done) {
+          return (
+            <QuestionPage id={this.props.id} name={this.props.name}/>
+          )
+        } else {
+            return (
+              <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              style={{ minHeight: '120vh' }}
+              >
+                <Typography variant="headline" component="h1">
+                    Learning
+                </Typography> <br/>
+                <Typography>
+                    Select the button to continue after you are done memorising the words
+                </Typography> <br/>
 
-            <Grid item xs={6}>
-                <div className={classes.root}>
-                    <Typography className={classes.formControl}>{this.state.emotionContent}</Typography>
-                    <Typography className={classes.formControl}>{this.state.familyContent}</Typography>
-                    <Typography className={classes.formControl}>{this.state.foodContent}</Typography>
-                </div>
-            </Grid>  
-            <Button
-                  component={ Link } to="/question"
-                  color="primary"
-                  variant="contained"
-                  className={classes.formItems}
-                  onClick={this.nextContentHandler}
-            >
-            Continue
-            </Button>
-        </Grid>
-        )
+                <Grid item xs={6}>
+                    <div className={classes.root}>
+                        <Typography className={classes.formControl}>{this.state.firstEmotionContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.firstFamilyContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.firstFoodContent}</Typography>
+
+                        <Typography className={classes.formControl}>{this.state.secondEmotionContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.secondFamilyContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.secondFoodContent}</Typography>
+
+                        <Typography className={classes.formControl}>{this.state.thirdEmotionContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.thirdFamilyContent}</Typography>
+                        <Typography className={classes.formControl}>{this.state.thirdFoodContent}</Typography>
+                    </div>
+                </Grid>  
+                <Button
+                      color="primary"
+                      variant="contained"
+                      className={classes.formItems}
+                      onClick={this.nextContentHandler}
+                >
+                Continue
+                </Button>
+            </Grid>
+            )
+        }
     };
 
 }
 
-export default withStyles(styles)(LearningPage);    
+export default withStyles(styles)(LearningPage);   

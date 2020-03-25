@@ -161,20 +161,6 @@ class QuestionPage extends Component {
         foodscore: this.state.foodscore
       }
 
-      // create user data 
-      // try {
-      //   let res = await this.createStudent(userData);
-      //   if (res) {
-      //     let data = await res.json();
-      //     this.setState({
-      //       id: data['_id']
-      //     });
-      //     console.log('i am id', data['_id'], this.state.id);
-      //   }
-      // } catch (e) {
-      //   console.log(e);
-      // }
-
       // update user data 
       try {
         let userData = await this.getStudent(this.props.id);
@@ -185,10 +171,23 @@ class QuestionPage extends Component {
         } else {
           console.log('not happening', data['name'], this.props.name, this.props.id);
         }
-      } catch (e){
+      } catch (e) {
         console.log(e);
       } 
      
+    }
+
+    practiceHandler = async () => {
+      try {
+        let userData = await this.getStudent(this.props.id);
+        let data = await userData.json();
+        if (data['emotionscore'] === 3) {
+          
+        }
+      } catch (e) {
+        console.log(e);
+      }
+
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -312,7 +311,6 @@ class QuestionPage extends Component {
                   className={classes.group}
                   value={this.state.value}
                   onChange={(value) => this.handleOnChangeFood(value)}
-                  // onChange={this.handleChange}
                 >
                   <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio />} label={this.state.possibleFoodAnswer[0]}/>
                   <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio />} label={this.state.possibleFoodAnswer[1]}/>
@@ -322,7 +320,6 @@ class QuestionPage extends Component {
             
             {this.state.emotioncounter < 2 && (
               <Button
-              // component={ Link } to="/question"
               color="primary"
               variant="contained"
               className={classes.formItems}
@@ -334,7 +331,6 @@ class QuestionPage extends Component {
 
             {this.state.emotioncounter >= 2 && (
               <Button
-              // component={ Link } to="/question"
               color="primary"
               variant="contained"
               className={classes.formItems}
