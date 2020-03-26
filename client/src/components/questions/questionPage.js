@@ -72,7 +72,39 @@ class QuestionPage extends Component {
       return await fetch(`api/question/emotionthree`);
     }
 
-    addEmotionwords = async (id, data) => {
+    getSixEmotionWords = async () => {
+      return await fetch(`api/question/emotionsix`);
+    }
+
+    getNineEmotionWords = async () => {
+      return await fetch(`api/question/emotionnine`);
+    }
+
+    getThreeFamilyWords = async () => {
+      return await fetch(`api/question/familythree`);
+    }
+
+    getSixFamilyWords = async () => {
+      return await fetch(`api/question/familysix`);
+    }
+
+    getNineFamilyWords = async () => {
+      return await fetch(`api/question/familynine`);
+    }
+
+    getThreeFoodWords = async () => {
+      return await fetch(`api/question/foodthree`);
+    }
+
+    getSixFoodWords = async () => {
+      return await fetch(`api/question/foodsix`);
+    }
+
+    getNineFoodWords = async () => {
+      return await fetch(`api/question/foodnine`);
+    }
+
+    addWords = async (id, data) => {
       console.log(data);
       return await fetch(`api/userlogin/addwords/${id}`, {
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -200,11 +232,88 @@ class QuestionPage extends Component {
           let words = await this.getThreeEmotionWords();
           let wordsjson = await words.json();
           console.log('i am words', wordsjson);
-          // let insertedwordsjson = {
-          //   words: wordsjson
-          // }
-          // this.updateStudent(this.props.id, insertedwordsjson);
-          this.addEmotionwords(this.props.id, wordsjson);
+   
+          this.addWords(this.props.id, wordsjson);
+        } else {
+          console.log('wordsHandler not working')
+        }
+
+        if (data['familyscore'] === 3) {
+          let words = await this.getThreeFamilyWords();
+          let wordsjson = await words.json();
+          console.log('i am words', wordsjson);
+
+          this.addWords(this.props.id, wordsjson);
+        } else {
+          console.log('wordsHandler not working')
+        }
+
+        if (data['foodscore'] === 3) {
+          let words = await this.getThreeFoodWords();
+          let wordsjson = await words.json();
+          console.log('i am words', wordsjson);
+   
+          this.addWords(this.props.id, wordsjson);
+        } else {
+          console.log('wordsHandler not working')
+        }
+
+        if (data['emotionscore'] === 2) {
+          let words = await this.getSixEmotionWords();
+          let wordsjson = await words.json();
+          console.log('i am words', wordsjson);
+      
+          this.addWords(this.props.id, wordsjson);
+        } else {
+          console.log('wordsHandler not working')
+        }
+
+        if (data['familyscore'] === 2) {
+          let words = await this.getSixFamilyWords();
+          let wordsjson = await words.json();
+          console.log('i am words', wordsjson);
+     
+          this.addWords(this.props.id, wordsjson);
+        } else {
+          console.log('wordsHandler not working')
+        }
+
+        if (data['foodscore'] === 2) {
+          let words = await this.getSixFoodWords();
+          let wordsjson = await words.json();
+          console.log('i am words', wordsjson);
+ 
+          this.addWords(this.props.id, wordsjson);
+        } else {
+          console.log('wordsHandler not working')
+        }
+
+        if (data['emotionscore'] === 1 || data['emotionscore'] === 0) {
+          let words = await this.getNineEmotionWords();
+          let wordsjson = await words.json();
+          console.log('i am words', wordsjson);
+  
+          this.addWords(this.props.id, wordsjson);
+        } else {
+          console.log('wordsHandler not working')
+        }
+
+        if (data['familyscore'] === 1 || data['familyscore'] === 0) {
+          let words = await this.getNineFamilyWords();
+          let wordsjson = await words.json();
+          console.log('i am words', wordsjson);
+    
+          this.addWords(this.props.id, wordsjson);
+        } else {
+          console.log('wordsHandler not working')
+        }
+
+        if (data['foodscore'] === 1 || data['foodscore'] === 0) {
+          let words = await this.getNineFoodWords();
+          let wordsjson = await words.json();
+          console.log('i am words', wordsjson);
+   
+          this.addWords(this.props.id, wordsjson);
         } else {
           console.log('wordsHandler not working')
         }
@@ -213,21 +322,6 @@ class QuestionPage extends Component {
         console.log(e);
       }
     }
-
-    // wordsHandler = async (data) => {
-    //   try {
-    //     if (data['emotionscore'] === 3) {
-    //       let words = await this.getThreeEmotionWords();
-    //       console.log('i am words', words);
-    //       this.updateStudent(this.props.id, words);
-    //       console.log('tryna update words:', words);
-    //     } else {
-    //       console.log('wordsHandler not working')
-    //     }
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
-    // }
 
     componentDidUpdate(prevProps, prevState) {
       if (this.state.emotioncounter !== prevState.emotioncounter || this.state.familycounter !== prevState.familycounter || this.state.foodcounter !== prevState.foodcounter) {

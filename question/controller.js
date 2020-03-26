@@ -35,7 +35,7 @@ async function QueryEmotionNineController(req, res, next) {
 }
 
 async function QueryFamilyThreeController(req, res, next) {
-    let query = Question.findOne({ type: 'Family'}).limit( 3 );
+    let query = Question.find({ type: 'Family'}).limit( 3 );
     try {
         let data = await query.exec();
         res.status(200).json(data);
@@ -46,7 +46,7 @@ async function QueryFamilyThreeController(req, res, next) {
 }
 
 async function QueryFamilySixController(req, res, next) {
-    let query = Question.findOne({ type: 'Family'}).limit( 6 );
+    let query = Question.find({ type: 'Family'}).limit( 6 );
     try {
         let data = await query.exec();
         res.status(200).json(data);
@@ -57,7 +57,7 @@ async function QueryFamilySixController(req, res, next) {
 }
 
 async function QueryFamilyNineController(req, res, next) {
-    let query = Question.findOne({ type: 'Family'}).limit( 9 );
+    let query = Question.find({ type: 'Family'}).limit( 9 );
     try {
         let data = await query.exec();
         res.status(200).json(data);
@@ -68,7 +68,7 @@ async function QueryFamilyNineController(req, res, next) {
 }
 
 async function QueryFoodThreeController(req, res, next) {
-    let query = Question.findOne({ type: 'Food'}).limit( 3 );
+    let query = Question.find({ type: 'Food'}).limit( 3 );
     try {
         let data = await query.exec();
         res.status(200).json(data);
@@ -79,7 +79,7 @@ async function QueryFoodThreeController(req, res, next) {
 }
 
 async function QueryFoodSixController(req, res, next) {
-    let query = Question.findOne({ type: 'Food'}).limit( 6 );
+    let query = Question.find({ type: 'Food'}).limit( 6 );
     try {
         let data = await query.exec();
         res.status(200).json(data);
@@ -90,7 +90,7 @@ async function QueryFoodSixController(req, res, next) {
 }
 
 async function QueryFoodNineController(req, res, next) {
-    let query = Question.findOne({ type: 'Food'}).limit( 9 );
+    let query = Question.find({ type: 'Food'}).limit( 9 );
     try {
         let data = await query.exec();
         res.status(200).json(data);
