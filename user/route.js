@@ -5,5 +5,6 @@ const controller = require("./controller");
 route.post("/", controller.CreateUserController);
 route.put("/:id", controller.UpdateUserController);
 route.get("/:id", controller.RetrieveUserController);
+route.put("/addwords/:id", controller.addWords);
 
 module.exports = route;

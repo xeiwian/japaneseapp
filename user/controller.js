@@ -20,6 +20,8 @@ async function CreateUserController(req, res, next) {
             emotionscore: body.emotionscore,
             familyscore: body.familyscore,
             foodscore: body.foodscore,
+            words: body.words,
+            chosenwords: body.chosenwords,
             finalscore: body.finalscore
         });
         res.status(201).json({
@@ -29,6 +31,8 @@ async function CreateUserController(req, res, next) {
             emotionscore: body.emotionscore,
             familyscore: body.familyscore,
             foodscore: body.foodscore,
+            words: body.words,
+            chosenwords: body.chosenwords,
             finalscore: body.finalscore
         });
         // res.send(data);
@@ -43,6 +47,7 @@ async function CreateUserController(req, res, next) {
 async function UpdateUserController(req, res, next) {
     let body = req.body;
     body._id = req.params.id;
+    console.log('update body', body)
     try {
         await User.updateOne({ _id: req.params.id }, body, {
             runValidators: true
@@ -57,7 +62,7 @@ async function UpdateUserController(req, res, next) {
 async function RetrieveUserController(req, res, next) {
     let query = User.findById(
         { _id: req.params.id },
-        "_id name"
+        "_id name earlyscore emotionscore familyscore foodscore words chosenwords finalscore"
     );
     try {
         let data = await query.exec();
@@ -74,8 +79,25 @@ async function RetrieveUserController(req, res, next) {
     }
 }
 
+async function addWords(req, res, next) {
+    let body = req.body;
+    body._id = req.params.id;
+
+    console.log(body);
+    try {
+        await User.updateOne({ _id: req.params.id }, { $push: { words: body } }, {
+            runValidators: true
+        });
+        res.status(200).json();
+    } catch (err) {
+        res.status(400).json({ err: err.message });
+        return;
+    }
+}
+
 module.exports = {
     CreateUserController,
     UpdateUserController,
-    RetrieveUserController
+    RetrieveUserController,
+    addWords
 };

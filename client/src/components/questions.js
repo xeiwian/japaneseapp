@@ -61,6 +61,13 @@ var quizQuestions = [
         question: "林檎 (ringo)",
         correctAnswer: "Apple",
         possibleAnswer: ["Orange", "Grapes", "Apple"]
+    },
+    {
+        type: "Food",
+        content: "林檎 (ringo) => Apple",
+        question: "林檎 (ringo)",
+        correctAnswer: "Apple",
+        possibleAnswer: ["Orange", "Grapes", "Apple"]
     }
 ];
   

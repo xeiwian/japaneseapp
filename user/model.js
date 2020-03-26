@@ -8,6 +8,8 @@ const UserSchema = new Schema({
     familyscore: Number,
     foodscore: Number,
     earlyscore: Number,
+    words: Array,
+    chosenwords: Array,
     finalscore: Number
 });
 

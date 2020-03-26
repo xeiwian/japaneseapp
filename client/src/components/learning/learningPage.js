@@ -32,14 +32,14 @@ class LearningPage extends Component {
     componentDidMount = () => {
         this.setState({
           firstEmotionContent: quizQuestions[0].content,
-          firstFamilyContent: quizQuestions[9].content,
-          firstFoodContent: quizQuestions[18].content,
+          firstFamilyContent: quizQuestions[3].content,
+          firstFoodContent: quizQuestions[6].content,
           secondEmotionContent: quizQuestions[1].content,
-          secondFamilyContent: quizQuestions[10].content,
-          secondFoodContent: quizQuestions[19].content,
+          secondFamilyContent: quizQuestions[4].content,
+          secondFoodContent: quizQuestions[7].content,
           thirdEmotionContent: quizQuestions[2].content,
-          thirdFamilyContent: quizQuestions[11].content,
-          thirdFoodContent: quizQuestions[20].content
+          thirdFamilyContent: quizQuestions[5].content,
+          thirdFoodContent: quizQuestions[8].content
         });
     }
 

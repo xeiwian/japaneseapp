@@ -39,13 +39,13 @@ class QuestionPage extends Component {
       emotionQuestion: '',
       possibleEmotionAnswer: [],
       correctEmotionAnswer: '',
-      familycounter: 9,
+      familycounter: 3,
       familyscore: 0,
       myFamilyAnswer: '',
       familyQuestion: '',
       possibleFamilyAnswer: [],
       correctFamilyAnswer: '',
-      foodcounter: 18,
+      foodcounter: 6,
       foodscore: 0,
       myFoodAnswer: '',
       foodQuestion: '',
@@ -53,6 +53,7 @@ class QuestionPage extends Component {
       correctFoodAnswer: ''
     }
 
+    // get user info if user exists
     getStudent = async (id) => {
       return await fetch(`api/userlogin/${id}`);
     };
@@ -66,6 +67,19 @@ class QuestionPage extends Component {
         body: JSON.stringify(data)  
       });
     };
+
+    getThreeEmotionWords = async () => {
+      return await fetch(`api/question/emotionthree`);
+    }
+
+    addEmotionwords = async (id, data) => {
+      console.log(data);
+      return await fetch(`api/userlogin/addwords/${id}`, {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        method: 'PUT',
+        body: JSON.stringify(data)  
+      });
+    }
 
     componentDidMount = () => {   
         this.setState({
@@ -167,28 +181,53 @@ class QuestionPage extends Component {
         let data = await userData.json();
         if ( data['name'] === this.props.name && data['_id'] ) {
               this.updateStudent(this.props.id, userscoreData);
-              console.log('tryna update', data);
+              // console.log('tryna update', data);
         } else {
           console.log('not happening', data['name'], this.props.name, this.props.id);
         }
       } catch (e) {
         console.log(e);
       } 
-     
     }
 
     practiceHandler = async () => {
       try {
         let userData = await this.getStudent(this.props.id);
         let data = await userData.json();
+        console.log('i am data', data);
+
         if (data['emotionscore'] === 3) {
-          
+          let words = await this.getThreeEmotionWords();
+          let wordsjson = await words.json();
+          console.log('i am words', wordsjson);
+          // let insertedwordsjson = {
+          //   words: wordsjson
+          // }
+          // this.updateStudent(this.props.id, insertedwordsjson);
+          this.addEmotionwords(this.props.id, wordsjson);
+        } else {
+          console.log('wordsHandler not working')
         }
+
       } catch (e) {
         console.log(e);
       }
-
     }
+
+    // wordsHandler = async (data) => {
+    //   try {
+    //     if (data['emotionscore'] === 3) {
+    //       let words = await this.getThreeEmotionWords();
+    //       console.log('i am words', words);
+    //       this.updateStudent(this.props.id, words);
+    //       console.log('tryna update words:', words);
+    //     } else {
+    //       console.log('wordsHandler not working')
+    //     }
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+    // }
 
     componentDidUpdate(prevProps, prevState) {
       if (this.state.emotioncounter !== prevState.emotioncounter || this.state.familycounter !== prevState.familycounter || this.state.foodcounter !== prevState.foodcounter) {
@@ -243,6 +282,14 @@ class QuestionPage extends Component {
                   <Typography>
                       I AM ID: {id}
                   </Typography>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    className={classes.formItems}
+                    onClick={this.practiceHandler}
+                    >
+                      Update DB
+                  </Button>
               </Grid>
           )
         } else {
