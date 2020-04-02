@@ -68,6 +68,10 @@ class QuestionPage extends Component {
       });
     };
 
+    getWords = async (id) => {
+      return await fetch(`api/userlogin/getNine/${id}`);
+    }
+
     getThreeEmotionWords = async () => {
       return await fetch(`api/question/emotionthree`);
     }
@@ -318,9 +322,34 @@ class QuestionPage extends Component {
           console.log('wordsHandler not working')
         }
 
+        this.handleWords();
+
       } catch (e) {
         console.log(e);
       }
+    }
+
+    handleWords = async () => {
+      try {
+        let userWords = await this.getWords(this.props.id);
+        let words = await userWords.json();
+
+        let newarray =  new Array();
+        let array = words.words;
+        let counter = 0;
+
+        while (counter < 9) {
+          let randomindex = Math.floor(Math.random()*array.length);
+          let randomWord = array[randomindex];
+          array.splice(randomindex, 1); 
+          newarray.push(randomWord);
+          counter++;      
+        }
+  
+        console.log('i am newarray words', newarray);
+        } catch (e) {
+          console.log(e);
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {

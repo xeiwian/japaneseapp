@@ -95,7 +95,7 @@ async function addWords(req, res, next) {
     }
 }
 
-async function getNineRandWords(req, res, next) {
+async function getWords(req, res, next) {
     let query = User.findById({ _id: req.params.id }, 'words');
     try {
         let data = await query.exec();
@@ -117,5 +117,5 @@ module.exports = {
     UpdateUserController,
     RetrieveUserController,
     addWords,
-    getNineRandWords
+    getWords
 };
