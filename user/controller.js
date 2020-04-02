@@ -95,6 +95,22 @@ async function addWords(req, res, next) {
     }
 }
 
+async function addChosenWords(req, res, next) {
+    let body = req.body;
+    body._id = req.params.id;
+
+    console.log(body);
+    try {
+        await User.updateOne({ _id: req.params.id }, { $push: { chosenwords: body } }, {
+            runValidators: true
+        });
+        res.status(200).json();
+    } catch (err) {
+        res.status(400).json({ err: err.message });
+        return;
+    }
+}
+
 async function getWords(req, res, next) {
     let query = User.findById({ _id: req.params.id }, 'words');
     try {
@@ -117,5 +133,6 @@ module.exports = {
     UpdateUserController,
     RetrieveUserController,
     addWords,
+    addChosenWords,
     getWords
 };

@@ -117,6 +117,15 @@ class QuestionPage extends Component {
       });
     }
 
+    addChosenWords = async (id, data) => {
+      console.log(data);
+      return await fetch(`api/userlogin/addchosenwords/${id}`, {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        method: 'PUT',
+        body: JSON.stringify(data)  
+      });
+    }
+
     componentDidMount = () => {   
         this.setState({
           emotionQuestion: quizQuestions[this.state.emotioncounter].question,
@@ -347,6 +356,7 @@ class QuestionPage extends Component {
         }
   
         console.log('i am newarray words', newarray);
+        this.addChosenWords(this.props.id, newarray);
         } catch (e) {
           console.log(e);
         }
