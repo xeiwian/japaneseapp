@@ -128,11 +128,29 @@ async function getWords(req, res, next) {
     }
 }
 
+async function getChosenWords(req, res, next) {
+    let query = User.findById({ _id: req.params.id }, 'chosenwords');
+    try {
+        let data = await query.exec();
+        if (data === null) {
+            res.status(404).json({
+                err: "Document with that id does not exist."
+            });
+            return;
+        }
+        res.status(200).json(data);
+    } catch (err) {
+        res.status(400).json({ err: err.message });
+        return;
+    }
+}
+
 module.exports = {
     CreateUserController,
     UpdateUserController,
     RetrieveUserController,
     addWords,
     addChosenWords,
-    getWords
+    getWords,
+    getChosenWords
 };

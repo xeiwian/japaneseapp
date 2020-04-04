@@ -7,6 +7,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
+import PracticePage from '../practice/practicePage';
 
 const styles = theme => ({
   root: {
@@ -33,6 +34,7 @@ class QuestionPage extends Component {
       earlyscore: 0,
       disabled: true,
       isEnd: false,
+      gotoPractice: false,
       emotioncounter: 0,
       emotionscore: 0,
       myEmotionAnswer: '',
@@ -360,6 +362,10 @@ class QuestionPage extends Component {
         } catch (e) {
           console.log(e);
         }
+        // set gotoPractice to true here to make sure chosenwords array is not empty in practice page
+        this.setState({
+          gotoPractice: true
+        })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -385,8 +391,14 @@ class QuestionPage extends Component {
   
     render() {
         const { classes, id } = this.props;
-        const { isEnd } = this.state;
+        const { isEnd, gotoPractice } = this.state;
 
+        if (gotoPractice) {
+          return (
+            <PracticePage id={this.props.id} name={this.props.name}/>
+          )
+        }
+        
         if (isEnd) {
           return (     
               <Grid
