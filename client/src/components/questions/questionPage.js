@@ -345,7 +345,7 @@ class QuestionPage extends Component {
         let userWords = await this.getWords(this.props.id);
         let words = await userWords.json();
 
-        let newarray =  new Array();
+        let newarray = new Array();
         let array = words.words;
         let counter = 0;
 

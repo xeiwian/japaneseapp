@@ -33,8 +33,12 @@ class PracticePage extends Component {
       visible: false,
       correct: false,
       wrong: false,
-      cont: false
+      cont: false,
+      counter: 0
     }
+
+    // global variable
+    chosenwords = [];
 
     getChosenWords = async (id) => {
         return await fetch(`api/userlogin/getchosenwords/${id}`);
@@ -43,16 +47,14 @@ class PracticePage extends Component {
     handleChosenWords = async () => {
         let data = await this.getChosenWords(this.props.id);
         let datajson = await data.json();
-        let chosenwords = datajson.chosenwords; 
-        console.log('i am chosenwords data in practice', datajson, chosenwords);
-        // console.log('i am chosenwords in practice', chosenwords.chosenwords);
+        this.chosenwords = datajson.chosenwords;
+        console.log('i am chosenwords data in practice', datajson, this.chosenwords);
+    
         this.setState({
-          // content: 'yoo',
-          // question: 'son'
-          content: chosenwords[0].content,
-          question: chosenwords[0].question,
-          possibleAnswer: chosenwords[0].possibleAnswer,
-          correctAnswer: chosenwords[0].correctAnswer
+          content: this.chosenwords[this.state.counter].content,
+          question: this.chosenwords[this.state.counter].question,
+          possibleAnswer: this.chosenwords[this.state.counter].possibleAnswer,
+          correctAnswer: this.chosenwords[this.state.counter].correctAnswer
         });
     }
 
@@ -62,7 +64,9 @@ class PracticePage extends Component {
 
     contHandler = () => {
       this.setState({
-        cont: true
+        cont: true,
+        correct: false,
+        visible: false
       })
     }
 
@@ -82,14 +86,35 @@ class PracticePage extends Component {
         }
     }
 
+    nextPracticeHandler = () => {
+      this.setState({
+        counter: this.state.counter + 1,
+        cont: false
+      });
+    }
+
     handleOnChange(e) {
         console.log('selected option', e.target.value);
         this.setState({ myAnswer: e.target.value, visible: false, correct: false, wrong: false });
     }
+
+    componentDidUpdate(prevProps, prevState) {
+      if ( this.state.counter !== prevState.counter ) {
+        this.setState(() => {
+          return {
+            // disabled: true,
+            content: this.chosenwords[this.state.counter].content,
+            question: this.chosenwords[this.state.counter].question,
+            possibleAnswer: this.chosenwords[this.state.counter].possibleAnswer,
+            correctAnswer: this.chosenwords[this.state.counter].correctAnswer
+          };
+        });
+      }
+    }
   
     render() {
         const { classes } = this.props;
-        const { done, next, correct, cont } = this.state;
+        const { cont } = this.state;
       
           if (!cont) {
             return (
@@ -143,41 +168,29 @@ class PracticePage extends Component {
                         <FormControlLabel value={this.state.possibleAnswer[0]} control={<Radio />} label={this.state.possibleAnswer[0]}/>
                         <FormControlLabel value={this.state.possibleAnswer[1]} control={<Radio />} label={this.state.possibleAnswer[1]}/>
                         <FormControlLabel value={this.state.possibleAnswer[2]} control={<Radio />} label={this.state.possibleAnswer[2]}/>
-                      </RadioGroup> <br/>
+                      </RadioGroup> 
 
-                      { this.state.correct && this.state.visible ? 
-                      <Typography variant="headline" component="h1">
-                        The answer is correct. 
-                      </Typography> : null }
-
-                      { this.state.wrong && this.state.visible ? 
-                      <Typography variant="headline" component="h1">
-                        The answer is wrong try again. 
-                      </Typography> : null }
-
-                      { this.state.correct && this.state.visible ? 
-                      <Button
-                      color="primary"
-                      variant="contained"
-                      className={classes.formItems}
-                      onClick={this.checkHandler}
-                      >
-                        Continue to next word
-                      </Button> : 
-                      <Button
-                      color="primary"
-                      variant="contained"
-                      className={classes.formItems}
-                      onClick={this.checkHandler}
-                      >
-                        Check
-                      </Button>
+                      { (this.state.correct && this.state.visible) &&
+                        <Typography variant="headline" component="h1">
+                          The answer is correct. <br/>
+                        </Typography> 
                       }
 
-                      {/* { (this.state.correct && this.state.visible) && (
+                      { (this.state.wrong && this.state.visible) &&
                         <Typography variant="headline" component="h1">
-                        The answer is correct. 
-                        </Typography>,
+                          The answer is wrong try again. <br/>
+                        </Typography>
+                      }
+
+                      { this.state.correct && this.state.visible ? 
+                        <Button
+                        color="primary"
+                        variant="contained"
+                        className={classes.formItems}
+                        onClick={this.nextPracticeHandler}
+                        >
+                          Continue to next word
+                        </Button> : 
                         <Button
                         color="primary"
                         variant="contained"
@@ -186,16 +199,7 @@ class PracticePage extends Component {
                         >
                           Check
                         </Button>
-                      )} */}                    
-
-                      {/* <Button
-                            color="primary"
-                            variant="contained"
-                            className={classes.formItems}
-                            onClick={this.checkHandler}
-                      >
-                        Check
-                      </Button> */}
+                      }
                       
                   </Grid>
             )
