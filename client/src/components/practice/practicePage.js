@@ -27,11 +27,13 @@ class PracticePage extends Component {
     state = {
       content: '',
       question: '',
-      foodContent: '',
-      next: false,
+      myAnswer: '',
+      possibleAnswer: [],
+      correctAnswer: '',
+      visible: false,
       correct: false,
-      proceed: false,
-      done: false
+      wrong: false,
+      cont: false
     }
 
     getChosenWords = async (id) => {
@@ -45,8 +47,12 @@ class PracticePage extends Component {
         console.log('i am chosenwords data in practice', datajson, chosenwords);
         // console.log('i am chosenwords in practice', chosenwords.chosenwords);
         this.setState({
+          // content: 'yoo',
+          // question: 'son'
           content: chosenwords[0].content,
-          question: chosenwords[0].question
+          question: chosenwords[0].question,
+          possibleAnswer: chosenwords[0].possibleAnswer,
+          correctAnswer: chosenwords[0].correctAnswer
         });
     }
 
@@ -54,64 +60,167 @@ class PracticePage extends Component {
         this.handleChosenWords();
     }
 
-    nextHandler = () => {
-        this.setState({
-            next: true
-        });
-    }
-
-    continueHandler = () => {
+    contHandler = () => {
       this.setState({
-        proceed: true
+        cont: true
       })
     }
 
-    checkAnswerHandler = () => {
+    checkHandler = () => {
         const { myAnswer, correctAnswer } = this.state;
 
         if (myAnswer === correctAnswer) {
           this.setState({
-            correct: true
+            correct: true,
+            visible: true
+          });
+        } else {
+          this.setState({
+            wrong: true,
+            visible: true
           });
         }
-
     }
 
     handleOnChange(e) {
         console.log('selected option', e.target.value);
-        this.setState({ myAnswer: e.target.value});
+        this.setState({ myAnswer: e.target.value, visible: false, correct: false, wrong: false });
     }
   
     render() {
         const { classes } = this.props;
-        const { done, next, correct, proceed } = this.state;
+        const { done, next, correct, cont } = this.state;
+      
+          if (!cont) {
+            return (
+              <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              style={{ minHeight: '60vh' }}
+              >
+                  <Typography variant="headline" component="h1">
+                      Practice
+                  </Typography> <br/>
+                  <Typography className={classes.formControl}>{this.state.content}</Typography>
 
-          return (
-            <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justify="center"
-            style={{ minHeight: '120vh' }}
-            >
-                <Typography variant="headline" component="h1">
-                    Practice
-                </Typography> <br/>
-                <Typography className={classes.formControl}>{this.state.content}</Typography>
-                <Button
+                  <Button
+                        color="primary"
+                        variant="contained"
+                        className={classes.formItems}
+                        onClick={this.contHandler}
+                  >
+                    Continue
+                  </Button>
+              </Grid>
+            )
+          } else {
+            return (
+                  <Grid
+                  container
+                  spacing={0}
+                  direction="column"
+                  alignItems="center"
+                  justify="center"
+                  style={{ minHeight: '60vh' }}
+                  >
+                      <Typography variant="headline" component="h1">
+                          Practice
+                      </Typography> <br/>
+                      <Typography className={classes.formControl}>{this.state.question}</Typography>
+      
+                      <RadioGroup 
+                        row
+                        aria-label="Emotion"
+                        name="emotionQuestion"
+                        className={classes.group}
+                        value={this.state.value}
+                        onChange={(value) => this.handleOnChange(value)}
+                        // onChange={this.handleChange}
+                      >
+                        <FormControlLabel value={this.state.possibleAnswer[0]} control={<Radio />} label={this.state.possibleAnswer[0]}/>
+                        <FormControlLabel value={this.state.possibleAnswer[1]} control={<Radio />} label={this.state.possibleAnswer[1]}/>
+                        <FormControlLabel value={this.state.possibleAnswer[2]} control={<Radio />} label={this.state.possibleAnswer[2]}/>
+                      </RadioGroup> <br/>
+
+                      { this.state.correct && this.state.visible ? 
+                      <Typography variant="headline" component="h1">
+                        The answer is correct. 
+                      </Typography> : null }
+
+                      { this.state.wrong && this.state.visible ? 
+                      <Typography variant="headline" component="h1">
+                        The answer is wrong try again. 
+                      </Typography> : null }
+
+                      { this.state.correct && this.state.visible ? 
+                      <Button
                       color="primary"
                       variant="contained"
                       className={classes.formItems}
-                      onClick={this.nextHandler}
-                >
-                  Next
-                </Button>
-            </Grid>
-          )
-        
-    };
+                      onClick={this.checkHandler}
+                      >
+                        Continue to next word
+                      </Button> : 
+                      <Button
+                      color="primary"
+                      variant="contained"
+                      className={classes.formItems}
+                      onClick={this.checkHandler}
+                      >
+                        Check
+                      </Button>
+                      }
 
+                      {/* { (this.state.correct && this.state.visible) && (
+                        <Typography variant="headline" component="h1">
+                        The answer is correct. 
+                        </Typography>,
+                        <Button
+                        color="primary"
+                        variant="contained"
+                        className={classes.formItems}
+                        onClick={this.checkHandler}
+                        >
+                          Check
+                        </Button>
+                      )} */}                    
+
+                      {/* <Button
+                            color="primary"
+                            variant="contained"
+                            className={classes.formItems}
+                            onClick={this.checkHandler}
+                      >
+                        Check
+                      </Button> */}
+                      
+                  </Grid>
+            )
+          }
+    };
 }
+
+// class Correct extends Component {
+//   render() {
+//       return (
+//         <Grid>
+//         <Typography variant="headline" component="h1">
+//           The answer is correct. 
+//         </Typography> 
+//               <Button
+//               color="primary"
+//               variant="contained"
+//               className={classes.formItems}
+//               onClick={this.checkHandler}
+//         >
+//           Check
+//         </Button>
+//          <Grid/>
+//       )
+//   };
+// }
 
 export default withStyles(styles)(PracticePage);   
