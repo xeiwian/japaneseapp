@@ -34,6 +34,7 @@ class PracticePage extends Component {
       correct: false,
       wrong: false,
       cont: false,
+      done: false,
       counter: 0
     }
 
@@ -70,7 +71,7 @@ class PracticePage extends Component {
       })
     }
 
-    checkHandler = () => {
+    checkAnswerHandler = () => {
         const { myAnswer, correctAnswer } = this.state;
 
         if (myAnswer === correctAnswer) {
@@ -91,6 +92,55 @@ class PracticePage extends Component {
         counter: this.state.counter + 1,
         cont: false
       });
+    }
+
+    doneHandler = () => {
+      this.setState({
+        done: true
+      })
+    }
+
+    renderMessage = () => {
+      if (this.state.correct && this.state.visible) {
+         return <Typography variant="headline" component="h1"> The answer is correct. <br/> </Typography>
+      } else if (this.state.wrong && this.state.visible) {
+        return <Typography variant="headline" component="h1"> The answer is wrong try again. <br/> </Typography>
+      } else {
+        return null;
+      }
+    }
+
+    renderButton = () => {
+      const { classes } = this.props;
+
+      if ( (this.state.correct && this.state.visible) && (this.state.counter < 8) ) {
+         return <Button
+         color="primary"
+         variant="contained"
+         className={classes.formItems}
+         onClick={this.nextPracticeHandler}
+         >
+           Continue
+         </Button>
+      } else if ( (this.state.correct && this.state.visible) && (this.state.counter >= 8) ) {
+        return <Button
+        color="primary"
+        variant="contained"
+        className={classes.formItems}
+        onClick={this.doneHandler}
+        >
+          Finish
+        </Button>
+      } else {
+        return <Button
+        color="primary"
+        variant="contained"
+        className={classes.formItems}
+        onClick={this.checkAnswerHandler}
+        >
+          Check
+        </Button>
+      }
     }
 
     handleOnChange(e) {
@@ -114,7 +164,13 @@ class PracticePage extends Component {
   
     render() {
         const { classes } = this.props;
-        const { cont } = this.state;
+        const { cont, done } = this.state;
+
+          if (done) {
+            return (
+            <Typography>I am test.</Typography>
+            )
+          }
       
           if (!cont) {
             return (
@@ -127,7 +183,7 @@ class PracticePage extends Component {
               style={{ minHeight: '60vh' }}
               >
                   <Typography variant="headline" component="h1">
-                      Practice
+                      Practice {this.state.counter}
                   </Typography> <br/>
                   <Typography className={classes.formControl}>{this.state.content}</Typography>
 
@@ -152,7 +208,7 @@ class PracticePage extends Component {
                   style={{ minHeight: '60vh' }}
                   >
                       <Typography variant="headline" component="h1">
-                          Practice
+                          Practice {this.state.counter}
                       </Typography> <br/>
                       <Typography className={classes.formControl}>{this.state.question}</Typography>
       
@@ -170,61 +226,14 @@ class PracticePage extends Component {
                         <FormControlLabel value={this.state.possibleAnswer[2]} control={<Radio />} label={this.state.possibleAnswer[2]}/>
                       </RadioGroup> 
 
-                      { (this.state.correct && this.state.visible) &&
-                        <Typography variant="headline" component="h1">
-                          The answer is correct. <br/>
-                        </Typography> 
-                      }
+                      { this.renderMessage() }
 
-                      { (this.state.wrong && this.state.visible) &&
-                        <Typography variant="headline" component="h1">
-                          The answer is wrong try again. <br/>
-                        </Typography>
-                      }
-
-                      { this.state.correct && this.state.visible ? 
-                        <Button
-                        color="primary"
-                        variant="contained"
-                        className={classes.formItems}
-                        onClick={this.nextPracticeHandler}
-                        >
-                          Continue to next word
-                        </Button> : 
-                        <Button
-                        color="primary"
-                        variant="contained"
-                        className={classes.formItems}
-                        onClick={this.checkHandler}
-                        >
-                          Check
-                        </Button>
-                      }
+                      { this.renderButton() }
                       
                   </Grid>
             )
           }
     };
 }
-
-// class Correct extends Component {
-//   render() {
-//       return (
-//         <Grid>
-//         <Typography variant="headline" component="h1">
-//           The answer is correct. 
-//         </Typography> 
-//               <Button
-//               color="primary"
-//               variant="contained"
-//               className={classes.formItems}
-//               onClick={this.checkHandler}
-//         >
-//           Check
-//         </Button>
-//          <Grid/>
-//       )
-//   };
-// }
 
 export default withStyles(styles)(PracticePage);   
