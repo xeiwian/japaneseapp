@@ -28,6 +28,15 @@ class PracticePage extends Component {
       content: '',
       question: '',
       myAnswer: '',
+      myTestAnswer1: '',
+      myTestAnswer2: '',
+      myTestAnswer3: '',
+      myTestAnswer4: '',
+      myTestAnswer5: '',
+      myTestAnswer6: '',
+      myTestAnswer7: '',
+      myTestAnswer8: '',
+      myTestAnswer9: '',
       possibleAnswer: [],
       correctAnswer: '',
       visible: false,
@@ -103,18 +112,60 @@ class PracticePage extends Component {
     }
 
     testHandler = () => {
-      const { myAnswer, correctAnswer } = this.state;
-      console.log('i am testHandler',myAnswer, correctAnswer);
-      if (myAnswer === correctAnswer) {
+      const { 
+        myTestAnswer1, 
+        myTestAnswer2, 
+        myTestAnswer3, 
+        myTestAnswer4, 
+        myTestAnswer5, 
+        myTestAnswer6, 
+        myTestAnswer7, 
+        myTestAnswer8,
+        myTestAnswer9
+      } = this.state;
+      
+      if (myTestAnswer1 === this.chosenwords[0].correctAnswer) {
         this.state.score += 1;
       }
+      
+      if (myTestAnswer2 === this.chosenwords[1].correctAnswer) {
+        this.state.score += 1;
+      }
+
+      if (myTestAnswer3 === this.chosenwords[2].correctAnswer) {
+        this.state.score += 1;
+      }
+
+      if (myTestAnswer4 === this.chosenwords[3].correctAnswer) {
+        this.state.score += 1;
+      }
+
+      if (myTestAnswer5 === this.chosenwords[4].correctAnswer) {
+        this.state.score += 1;
+      }
+
+      if (myTestAnswer6 === this.chosenwords[5].correctAnswer) {
+        this.state.score += 1;
+      }
+
+      if (myTestAnswer7 === this.chosenwords[6].correctAnswer) {
+        this.state.score += 1;
+      }
+
+      if (myTestAnswer8 === this.chosenwords[7].correctAnswer) {
+        this.state.score += 1;
+      }
+
+      if (myTestAnswer9 === this.chosenwords[8].correctAnswer) {
+        this.state.score += 1;
+      }
+
       this.setState({
         result: true
       })
-      console.log(this.state.score, this.state.result);
     }
 
-    renderTestQuestion = (num) => {
+    renderTestQuestion = (num, keyName) => {
       const { classes } = this.props;
 
         return(
@@ -127,7 +178,7 @@ class PracticePage extends Component {
                 name="emotionQuestion"
                 className={classes.group}
                 value={this.state.value}
-                onChange={(value) => this.handleOnChange(value)}
+                onChange={(value) => this.handleOnChangeTest(keyName, value)}
               >
                 <FormControlLabel value={this.chosenwords[num].possibleAnswer[0]} control={<Radio />} label={this.chosenwords[num].possibleAnswer[0]}/>
                 <FormControlLabel value={this.chosenwords[num].possibleAnswer[1]} control={<Radio />} label={this.chosenwords[num].possibleAnswer[1]}/>
@@ -180,9 +231,13 @@ class PracticePage extends Component {
       }
     }
 
-    handleOnChange(e) {
+    handleOnChange = (e) => {
         console.log('selected option', e.target.value);
         this.setState({ myAnswer: e.target.value, visible: false, correct: false, wrong: false });
+    }
+
+    handleOnChangeTest = (name, e) => {
+        this.setState({ [name]: e.target.value});
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -218,7 +273,7 @@ class PracticePage extends Component {
                   </Typography> <br/>
                   <Typography>
                       Congrats {name}! You have completed your lesson.
-                  </Typography>
+                  </Typography> <br/>
                   <Typography>
                       FINAL SCORE: {this.state.score}
                   </Typography>
@@ -234,22 +289,22 @@ class PracticePage extends Component {
               direction="column"
               alignItems="center"
               justify="center"
-              style={{ minHeight: '200vh' }}
+              style={{ minHeight: '160vh' }}
               >          
                   <Typography variant="headline" component="h1">
                       Test 
                   </Typography> <br/>
                   <Grid item xs={6}>
                     <div className={classes.root}>
-                      { this.renderTestQuestion(0) } <br/>
-                      { this.renderTestQuestion(1) } <br/>
-                      { this.renderTestQuestion(2) } <br/>
-                      { this.renderTestQuestion(3) } <br/>
-                      { this.renderTestQuestion(4) } <br/>
-                      { this.renderTestQuestion(5) } <br/>
-                      { this.renderTestQuestion(6) } <br/>
-                      { this.renderTestQuestion(7) } <br/>
-                      { this.renderTestQuestion(8) } <br/>
+                      { this.renderTestQuestion(0, 'myTestAnswer1') } <br/>
+                      { this.renderTestQuestion(1, 'myTestAnswer2') } <br/>
+                      { this.renderTestQuestion(2, 'myTestAnswer3') } <br/>
+                      { this.renderTestQuestion(3, 'myTestAnswer4') } <br/>
+                      { this.renderTestQuestion(4, 'myTestAnswer5') } <br/>
+                      { this.renderTestQuestion(5, 'myTestAnswer6') } <br/>
+                      { this.renderTestQuestion(6, 'myTestAnswer7') } <br/>
+                      { this.renderTestQuestion(7, 'myTestAnswer8') } <br/>
+                      { this.renderTestQuestion(8, 'myTestAnswer9') } <br/>
                     </div>
                   </Grid>
 
