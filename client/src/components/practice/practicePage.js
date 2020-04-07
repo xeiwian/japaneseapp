@@ -35,7 +35,9 @@ class PracticePage extends Component {
       wrong: false,
       cont: false,
       done: false,
-      counter: 0
+      result: false,
+      counter: 0,
+      score: 0
     }
 
     // global variable
@@ -100,11 +102,46 @@ class PracticePage extends Component {
       })
     }
 
+    testHandler = () => {
+      const { myAnswer, correctAnswer } = this.state;
+      console.log('i am testHandler',myAnswer, correctAnswer);
+      if (myAnswer === correctAnswer) {
+        this.state.score += 1;
+      }
+      this.setState({
+        result: true
+      })
+      console.log(this.state.score, this.state.result);
+    }
+
+    renderTestQuestion = (num) => {
+      const { classes } = this.props;
+
+        return(
+          <Grid>      
+              <Typography>{this.chosenwords[num].question}</Typography>
+      
+              <RadioGroup 
+                row
+                aria-label="Emotion"
+                name="emotionQuestion"
+                className={classes.group}
+                value={this.state.value}
+                onChange={(value) => this.handleOnChange(value)}
+              >
+                <FormControlLabel value={this.chosenwords[num].possibleAnswer[0]} control={<Radio />} label={this.chosenwords[num].possibleAnswer[0]}/>
+                <FormControlLabel value={this.chosenwords[num].possibleAnswer[1]} control={<Radio />} label={this.chosenwords[num].possibleAnswer[1]}/>
+                <FormControlLabel value={this.chosenwords[num].possibleAnswer[2]} control={<Radio />} label={this.chosenwords[num].possibleAnswer[2]}/>
+              </RadioGroup> <br/>
+          </Grid>
+        )
+  }
+
     renderMessage = () => {
       if (this.state.correct && this.state.visible) {
-         return <Typography variant="headline" component="h1"> The answer is correct. <br/> </Typography>
+         return <Typography variant="headline" component="h1"> The answer is correct. </Typography>
       } else if (this.state.wrong && this.state.visible) {
-        return <Typography variant="headline" component="h1"> The answer is wrong try again. <br/> </Typography>
+        return <Typography variant="headline" component="h1"> The answer is wrong try again. </Typography>
       } else {
         return null;
       }
@@ -163,12 +200,69 @@ class PracticePage extends Component {
     }
   
     render() {
-        const { classes } = this.props;
-        const { cont, done } = this.state;
+        const { classes, name } = this.props;
+        const { cont, done, result } = this.state;
+
+        if (result) {
+          return (     
+              <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              style={{ minHeight: '60vh' }}
+              >
+                  <Typography variant="headline" component="h1">
+                      Final Result
+                  </Typography> <br/>
+                  <Typography>
+                      Congrats {name}! You have completed your lesson.
+                  </Typography>
+                  <Typography>
+                      FINAL SCORE: {this.state.score}
+                  </Typography>
+              </Grid>
+          )
+        }
 
           if (done) {
             return (
-            <Typography>I am test.</Typography>
+              <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              style={{ minHeight: '200vh' }}
+              >          
+                  <Typography variant="headline" component="h1">
+                      Test 
+                  </Typography> <br/>
+                  <Grid item xs={6}>
+                    <div className={classes.root}>
+                      { this.renderTestQuestion(0) } <br/>
+                      { this.renderTestQuestion(1) } <br/>
+                      { this.renderTestQuestion(2) } <br/>
+                      { this.renderTestQuestion(3) } <br/>
+                      { this.renderTestQuestion(4) } <br/>
+                      { this.renderTestQuestion(5) } <br/>
+                      { this.renderTestQuestion(6) } <br/>
+                      { this.renderTestQuestion(7) } <br/>
+                      { this.renderTestQuestion(8) } <br/>
+                    </div>
+                  </Grid>
+
+                  <Button
+                  color="primary"
+                  variant="contained"
+                  className={classes.formItems}
+                  onClick={this.testHandler}
+                  >
+                    Confirm
+                  </Button>
+
+              </Grid>      
             )
           }
       
@@ -208,8 +302,9 @@ class PracticePage extends Component {
                   style={{ minHeight: '60vh' }}
                   >
                       <Typography variant="headline" component="h1">
-                          Practice {this.state.counter}
+                          Practice {this.state.counter+1}
                       </Typography> <br/>
+
                       <Typography className={classes.formControl}>{this.state.question}</Typography>
       
                       <RadioGroup 
@@ -227,7 +322,7 @@ class PracticePage extends Component {
                       </RadioGroup> 
 
                       { this.renderMessage() }
-
+                      <br/>
                       { this.renderButton() }
                       
                   </Grid>
@@ -235,5 +330,32 @@ class PracticePage extends Component {
           }
     };
 }
+
+// class TestQuestion extends Component {
+
+//   render() {
+//     const { classes } = this.props;
+
+//       return (
+//           <Grid>      
+//               <Typography>{this.chosenwords[this.props.counter].question}</Typography>
+      
+//               <RadioGroup 
+//                 row
+//                 aria-label="Emotion"
+//                 name="emotionQuestion"
+//                 // className={classes.group}
+//                 value={this.state.value}
+//                 onChange={(value) => this.handleOnChange(value)}
+//                 // onChange={this.handleChange}
+//               >
+//                 <FormControlLabel value={this.chosenwords[this.props.counter].possibleAnswer[0]} control={<Radio />} label={this.chosenwords[this.props.counter].possibleAnswer[0]}/>
+//                 <FormControlLabel value={this.chosenwords[this.props.counter].possibleAnswer[1]} control={<Radio />} label={this.chosenwords[this.props.counter].possibleAnswer[1]}/>
+//                 <FormControlLabel value={this.chosenwords[this.props.counter].possibleAnswer[2]} control={<Radio />} label={this.chosenwords[this.props.counter].possibleAnswer[2]}/>
+//               </RadioGroup> <br/>
+//           </Grid>
+//       )
+//   };
+// }
 
 export default withStyles(styles)(PracticePage);   
