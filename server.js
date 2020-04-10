@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const apiRoutes = require("./routes");
 const bodyParser = require("body-parser");
 
-const mongoDB = 'mongodb://localhost:27017/appdb';
-mongoose.connect(process.env.MONGOLAB_URL || 'mongodb://localhost:27017/appdb');
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+// const mongoDB = 'mongodb://localhost:27017/appdb';
+mongoose.connect(process.env.MONGOLAB_URL || 'mongodb://localhost:27017/appdb', {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // mongodb+srv://adamlee680:<password>@fypcluster-r3uxv.mongodb.net/test
 const app = express();
