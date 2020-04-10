@@ -14,13 +14,14 @@ const app = express();
 // for parsing application/x-www-form-urlencoded
 // app.use(express.urlencoded({ extended: true }));
 
-// for parsing json data
-app.use(bodyParser.json());
-
- // Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, './client/build')));
-// API Endpoints
-app.use("/api", apiRoutes);
+if (process.env.NODE_ENV === "production"){
+    // for parsing json data
+    app.use(bodyParser.json());
+    // Priority serve any static files.
+    app.use(express.static(path.resolve(__dirname, './client/build')));
+    // API Endpoints
+    app.use("/api", apiRoutes);
+}
 
 const port = process.env.PORT || 5000;
 
