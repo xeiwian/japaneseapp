@@ -18,15 +18,15 @@ if (process.env.NODE_ENV === "production"){
     // for parsing json data
     app.use(bodyParser.json());
     // Priority serve any static files.
-    // app.use(express.static(path.resolve(__dirname, './client/build')));
-    app.use(express.static('./client/build'));
+    app.use(express.static(path.resolve(__dirname, './client/build')));
+    app.use("/api", apiRoutes);
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, './client/build', 'index.html'));
     });
 }
 
 // API Endpoints
-app.use("/api", apiRoutes);
+// app.use("/api", apiRoutes);
 
 const port = process.env.PORT || 5000;
 
