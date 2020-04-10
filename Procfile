@@ -1,1 +1,1 @@
-web: concurrently \"npm run server\" \"npm run client\"
+web: yarn dev
