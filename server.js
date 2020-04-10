@@ -14,8 +14,8 @@ const app = express();
 // app.use(express.urlencoded({ extended: true }));
 
 // for parsing json data
-app.use(bodyParser.json());
-
+// app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'), bodyParser.json());
 // API Endpoints
 app.use("/api", apiRoutes);
 
