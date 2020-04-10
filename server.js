@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const apiRoutes = require("./routes");
 const bodyParser = require("body-parser");
-const path = require('path');
+var path = require('path');
 
 // const mongoDB = 'mongodb://localhost:27017/appdb';
 // mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -15,10 +15,10 @@ const app = express();
 // app.use(express.urlencoded({ extended: true }));
 
 // for parsing json data
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
  // Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, './client/build')), bodyParser.json());
+app.use(express.static(path.resolve(__dirname, './client/build')));
 // API Endpoints
 app.use("/api", apiRoutes);
 
