@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const apiRoutes = require("./routes");
 const bodyParser = require("body-parser");
+const path = require('path');
 
 // const mongoDB = 'mongodb://localhost:27017/appdb';
 // mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
