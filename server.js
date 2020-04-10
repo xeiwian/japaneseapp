@@ -19,6 +19,9 @@ if (process.env.NODE_ENV === "production"){
     app.use(bodyParser.json());
     // Priority serve any static files.
     app.use(express.static(path.resolve(__dirname, './client/build')));
+    app.get('*', (req, res) => {
+        response.sendFile(path.join(__dirname, './client/build', 'index.html'));
+    });
     // API Endpoints
     app.use("/api", apiRoutes);
 }
