@@ -4,9 +4,10 @@ const apiRoutes = require("./routes");
 const bodyParser = require("body-parser");
 
 const mongoDB = 'mongodb://localhost:27017/appdb';
+mongoose.connect(process.env.MONGOLAB_URL || 'mongodb://localhost:27017/appdb');
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
+// mongodb+srv://adamlee680:<password>@fypcluster-r3uxv.mongodb.net/test
 const app = express();
 
 // for parsing application/x-www-form-urlencoded
@@ -17,15 +18,6 @@ app.use(bodyParser.json());
 
 // API Endpoints
 app.use("/api", apiRoutes);
-
-// app.get('/api/customers', (req, res) => {
-//     // usually this info is queried from a database
-//     const customers = [
-//         {id: 1, firstName: 'John', lastName: 'Doe'},
-//         {id: 2, firstName: 'Mary', lastName: 'Dodo'},
-//     ];
-//     res.json(customers);
-// });
 
 const port = process.env.PORT || 5000;
 
