@@ -332,7 +332,7 @@ class PracticePage extends Component {
               style={{ minHeight: '60vh' }}
               >
                   <Typography variant="headline" component="h1">
-                      Practice {this.state.counter}
+                      Practice {this.state.counter+1}
                   </Typography> <br/>
                   <Typography className={classes.formControl}>{this.state.content}</Typography>
 
