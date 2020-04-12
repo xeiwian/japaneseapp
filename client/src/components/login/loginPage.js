@@ -2,25 +2,54 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core';
 import LearningPage from '../learning/learningPage';
 
 // set the styles for loginPage
 const style = theme => ({
-  root: {
+  // card: {
+  //   display: 'column',
+  //   width: 500,
+  //   height: 300,
+  //   padding: 16,
+  //   alignItems: 'center',
+  //   // justifyContent: 'center',
+  //   color: 'white',
+  //   background: '#448aff',
+  //   borderRadius: 16
+  // },
+  // root: {
+  //   display: 'flex',
+  //   // justifyContent: "center"
+  // },
+  // formItems: {
+  //   marginTop: 16,
+  //   marginBottom: 12
+  // },
+  container: {
     display: 'flex',
-    // justifyContent: "center"
+    flexWrap: 'wrap',
+    width: 400,
+    margin: `${theme.spacing(0)} auto`
   },
-  titleText: {
-    fontSize: 36
+  loginBtn: {
+    marginTop: theme.spacing(2),
+    flexGrow: 1,
+    background: '#3d5afe' 
   },
-  form: {
-    padding: 16
+  header: {
+    textAlign: 'center',
+    background: '#3d5afe',
+    color: '#fff'
   },
-  formItems: {
-    marginTop: 16,
-    marginBottom: 12,
+  card: {
+    marginTop: theme.spacing(10)
   },
   formControl: {
     margin: theme.spacing(1),
@@ -97,47 +126,79 @@ class LoginPage extends Component {
           <LearningPage id = {this.state.id} name = {this.state.name} />
         )
       } else {
+          // return (
+          //   <Grid
+          //     container
+          //     spacing={0}
+          //     direction="column"
+          //     alignItems="center"
+          //     justify="center"
+          //     style={{ minHeight: '60vh' }}
+          //     >
+          //         <Typography>
+          //           <Box fontSize={30} fontFamily="Open Sans">
+          //             Japanese Adaptive Language Learning App
+          //           </Box>
+          //         </Typography>                                 
+          //         <TextField
+          //             id="username"
+          //             label="Username"
+          //             value={this.state.username}
+          //             color="#2196f3"
+          //             onChange={this.handleChange('username')}
+          //             margin="normal"
+          //             placeholder="Enter a username"
+          //             required
+          //             InputLabelProps={{
+          //               shrink: true
+          //             }}
+                    
+          //             helperText={this.state.nameErrorMsg}
+          //             error={this.state.nameError}
+          //         /> <br/>
+          //           <Button
+          //             color="primary"
+          //             variant="contained"
+          //             className={classes.formItems}
+          //             onClick={this.proceedNext}
+          //           >
+          //             Begin Lesson
+          //           </Button>
+          //     </Grid>
+          // );
           return (
-            <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              justify="center"
-              style={{ minHeight: '60vh' }}
-              >
-
-                <Typography variant="headline" component="h1">
-                  Japanese Adaptive Language Learning App
-                </Typography> 
-                <form className={classes.form}>
-                  <TextField
-                      id="username"
-                      label="Username"
-                      value={this.state.username}
-
-                      onChange={this.handleChange('username')}
-                      margin="normal"
-                      placeholder="Enter a username"
-                      required
-                      InputLabelProps={{
-                        shrink: true
-                      }}
-                      className={classes.formItems}
-                      helperText={this.state.nameErrorMsg}
-                      error={this.state.nameError}
-                  />       
-                  <br/>
+            <React.Fragment>
+              <form className={classes.container} noValidate autoComplete="off">
+                <Card className={classes.card}>
+                  <CardHeader className={classes.header} title="Japanese Adaptive Language Learning Web App" />
+                  <CardContent>
+                    <div>
+                      <TextField
+                        fullWidth
+                        id="username"
+                        type="email"
+                        label="Username"
+                        value={this.state.username}
+                        placeholder="Enter any username"
+                        margin="normal"
+                        onChange={this.handleChange('username')}
+                      />
+                    </div>
+                  </CardContent>
+                  <CardActions>
                     <Button
-                      color="primary"
                       variant="contained"
-                      className={classes.formItems}
+                      size="large"
+                      color="primary"
+                      className={classes.loginBtn}
                       onClick={this.proceedNext}
-                    >
+                      >
                       Begin Lesson
                     </Button>
-                </form> 
-            </Grid>
+                  </CardActions>
+                </Card>
+              </form>
+            </React.Fragment>
           );
       }
     }
