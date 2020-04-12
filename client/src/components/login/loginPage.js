@@ -50,10 +50,6 @@ const style = theme => ({
   },
   card: {
     marginTop: theme.spacing(10)
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
   }
 });
 

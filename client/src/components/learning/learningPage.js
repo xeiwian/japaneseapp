@@ -3,6 +3,11 @@ import quizQuestions from '../questions';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import QuestionPage from '../questions/questionPage';
 
@@ -17,6 +22,40 @@ const styles = theme => ({
   },
   group: {
     margin: `${theme.spacing.unit}px 0`
+  },
+  container: {
+    display: 'column',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    width: 400,
+    margin: `${theme.spacing(0)} auto`
+  },
+  instructions: {
+    fontSize: 20
+  },
+  continueBtn: {
+    marginTop: theme.spacing(6),
+    flexGrow: 1,
+    background: '#3d5afe',
+    width: 400,
+    height: 50
+  },
+  header: {
+    textAlign: 'center',
+    background: '#536dfe',
+    color: '#fff',
+    height: 12
+  },
+  content: {
+    fontSize: 22
+  },
+  title: {
+    fontFamily: 'sans-serif',
+    fontSize: 28
+  },
+  card: {
+    marginTop: theme.spacing(6),
+    borderRadius: 12
   }
 });
 
@@ -58,46 +97,148 @@ class LearningPage extends Component {
             <QuestionPage id={this.props.id} name={this.props.name}/>
           )
         } else {
-            return (
-              <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              justify="center"
-              style={{ minHeight: '120vh' }}
-              >
-                <Typography variant="headline" component="h1">
-                    Learning
-                </Typography> <br/>
-                <Typography>
-                    Select the button to continue after you are done memorising the words
-                </Typography> <br/>
+            // return (
+            //   <Grid
+            //   container
+            //   spacing={0}
+            //   direction="column"
+            //   alignItems="center"
+            //   justify="center"
+            //   style={{ minHeight: '120vh' }}
+            //   >
+            //     <Typography variant="headline" component="h1">
+            //         Learning
+            //     </Typography> <br/>
+            //     <Typography>
+            //         Select the button to continue after you are done memorising the words
+            //     </Typography> <br/>
 
-                <Grid item xs={6}>
-                    <div className={classes.root}>
-                        <Typography className={classes.formControl}>{this.state.firstEmotionContent}</Typography>
-                        <Typography className={classes.formControl}>{this.state.firstFamilyContent}</Typography>
-                        <Typography className={classes.formControl}>{this.state.firstFoodContent}</Typography>
+            //     <Grid item xs={6}>
+            //         <div className={classes.root}>
+            //             <Typography className={classes.formControl}>{this.state.firstEmotionContent}</Typography>
+            //             <Typography className={classes.formControl}>{this.state.firstFamilyContent}</Typography>
+            //             <Typography className={classes.formControl}>{this.state.firstFoodContent}</Typography>
 
-                        <Typography className={classes.formControl}>{this.state.secondEmotionContent}</Typography>
-                        <Typography className={classes.formControl}>{this.state.secondFamilyContent}</Typography>
-                        <Typography className={classes.formControl}>{this.state.secondFoodContent}</Typography>
+            //             <Typography className={classes.formControl}>{this.state.secondEmotionContent}</Typography>
+            //             <Typography className={classes.formControl}>{this.state.secondFamilyContent}</Typography>
+            //             <Typography className={classes.formControl}>{this.state.secondFoodContent}</Typography>
 
-                        <Typography className={classes.formControl}>{this.state.thirdEmotionContent}</Typography>
-                        <Typography className={classes.formControl}>{this.state.thirdFamilyContent}</Typography>
-                        <Typography className={classes.formControl}>{this.state.thirdFoodContent}</Typography>
-                    </div>
-                </Grid>  
-                <Button
-                      color="primary"
-                      variant="contained"
-                      className={classes.formItems}
-                      onClick={this.nextContentHandler}
+            //             <Typography className={classes.formControl}>{this.state.thirdEmotionContent}</Typography>
+            //             <Typography className={classes.formControl}>{this.state.thirdFamilyContent}</Typography>
+            //             <Typography className={classes.formControl}>{this.state.thirdFoodContent}</Typography>
+            //         </div>
+            //     </Grid>  
+            //     <Button
+            //           color="primary"
+            //           variant="contained"
+            //           className={classes.formItems}
+            //           onClick={this.nextContentHandler}
+            //     >
+            //     Continue
+            //     </Button>
+            // </Grid>
+            // )
+            return(
+              <div>
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                style={{  backgroundColor: '#3d5afe', height: 80 }}
                 >
-                Continue
-                </Button>
-            </Grid>
+                  <Typography variant="headline">
+                    <Box className={classes.title} color="white" m={0}>
+                      Learning
+                    </Box>
+                  </Typography>
+                </Grid> 
+                <br/>
+                <br/>
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                className={classes.instructions}
+                >
+                  Please take your time to learn the words below and click on the button to continue. 
+                </Grid>
+                
+                <form className={classes.container}>
+                  <Card className={classes.card} variant="outlined">
+                    <CardHeader className={classes.header} title="Word #1" />
+                    <CardContent className={classes.content}>
+                      {this.state.firstEmotionContent}
+                    </CardContent>
+                  </Card>
+                  <Card className={classes.card} variant="outlined">
+                    <CardHeader className={classes.header} title="Word #2" />
+                    <CardContent className={classes.content}>
+                      {this.state.firstFamilyContent}
+                    </CardContent>
+                  </Card>
+                  <Card className={classes.card} variant="outlined">
+                    <CardHeader className={classes.header} title="Word #3" />
+                    <CardContent className={classes.content}>
+                      {this.state.firstFoodContent}
+                    </CardContent>
+                  </Card>
+                  <Card className={classes.card} variant="outlined">
+                    <CardHeader className={classes.header} title="Word #4" />
+                    <CardContent className={classes.content}>
+                      {this.state.secondEmotionContent}
+                    </CardContent>
+                  </Card>
+                  <Card className={classes.card} variant="outlined">
+                    <CardHeader className={classes.header} title="Word #5" />
+                    <CardContent className={classes.content}>
+                      {this.state.secondFamilyContent}
+                    </CardContent>
+                  </Card>
+                  <Card className={classes.card} variant="outlined">
+                    <CardHeader className={classes.header} title="Word #6" />
+                    <CardContent className={classes.content}>
+                      {this.state.secondFoodContent}
+                    </CardContent>
+                  </Card>
+                  <Card className={classes.card} variant="outlined">
+                    <CardHeader className={classes.header} title="Word #7" />
+                    <CardContent className={classes.content}>
+                      {this.state.thirdEmotionContent}
+                    </CardContent>
+                  </Card>
+                  <Card className={classes.card} variant="outlined">
+                    <CardHeader className={classes.header} title="Word #8" />
+                    <CardContent className={classes.content}>
+                      {this.state.thirdFamilyContent}
+                    </CardContent>
+                  </Card>
+                  <Card className={classes.card} variant="outlined">
+                    <CardHeader className={classes.header} title="Word #9" />
+                    <CardContent className={classes.content}>
+                      {this.state.thirdFoodContent}
+                    </CardContent>
+                  </Card>
+                  
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="primary"
+                    className={classes.continueBtn}
+                    onClick={this.nextContentHandler}
+                  >
+                    Continue
+                  </Button>
+                </form>
+                <br/>
+                <br/>
+                
+              </div>
+              
+                      
             )
         }
     };
