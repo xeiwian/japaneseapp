@@ -96,47 +96,6 @@ class LearningPage extends Component {
             <QuestionPage id={this.props.id} name={this.props.name}/>
           )
         } else {
-            // return (
-            //   <Grid
-            //   container
-            //   spacing={0}
-            //   direction="column"
-            //   alignItems="center"
-            //   justify="center"
-            //   style={{ minHeight: '120vh' }}
-            //   >
-            //     <Typography variant="headline" component="h1">
-            //         Learning
-            //     </Typography> <br/>
-            //     <Typography>
-            //         Select the button to continue after you are done memorising the words
-            //     </Typography> <br/>
-
-            //     <Grid item xs={6}>
-            //         <div className={classes.root}>
-            //             <Typography className={classes.formControl}>{this.state.firstEmotionContent}</Typography>
-            //             <Typography className={classes.formControl}>{this.state.firstFamilyContent}</Typography>
-            //             <Typography className={classes.formControl}>{this.state.firstFoodContent}</Typography>
-
-            //             <Typography className={classes.formControl}>{this.state.secondEmotionContent}</Typography>
-            //             <Typography className={classes.formControl}>{this.state.secondFamilyContent}</Typography>
-            //             <Typography className={classes.formControl}>{this.state.secondFoodContent}</Typography>
-
-            //             <Typography className={classes.formControl}>{this.state.thirdEmotionContent}</Typography>
-            //             <Typography className={classes.formControl}>{this.state.thirdFamilyContent}</Typography>
-            //             <Typography className={classes.formControl}>{this.state.thirdFoodContent}</Typography>
-            //         </div>
-            //     </Grid>  
-            //     <Button
-            //           color="primary"
-            //           variant="contained"
-            //           className={classes.formItems}
-            //           onClick={this.nextContentHandler}
-            //     >
-            //     Continue
-            //     </Button>
-            // </Grid>
-            // )
             return(
               <div>
                 <Grid

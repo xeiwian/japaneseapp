@@ -438,7 +438,7 @@ class QuestionPage extends Component {
               >
                 <Typography variant="headline">
                   <Box className={classes.earlyResult} m={0}>
-                    Your score is {this.state.earlyscore} out of 9.
+                    Hi {this.props.name}! Your early score is {this.state.earlyscore} out of 9.
                   </Box>
                   <Box className={classes.earlyResult} m={0}>
                     You scored {this.state.emotionscore} out of 3 for words in Emotion category.
@@ -451,6 +451,7 @@ class QuestionPage extends Component {
                   </Box>
                   <Box className={classes.earlyResult} m={0}>
                     Your early results are evaluated and now let's begin the lesson that is planned based on your results. 
+                    When the lesson is finished, a test will be given to you.
                   </Box>
                 </Typography>
               </Grid>
