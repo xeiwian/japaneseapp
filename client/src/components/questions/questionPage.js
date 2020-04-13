@@ -6,6 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import { Typography } from '@material-ui/core';
 import PracticePage from '../practice/practicePage';
 
@@ -23,8 +24,19 @@ const styles = theme => ({
   group: {
     margin: `${theme.spacing.unit}px 0`,
   },
+  title: {
+    fontFamily: 'sans-serif',
+    fontSize: 28
+  },
   button: {
-    margin: theme.spacing.unit,
+    marginTop: theme.spacing(4),
+    flexGrow: 1,
+    background: '#3d5afe',
+  },
+  earlyResult: {
+    fontFamily: 'sans-serif',
+    fontSize: 18,
+    marginTop: theme.spacing(4)
   }
 });
 
@@ -400,80 +412,169 @@ class QuestionPage extends Component {
         }
         
         if (isEnd) {
-          return (     
+          return(
+            <div>
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                style={{  backgroundColor: '#3d5afe', height: 80 }}
+              >
+                <Typography variant="headline">
+                  <Box className={classes.title} color="white" m={0}>
+                    Early Result
+                  </Box>
+                </Typography>
+              </Grid> 
+              <br/>
               <Grid
               container
               spacing={0}
               direction="column"
-              alignItems="center"
+              align="center"
               justify="center"
-              style={{ minHeight: '60vh' }}
               >
-                  <Typography variant="headline" component="h1">
-                      Early Result
-                  </Typography> <br/>
-                  <Typography>
-                      I AM EARLY SCORE: {this.state.earlyscore}
-                  </Typography>
-                  <Typography>
-                      I AM EMOTION SCORE: {this.state.emotionscore}
-                  </Typography>
-                  <Typography>
-                      I AM FAMILY SCORE: {this.state.familyscore}
-                  </Typography>
-                  <Typography>
-                      I AM FOOD SCORE: {this.state.foodscore}
-                  </Typography>
-                  <Typography>
-                      I AM ID: {id}
-                  </Typography>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    className={classes.formItems}
-                    onClick={this.practiceHandler}
-                    >
-                      Update DB
-                  </Button>
-              </Grid>
-          )
-        } else {
-          return (
-            <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justify="center"
-            style={{ minHeight: '100vh' }}
-            >
-              <Typography variant="headline" component="h1">
-              Learning
-              </Typography> <br/>
-              <Typography>
-              Please answer these 3 questions and select the next button to continue
-              </Typography> <br/>
-
-              <Grid item xs={12}>        
-                <Typography className={classes.questionfont}>
-                  {this.state.emotionQuestion}
+                <Typography variant="headline">
+                  <Box className={classes.earlyResult} m={0}>
+                    Your score is {this.state.earlyscore} out of 9.
+                  </Box>
+                  <Box className={classes.earlyResult} m={0}>
+                    You scored {this.state.emotionscore} out of 3 for words in Emotion category.
+                  </Box>
+                  <Box className={classes.earlyResult} m={0}>
+                    You scored {this.state.familyscore} out of 3 for words in Family category.
+                  </Box>
+                  <Box className={classes.earlyResult} m={0}>
+                    You scored {this.state.foodscore} out of 3 for words in Food category.
+                  </Box>
+                  <Box className={classes.earlyResult} m={0}>
+                    Your early results are evaluated and now let's begin the lesson that is planned based on your results. 
+                  </Box>
                 </Typography>
-                <RadioGroup 
+              </Grid>
+    
+              <Grid
+              container
+              spacing={0}
+              direction="column"
+              align="center"
+              justify="center"
+              >
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className={classes.button}
+                  onClick={this.practiceHandler}
+                  >
+                    Proceed to lesson
+                </Button>
+              </Grid>
+            </div>
+          )
+          // return (     
+          //     <Grid
+          //     container
+          //     spacing={0}
+          //     direction="column"
+          //     alignItems="center"
+          //     justify="center"
+          //     style={{ minHeight: '60vh' }}
+          //     >
+          //         <Typography variant="headline" component="h1">
+          //             Early Result
+          //         </Typography> <br/>
+          //         <Typography>
+          //             I AM EARLY SCORE: {this.state.earlyscore}
+          //         </Typography>
+          //         <Typography>
+          //             I AM EMOTION SCORE: {this.state.emotionscore}
+          //         </Typography>
+          //         <Typography>
+          //             I AM FAMILY SCORE: {this.state.familyscore}
+          //         </Typography>
+          //         <Typography>
+          //             I AM FOOD SCORE: {this.state.foodscore}
+          //         </Typography>
+          //         <Typography>
+          //             I AM ID: {id}
+          //         </Typography>
+          //         <Button
+          //           color="primary"
+          //           variant="contained"
+          //           className={classes.formItems}
+          //           onClick={this.practiceHandler}
+          //           >
+          //             Update DB
+          //         </Button>
+          //     </Grid>
+          // )
+        } else {
+          return(
+            <div>
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                style={{  backgroundColor: '#3d5afe', height: 80 }}
+                >
+                  <Typography variant="headline">
+                    <Box className={classes.title} color="white" m={0}>
+                      Learning
+                    </Box>
+                  </Typography>
+                </Grid> 
+                <br/>
+                <br/>
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                className={classes.instructions}
+                >
+                  Please answer these 3 questions and select the next button to continue.
+                </Grid> 
+                <br/>
+                <br/>
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                >       
+                 <Typography className={classes.questionfont}>
+                   {this.state.emotionQuestion}
+                 </Typography>
+                 <RadioGroup 
                   row
                   aria-label="Emotion"
                   name="emotionQuestion"
                   className={classes.group}
                   value={this.state.value}
                   onChange={(value) => this.handleOnChangeEmotion(value)}
-                  // onChange={this.handleChange}
                 >
-                  <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio />} label={this.state.possibleEmotionAnswer[0]}/>
-                  <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio />} label={this.state.possibleEmotionAnswer[1]}/>
-                  <FormControlLabel value={this.state.possibleEmotionAnswer[2]} control={<Radio />} label={this.state.possibleEmotionAnswer[2]}/>
+                  <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio color='primary'/>} label={this.state.possibleEmotionAnswer[0]}/>
+                  <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio color='primary'/>} label={this.state.possibleEmotionAnswer[1]}/>
+                  <FormControlLabel value={this.state.possibleEmotionAnswer[2]} control={<Radio color='primary'/>} label={this.state.possibleEmotionAnswer[2]}/>
                 </RadioGroup>
-              </Grid> <br/>
-
-              <Grid item xs={12}>        
+              </Grid> 
+              <br/>
+              <br/>
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                className={classes.instructions}
+              >      
                 <Typography className={classes.questionfont}>
                   {this.state.familyQuestion}
                 </Typography>
@@ -484,15 +585,22 @@ class QuestionPage extends Component {
                   className={classes.group}
                   value={this.state.value}
                   onChange={(value) => this.handleOnChangeFamily(value)}
-                  // onChange={this.handleChange}
                 >
-                  <FormControlLabel value={this.state.possibleFamilyAnswer[0]} control={<Radio />} label={this.state.possibleFamilyAnswer[0]}/>
-                  <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio />} label={this.state.possibleFamilyAnswer[1]}/>
-                  <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio />} label={this.state.possibleFamilyAnswer[2]}/>
+                  <FormControlLabel value={this.state.possibleFamilyAnswer[0]} control={<Radio color='primary'/>} label={this.state.possibleFamilyAnswer[0]}/>
+                  <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio color='primary'/>} label={this.state.possibleFamilyAnswer[1]}/>
+                  <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio color='primary'/>} label={this.state.possibleFamilyAnswer[2]}/>
                 </RadioGroup>
-              </Grid> <br/>
-
-              <Grid item xs={12}>        
+              </Grid> 
+              <br/>
+              <br/>
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                className={classes.instructions}
+              >      
                 <Typography className={classes.questionfont}>
                   {this.state.foodQuestion}
                 </Typography>
@@ -504,36 +612,141 @@ class QuestionPage extends Component {
                   value={this.state.value}
                   onChange={(value) => this.handleOnChangeFood(value)}
                 >
-                  <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio />} label={this.state.possibleFoodAnswer[0]}/>
-                  <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio />} label={this.state.possibleFoodAnswer[1]}/>
-                  <FormControlLabel value={this.state.possibleFoodAnswer[2]} control={<Radio />} label={this.state.possibleFoodAnswer[2]}/>
+                  <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio color='primary'/>} label={this.state.possibleFoodAnswer[0]}/>
+                  <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio color='primary'/>} label={this.state.possibleFoodAnswer[1]}/>
+                  <FormControlLabel value={this.state.possibleFoodAnswer[2]} control={<Radio color='primary'/>} label={this.state.possibleFoodAnswer[2]}/>
                 </RadioGroup>
-              </Grid> <br/>
-            
-            {this.state.emotioncounter < 2 && (
-              <Button
-              color="primary"
-              variant="contained"
-              className={classes.formItems}
-              onClick={this.nextQuestionHandler}
-              >
-                Continue
-              </Button>
-            )}
+              </Grid> 
 
-            {this.state.emotioncounter >= 2 && (
-              <Button
-              color="primary"
-              variant="contained"
-              className={classes.formItems}
-              onClick={this.finishHandler}
-              >
-                Finish
-              </Button>
-            )}
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+              >   
+                {this.state.emotioncounter < 2 && (
+                <Button
+                color="primary"
+                variant="contained"
+                size="large"
+                className={classes.button}
+                onClick={this.nextQuestionHandler}
+                >
+                  Continue
+                </Button>
+                )}
 
-          </Grid>
+                {this.state.emotioncounter >= 2 && (
+                  <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className={classes.button}
+                  onClick={this.finishHandler}
+                  >
+                    Finish
+                  </Button>
+                )}
+              </Grid>
+            </div>
           )
+          // return (
+          //   <Grid
+          //   container
+          //   spacing={0}
+          //   direction="column"
+          //   alignItems="center"
+          //   justify="center"
+          //   style={{ minHeight: '100vh' }}
+          //   >
+          //     <Typography variant="headline" component="h1">
+          //     Learning
+          //     </Typography> <br/>
+          //     <Typography>
+          //     Please answer these 3 questions and select the button to continue.
+          //     </Typography> <br/>
+
+          //     <Grid item xs={12}>        
+          //       <Typography className={classes.questionfont}>
+          //         {this.state.emotionQuestion}
+          //       </Typography>
+          //       <RadioGroup 
+          //         row
+          //         aria-label="Emotion"
+          //         name="emotionQuestion"
+          //         className={classes.group}
+          //         value={this.state.value}
+          //         onChange={(value) => this.handleOnChangeEmotion(value)}
+          //         // onChange={this.handleChange}
+          //       >
+          //         <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio />} label={this.state.possibleEmotionAnswer[0]}/>
+          //         <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio />} label={this.state.possibleEmotionAnswer[1]}/>
+          //         <FormControlLabel value={this.state.possibleEmotionAnswer[2]} control={<Radio />} label={this.state.possibleEmotionAnswer[2]}/>
+          //       </RadioGroup>
+          //     </Grid> <br/>
+
+          //     <Grid item xs={12}>        
+          //       <Typography className={classes.questionfont}>
+          //         {this.state.familyQuestion}
+          //       </Typography>
+          //       <RadioGroup 
+          //         row
+          //         aria-label="Family"
+          //         name="familyQuestion"
+          //         className={classes.group}
+          //         value={this.state.value}
+          //         onChange={(value) => this.handleOnChangeFamily(value)}
+          //         // onChange={this.handleChange}
+          //       >
+          //         <FormControlLabel value={this.state.possibleFamilyAnswer[0]} control={<Radio />} label={this.state.possibleFamilyAnswer[0]}/>
+          //         <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio />} label={this.state.possibleFamilyAnswer[1]}/>
+          //         <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio />} label={this.state.possibleFamilyAnswer[2]}/>
+          //       </RadioGroup>
+          //     </Grid> <br/>
+
+          //     <Grid item xs={12}>        
+          //       <Typography className={classes.questionfont}>
+          //         {this.state.foodQuestion}
+          //       </Typography>
+          //       <RadioGroup 
+          //         row
+          //         aria-label="Food"
+          //         name="foodQuestion"
+          //         className={classes.group}
+          //         value={this.state.value}
+          //         onChange={(value) => this.handleOnChangeFood(value)}
+          //       >
+          //         <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio />} label={this.state.possibleFoodAnswer[0]}/>
+          //         <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio />} label={this.state.possibleFoodAnswer[1]}/>
+          //         <FormControlLabel value={this.state.possibleFoodAnswer[2]} control={<Radio />} label={this.state.possibleFoodAnswer[2]}/>
+          //       </RadioGroup>
+          //     </Grid> <br/>
+            
+          //   {this.state.emotioncounter < 2 && (
+          //     <Button
+          //     color="primary"
+          //     variant="contained"
+          //     className={classes.formItems}
+          //     onClick={this.nextQuestionHandler}
+          //     >
+          //       Continue
+          //     </Button>
+          //   )}
+
+          //   {this.state.emotioncounter >= 2 && (
+          //     <Button
+          //     color="primary"
+          //     variant="contained"
+          //     className={classes.formItems}
+          //     onClick={this.finishHandler}
+          //     >
+          //       Finish
+          //     </Button>
+          //   )}
+
+          // </Grid>
+          // )
         }
     };
 

@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import QuestionPage from '../questions/questionPage';
@@ -31,14 +30,14 @@ const styles = theme => ({
     margin: `${theme.spacing(0)} auto`
   },
   instructions: {
-    fontSize: 20
+    marginTop: theme.spacing(6),
   },
   continueBtn: {
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(2),
     flexGrow: 1,
     background: '#3d5afe',
-    width: 400,
-    height: 50
+    // width: 400,
+    // height: 50
   },
   header: {
     textAlign: 'center',
@@ -154,17 +153,17 @@ class LearningPage extends Component {
                     </Box>
                   </Typography>
                 </Grid> 
-                <br/>
-                <br/>
+
                 <Grid
                 container
                 spacing={0}
                 direction="column"
                 align="center"
                 justify="center"
-                className={classes.instructions}
                 >
-                  Please take your time to learn the words below and click on the button to continue. 
+                  <Box className={classes.instructions} m={0}>
+                    Welcome! Please take your time and learn the words below before we begin the lesson.
+                  </Box> 
                 </Grid>
                 
                 <form className={classes.container}>
@@ -223,6 +222,15 @@ class LearningPage extends Component {
                     </CardContent>
                   </Card>
                   
+                </form>
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                className={classes.instructions}
+                >
                   <Button
                     variant="contained"
                     size="large"
@@ -232,7 +240,7 @@ class LearningPage extends Component {
                   >
                     Continue
                   </Button>
-                </form>
+                </Grid>
                 <br/>
                 <br/>
                 
