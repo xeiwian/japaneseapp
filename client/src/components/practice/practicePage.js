@@ -49,7 +49,7 @@ const styles = theme => ({
     display: 'column',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    width: 400,
+    width: 350,
     margin: `${theme.spacing(0)} auto`
   },
   button: {

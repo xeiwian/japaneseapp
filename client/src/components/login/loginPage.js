@@ -32,7 +32,7 @@ const style = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    width: 400,
+    width: 350,
     margin: `${theme.spacing(0)} auto`
   },
   loginBtn: {
