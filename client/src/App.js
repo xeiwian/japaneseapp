@@ -8,7 +8,7 @@ import PracticePage from './components/practice/practicePage';
 const User = () => {
   return (
       <Switch>
-        <Route exact path="/" component={ LoginPage } />
+        <Route exact path="/" component={ PracticePage } />
         <Route exact path="/question" component={ QuestionPage } />
         <Route exact path="/practice" component={ PracticePage } />
       </Switch>

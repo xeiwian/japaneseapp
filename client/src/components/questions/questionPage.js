@@ -19,7 +19,10 @@ const styles = theme => ({
     textAlign: 'center'
   },
   formControl: {
-    margin: theme.spacing.unit * 3,
+    // margin: theme.spacing.unit * 3,
+    fontSize: 22,
+    align: 'center',
+    justify: 'center'
   },
   group: {
     margin: `${theme.spacing.unit}px 0`,
@@ -475,43 +478,6 @@ class QuestionPage extends Component {
               </Grid>
             </div>
           )
-          // return (     
-          //     <Grid
-          //     container
-          //     spacing={0}
-          //     direction="column"
-          //     alignItems="center"
-          //     justify="center"
-          //     style={{ minHeight: '60vh' }}
-          //     >
-          //         <Typography variant="headline" component="h1">
-          //             Early Result
-          //         </Typography> <br/>
-          //         <Typography>
-          //             I AM EARLY SCORE: {this.state.earlyscore}
-          //         </Typography>
-          //         <Typography>
-          //             I AM EMOTION SCORE: {this.state.emotionscore}
-          //         </Typography>
-          //         <Typography>
-          //             I AM FAMILY SCORE: {this.state.familyscore}
-          //         </Typography>
-          //         <Typography>
-          //             I AM FOOD SCORE: {this.state.foodscore}
-          //         </Typography>
-          //         <Typography>
-          //             I AM ID: {id}
-          //         </Typography>
-          //         <Button
-          //           color="primary"
-          //           variant="contained"
-          //           className={classes.formItems}
-          //           onClick={this.practiceHandler}
-          //           >
-          //             Update DB
-          //         </Button>
-          //     </Grid>
-          // )
         } else {
           return(
             <div>

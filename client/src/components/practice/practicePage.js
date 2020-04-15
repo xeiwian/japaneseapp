@@ -19,12 +19,12 @@ const styles = theme => ({
   },
   formControl: {
     marginTop: theme.spacing(2),
-    fontSize: 22,
-    align: 'center',
-    justify: 'center'
+    marginLeft: theme.spacing(8),
+    fontSize: 22
   },
   group: {
-    margin: `${theme.spacing.unit}px 0`
+    margin: `${theme.spacing.unit}px 0`,
+    marginLeft: theme.spacing(8),
   },
   title: {
     fontFamily: 'sans-serif',
@@ -95,24 +95,95 @@ class PracticePage extends Component {
       correct: false,
       wrong: false,
       cont: false,
-      done: false,
+      done: true,
       result: false,
       counter: 0,
       score: 0
     }
 
     // global variable
-    chosenwords = [];
+    chosenwords = [
+      {
+        type: "Emotion",
+        content: "興奮した (kōfun shita) => Excited",
+        question: "興奮した (kōfun shita)",
+        correctAnswer: "Excited",
+        possibleAnswer: ["Smile", "Happy", "Excited"]
+    },
+    {
+        type: "Emotion",
+        content: "怖い (kowai) => Scared",
+        question: "怖い (kowai)",
+        correctAnswer: "Scared",
+        possibleAnswer: ["Worried", "Nervous", "Scared"]
+    },
+    {
+        type: "Emotion",
+        content: "叫ぶ (sakebu) => Shout",
+        question: "叫ぶ (sakebu)",
+        correctAnswer: "Shout",
+        possibleAnswer: ["Angry", "Shout", "Frown"]
+    },
+    {
+        type: "Family",
+        content: "兄弟 (kyōdai) => Brothers",
+        question: "兄弟 (kyōdai)",
+        correctAnswer: "Brothers",
+        possibleAnswer: ["Cousin", "Brothers", "Brother-in-law"]
+    },
+    {
+        type: "Family",
+        content: "子供 (kodomo) => Child",
+        question: "子供 (kodomo)",
+        correctAnswer: "Child",
+        possibleAnswer: ["Child", "Baby", "Children"]
+    },
+    {
+        type: "Family",
+        content: "娘 (musume) => Daughter",
+        question: "娘 (musume)",
+        correctAnswer: "Daughter",
+        possibleAnswer: ["Niece", "Daughter", "Child"]
+    },
+    {
+        type: "Food",
+        content: "朝ごはん (asa gohan) => Breakfast",
+        question: "朝ごはん (asa gohan)",
+        correctAnswer: "Breakfast",
+        possibleAnswer: ["Breakfast", "Dinner", "Lunch"]
+    },
+    {
+        type: "Food",
+        content: "コーヒー (kōhī) => Coffee",
+        question: "コーヒー (kōhī)",
+        correctAnswer: "Coffee",
+        possibleAnswer: ["Milk", "Tea", "Coffee"]
+    },
+    {
+        type: "Food",
+        content: "林檎 (ringo) => Apple",
+        question: "林檎 (ringo)",
+        correctAnswer: "Apple",
+        possibleAnswer: ["Orange", "Grapes", "Apple"]
+    },
+    {
+        type: "Food",
+        content: "林檎 (ringo) => Apple",
+        question: "林檎 (ringo)",
+        correctAnswer: "Apple",
+        possibleAnswer: ["Orange", "Grapes", "Apple"]
+    }
+    ];
 
     getChosenWords = async (id) => {
         return await fetch(`api/userlogin/getchosenwords/${id}`);
     }
 
     handleChosenWords = async () => {
-        let data = await this.getChosenWords(this.props.id);
-        let datajson = await data.json();
-        this.chosenwords = datajson.chosenwords;
-        console.log('i am chosenwords data in practice', datajson, this.chosenwords);
+        // let data = await this.getChosenWords(this.props.id);
+        // let datajson = await data.json();
+        // this.chosenwords = datajson.chosenwords;
+        // console.log('i am chosenwords data in practice', datajson, this.chosenwords);
     
         this.setState({
           content: this.chosenwords[this.state.counter].content,
@@ -352,26 +423,6 @@ class PracticePage extends Component {
               </Grid>
             </div>
           )
-          // return (     
-          //     <Grid
-          //     container
-          //     spacing={0}
-          //     direction="column"
-          //     alignItems="center"
-          //     justify="center"
-          //     style={{ minHeight: '60vh' }}
-          //     >
-          //         <Typography variant="headline" component="h1">
-          //             Final Result
-          //         </Typography> <br/>
-          //         <Typography>
-          //             Congrats {name}! You have completed your lesson.
-          //         </Typography> <br/>
-          //         <Typography>
-          //             FINAL SCORE: {this.state.score}
-          //         </Typography>
-          //     </Grid>
-          // )
         }
 
           if (done) {
@@ -404,7 +455,8 @@ class PracticePage extends Component {
                   Please answer all the questions and select the button when you are finished.
                 </Grid> 
                 <br/>
-                <form className={classes.container}>             
+                <form className={classes.container}>     
+
                   { this.renderTestQuestion(0, 'myTestAnswer1') } 
                   { this.renderTestQuestion(1, 'myTestAnswer2') } 
                   { this.renderTestQuestion(2, 'myTestAnswer3') } 
@@ -413,6 +465,7 @@ class PracticePage extends Component {
                   { this.renderTestQuestion(5, 'myTestAnswer6') } 
                   { this.renderTestQuestion(6, 'myTestAnswer7') } 
                   { this.renderTestQuestion(7, 'myTestAnswer8') } 
+                  { this.renderTestQuestion(8, 'myTestAnswer9') } 
                 </form>
                 <Grid
                 container
@@ -436,43 +489,6 @@ class PracticePage extends Component {
                 <br/>
               </div>
             )
-            // return (
-            //   <Grid
-            //   container
-            //   spacing={0}
-            //   direction="column"
-            //   alignItems="center"
-            //   justify="center"
-            //   style={{ minHeight: '160vh' }}
-            //   >          
-            //       <Typography variant="headline" component="h1">
-            //           Test 
-            //       </Typography> <br/>
-            //       <Grid item xs={6}>
-            //         <div className={classes.root}>
-            //           { this.renderTestQuestion(0, 'myTestAnswer1') } <br/>
-            //           { this.renderTestQuestion(1, 'myTestAnswer2') } <br/>
-            //           { this.renderTestQuestion(2, 'myTestAnswer3') } <br/>
-            //           { this.renderTestQuestion(3, 'myTestAnswer4') } <br/>
-            //           { this.renderTestQuestion(4, 'myTestAnswer5') } <br/>
-            //           { this.renderTestQuestion(5, 'myTestAnswer6') } <br/>
-            //           { this.renderTestQuestion(6, 'myTestAnswer7') } <br/>
-            //           { this.renderTestQuestion(7, 'myTestAnswer8') } <br/>
-            //           { this.renderTestQuestion(8, 'myTestAnswer9') } <br/>
-            //         </div>
-            //       </Grid>
-
-            //       <Button
-            //       color="primary"
-            //       variant="contained"
-            //       className={classes.formItems}
-            //       onClick={this.testHandler}
-            //       >
-            //         Confirm
-            //       </Button>
-
-            //   </Grid>      
-            // )
           }
       
           if (!cont) {
@@ -521,30 +537,6 @@ class PracticePage extends Component {
                 </Grid>
               </div>
             )
-            // return (
-            //   <Grid
-            //   container
-            //   spacing={0}
-            //   direction="column"
-            //   alignItems="center"
-            //   justify="center"
-            //   style={{ minHeight: '60vh' }}
-            //   >
-            //       <Typography variant="headline" component="h1">
-            //           Practice {this.state.counter + 1}
-            //       </Typography> <br/>
-            //       <Typography className={classes.formControl}>{this.state.content}</Typography>
-
-            //       <Button
-            //             color="primary"
-            //             variant="contained"
-            //             className={classes.formItems}
-            //             onClick={this.contHandler}
-            //       >
-            //         Continue
-            //       </Button>
-            //   </Grid>
-            // )
           } else {
             return(
               <div>
@@ -597,41 +589,6 @@ class PracticePage extends Component {
                 </Grid>
               </div>
             )
-            // render practice word and question
-            // return (
-            //       <Grid
-            //       container
-            //       spacing={0}
-            //       direction="column"
-            //       alignItems="center"
-            //       justify="center"
-            //       style={{ minHeight: '60vh' }}
-            //       >
-            //           <Typography variant="headline" component="h1">
-            //               Practice {this.state.counter + 1}
-            //           </Typography> <br/>
-
-            //           <Typography className={classes.formControl}>{this.state.question}</Typography>
-      
-            //           <RadioGroup 
-            //             row
-            //             aria-label="Emotion"
-            //             name="emotionQuestion"
-            //             className={classes.group}
-            //             value={this.state.value}
-            //             onChange={(value) => this.handleOnChange(value)}
-            //           >
-            //             <FormControlLabel value={this.state.possibleAnswer[0]} control={<Radio />} label={this.state.possibleAnswer[0]}/>
-            //             <FormControlLabel value={this.state.possibleAnswer[1]} control={<Radio />} label={this.state.possibleAnswer[1]}/>
-            //             <FormControlLabel value={this.state.possibleAnswer[2]} control={<Radio />} label={this.state.possibleAnswer[2]}/>
-            //           </RadioGroup> 
-
-            //           { this.renderMessage() }
-            //           <br/>
-            //           { this.renderButton() }
-                      
-            //       </Grid>
-            // )
           }
     };
 }
