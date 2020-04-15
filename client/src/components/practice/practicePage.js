@@ -29,6 +29,9 @@ const styles = theme => ({
     justify: 'center'
   },
   group: {
+    margin: `${theme.spacing.unit}px 0`
+  },
+  testradio: {
     margin: `${theme.spacing.unit}px 0`,
     marginLeft: theme.spacing(8),
   },
@@ -234,7 +237,7 @@ class PracticePage extends Component {
                 column
                 aria-label="Emotion"
                 name="emotionQuestion"
-                className={classes.group}
+                className={classes.testradio}
                 value={this.state.value}
                 onChange={(value) => this.handleOnChangeTest(keyName, value)}
               >
