@@ -17,10 +17,16 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column"
   },
-  formControl: {
+  testquestion: {
     marginTop: theme.spacing(2),
     marginLeft: theme.spacing(8),
     fontSize: 22
+  },
+  formControl: {
+    marginTop: theme.spacing(2),
+    fontSize: 22,
+    align: 'center',
+    justify: 'center'
   },
   group: {
     margin: `${theme.spacing.unit}px 0`,
@@ -95,7 +101,7 @@ class PracticePage extends Component {
       correct: false,
       wrong: false,
       cont: false,
-      done: true,
+      done: false,
       result: false,
       counter: 0,
       score: 0
@@ -222,7 +228,7 @@ class PracticePage extends Component {
 
         return(
           <Grid>      
-              <Typography className={classes.formControl}>{this.chosenwords[num].question}</Typography>
+              <Typography className={classes.testquestion}>{this.chosenwords[num].question}</Typography>
       
               <RadioGroup 
                 column
