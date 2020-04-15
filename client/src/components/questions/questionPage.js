@@ -32,7 +32,7 @@ const styles = theme => ({
     fontSize: 28
   },
   button: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(3),
     flexGrow: 1,
     background: '#3d5afe',
   },
@@ -533,7 +533,6 @@ class QuestionPage extends Component {
                 </RadioGroup>
               </Grid> 
               <br/>
-              <br/>
               <Grid
                 container
                 spacing={0}
@@ -558,7 +557,6 @@ class QuestionPage extends Component {
                   <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio color='primary'/>} label={this.state.possibleFamilyAnswer[2]}/>
                 </RadioGroup>
               </Grid> 
-              <br/>
               <br/>
               <Grid
                 container

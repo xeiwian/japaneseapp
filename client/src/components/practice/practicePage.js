@@ -62,7 +62,7 @@ const styles = theme => ({
     margin: `${theme.spacing(0)} auto`
   },
   button: {
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(4),
     flexGrow: 1,
     background: '#3d5afe',
   },
@@ -107,11 +107,16 @@ class PracticePage extends Component {
       done: false,
       result: false,
       counter: 0,
-      score: 0
+      finalscore: 0
     }
 
     // global variable
     chosenwords = [];
+
+    // get user info if user exists
+    getStudent = async (id) => {
+      return await fetch(`api/userlogin/${id}`);
+    };
 
     getChosenWords = async (id) => {
         return await fetch(`api/userlogin/getchosenwords/${id}`);
@@ -129,6 +134,15 @@ class PracticePage extends Component {
           possibleAnswer: this.chosenwords[this.state.counter].possibleAnswer,
           correctAnswer: this.chosenwords[this.state.counter].correctAnswer
         });
+    }
+
+    updateScore = async (id, score) => {
+      console.log(id, score);
+      return await fetch(`api/userlogin/${id}`, {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        method: 'PUT',
+        body: JSON.stringify(score)  
+      });
     }
 
     componentDidMount = () => {
@@ -172,7 +186,7 @@ class PracticePage extends Component {
       })
     }
 
-    testHandler = () => {
+    testHandler = async () => {
       const { 
         myTestAnswer1, 
         myTestAnswer2, 
@@ -186,44 +200,61 @@ class PracticePage extends Component {
       } = this.state;
       
       if (myTestAnswer1 === this.chosenwords[0].correctAnswer) {
-        this.state.score += 1;
+        this.state.finalscore += 1;
       }
       
       if (myTestAnswer2 === this.chosenwords[1].correctAnswer) {
-        this.state.score += 1;
+        this.state.finalscore += 1;
       }
 
       if (myTestAnswer3 === this.chosenwords[2].correctAnswer) {
-        this.state.score += 1;
+        this.state.finalscore += 1;
       }
 
       if (myTestAnswer4 === this.chosenwords[3].correctAnswer) {
-        this.state.score += 1;
+        this.state.finalscore += 1;
       }
 
       if (myTestAnswer5 === this.chosenwords[4].correctAnswer) {
-        this.state.score += 1;
+        this.state.finalscore += 1;
       }
 
       if (myTestAnswer6 === this.chosenwords[5].correctAnswer) {
-        this.state.score += 1;
+        this.state.finalscore += 1;
       }
 
       if (myTestAnswer7 === this.chosenwords[6].correctAnswer) {
-        this.state.score += 1;
+        this.state.finalscore += 1;
       }
 
       if (myTestAnswer8 === this.chosenwords[7].correctAnswer) {
-        this.state.score += 1;
+        this.state.finalscore += 1;
       }
 
       if (myTestAnswer9 === this.chosenwords[8].correctAnswer) {
-        this.state.score += 1;
+        this.state.finalscore += 1;
       }
 
       this.setState({
         result: true
-      })
+      });
+
+      let scoreData = {
+        finalscore: this.state.finalscore,
+      }
+
+      // update user data 
+      try {
+        let userData = await this.getStudent(this.props.id);
+        let data = await userData.json();
+        if ( data['name'] === this.props.name && data['_id'] ) {
+            this.updateScore(this.props.id, scoreData);
+        } else {
+          console.log('not happening', data['name'], this.props.name, this.props.id);
+        }
+      } catch (e) {
+        console.log(e);
+      } 
     }
 
     renderTestQuestion = (num, keyName) => {
@@ -351,7 +382,7 @@ class PracticePage extends Component {
               >
                 <Typography variant="headline">
                   <Box className={classes.finalresult} m={0}>
-                    Congratulations {name}! Your final score is {this.state.score} out of 9. 
+                    Congratulations {name}! Your final score is {this.state.finalscore} out of 9. 
                   </Box>
                   <br/>
                   <Box className={classes.finalresult} m={0}>

@@ -127,55 +127,55 @@ class LearningPage extends Component {
                 
                 <form className={classes.container}>
                   <Card className={classes.card} variant="outlined">
-                    <CardHeader className={classes.header} title="Word #1" />
+                    <CardHeader className={classes.header} title="Word #01" />
                     <CardContent className={classes.content}>
                       {this.state.firstEmotionContent}
                     </CardContent>
                   </Card>
                   <Card className={classes.card} variant="outlined">
-                    <CardHeader className={classes.header} title="Word #2" />
+                    <CardHeader className={classes.header} title="Word #02" />
                     <CardContent className={classes.content}>
                       {this.state.firstFamilyContent}
                     </CardContent>
                   </Card>
                   <Card className={classes.card} variant="outlined">
-                    <CardHeader className={classes.header} title="Word #3" />
+                    <CardHeader className={classes.header} title="Word #03" />
                     <CardContent className={classes.content}>
                       {this.state.firstFoodContent}
                     </CardContent>
                   </Card>
                   <Card className={classes.card} variant="outlined">
-                    <CardHeader className={classes.header} title="Word #4" />
+                    <CardHeader className={classes.header} title="Word #04" />
                     <CardContent className={classes.content}>
                       {this.state.secondEmotionContent}
                     </CardContent>
                   </Card>
                   <Card className={classes.card} variant="outlined">
-                    <CardHeader className={classes.header} title="Word #5" />
+                    <CardHeader className={classes.header} title="Word #05" />
                     <CardContent className={classes.content}>
                       {this.state.secondFamilyContent}
                     </CardContent>
                   </Card>
                   <Card className={classes.card} variant="outlined">
-                    <CardHeader className={classes.header} title="Word #6" />
+                    <CardHeader className={classes.header} title="Word #06" />
                     <CardContent className={classes.content}>
                       {this.state.secondFoodContent}
                     </CardContent>
                   </Card>
                   <Card className={classes.card} variant="outlined">
-                    <CardHeader className={classes.header} title="Word #7" />
+                    <CardHeader className={classes.header} title="Word #07" />
                     <CardContent className={classes.content}>
                       {this.state.thirdEmotionContent}
                     </CardContent>
                   </Card>
                   <Card className={classes.card} variant="outlined">
-                    <CardHeader className={classes.header} title="Word #8" />
+                    <CardHeader className={classes.header} title="Word #08" />
                     <CardContent className={classes.content}>
                       {this.state.thirdFamilyContent}
                     </CardContent>
                   </Card>
                   <Card className={classes.card} variant="outlined">
-                    <CardHeader className={classes.header} title="Word #9" />
+                    <CardHeader className={classes.header} title="Word #09" />
                     <CardContent className={classes.content}>
                       {this.state.thirdFoodContent}
                     </CardContent>
