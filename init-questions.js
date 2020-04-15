@@ -81,10 +81,10 @@ Question.insertMany(
         },
         {
             type: "Family",
-            content: "兄弟(kyōdai) => Brothers",
+            content: "兄弟(kyōdai) => Brother",
             question: "兄弟(kyōdai)",
             correctAnswer: "Brother",
-            possibleAnswer: ["Cousin", "Brothers", "Brother-in-law"]
+            possibleAnswer: ["Cousin", "Brother", "Brother-in-law"]
         },
         {
             type: "Family",
@@ -175,7 +175,7 @@ Question.insertMany(
             content: "緑茶(ryokucha) => Green tea",
             question: "緑茶(ryokucha)",
             correctAnswer: "Green tea",
-            possibleAnswer: ["Black Tea", "Tea", "Green Tea"]
+            possibleAnswer: ["Black tea", "Tea", "Green tea"]
         },
         {
             type: "Food",

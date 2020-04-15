@@ -10,30 +10,12 @@ import LearningPage from '../learning/learningPage';
 
 // set the styles for loginPage
 const style = theme => ({
-  // card: {
-  //   display: 'column',
-  //   width: 500,
-  //   height: 300,
-  //   padding: 16,
-  //   alignItems: 'center',
-  //   // justifyContent: 'center',
-  //   color: 'white',
-  //   background: '#448aff',
-  //   borderRadius: 16
-  // },
-  // root: {
-  //   display: 'flex',
-  //   // justifyContent: "center"
-  // },
-  // formItems: {
-  //   marginTop: 16,
-  //   marginBottom: 12
-  // },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
     width: 350,
-    margin: `${theme.spacing(0)} auto`
+    margin: `${theme.spacing(0)} auto`,
+    marginTop: theme.spacing(-4)
   },
   loginBtn: {
     marginTop: theme.spacing(2),
@@ -118,47 +100,7 @@ class LoginPage extends Component {
         return (
           <LearningPage id = {this.state.id} name = {this.state.name} />
         )
-      } else {
-          // return (
-          //   <Grid
-          //     container
-          //     spacing={0}
-          //     direction="column"
-          //     alignItems="center"
-          //     justify="center"
-          //     style={{ minHeight: '60vh' }}
-          //     >
-          //         <Typography>
-          //           <Box fontSize={30} fontFamily="Open Sans">
-          //             Japanese Adaptive Language Learning App
-          //           </Box>
-          //         </Typography>                                 
-          //         <TextField
-          //             id="username"
-          //             label="Username"
-          //             value={this.state.username}
-          //             color="#2196f3"
-          //             onChange={this.handleChange('username')}
-          //             margin="normal"
-          //             placeholder="Enter a username"
-          //             required
-          //             InputLabelProps={{
-          //               shrink: true
-          //             }}
-                    
-          //             helperText={this.state.nameErrorMsg}
-          //             error={this.state.nameError}
-          //         /> <br/>
-          //           <Button
-          //             color="primary"
-          //             variant="contained"
-          //             className={classes.formItems}
-          //             onClick={this.proceedNext}
-          //           >
-          //             Begin Lesson
-          //           </Button>
-          //     </Grid>
-          // );
+      } else {     
           return (
             <React.Fragment>
               <form className={classes.container} noValidate autoComplete="off">
