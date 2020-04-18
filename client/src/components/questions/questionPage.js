@@ -15,7 +15,7 @@ const styles = theme => ({
     display: 'flex'
   },
   questionfont: {
-    fontSize: 26,
+    fontSize: 22,
     textAlign: 'center'
   },
   formControl: {

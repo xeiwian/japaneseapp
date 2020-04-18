@@ -491,7 +491,6 @@ class PracticePage extends Component {
                 >
                   Take your time and learn the word.
                 </Grid> 
-                <br/>
                 <form className={classes.container}>
                   <Card className={classes.card} variant="outlined">
                     <CardHeader className={classes.header} title={"Practice Word #" + (this.state.counter + 1)} />
@@ -548,7 +547,6 @@ class PracticePage extends Component {
                 >
                   Pick the correct meaning of the word to continue.
                 </Grid> 
-                <br/>
                 <form className={classes.container}>
                   <Card className={classes.card} variant="outlined">
                     <CardHeader className={classes.header} title={"Practice Word #" + (this.state.counter + 1)} />
