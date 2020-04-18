@@ -475,11 +475,23 @@ class PracticePage extends Component {
                 >
                   <Typography variant="headline">
                     <Box className={classes.title} color="white" m={0}>
-                      Practice
+                      Lesson
                     </Box>
                   </Typography>
                 </Grid> 
                 <br/> 
+                <br/>
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                className={classes.instructions}
+                >
+                  Take your time and learn the word.
+                </Grid> 
+                <br/>
                 <form className={classes.container}>
                   <Card className={classes.card} variant="outlined">
                     <CardHeader className={classes.header} title={"Practice Word #" + (this.state.counter + 1)} />
@@ -520,9 +532,21 @@ class PracticePage extends Component {
                 >
                   <Typography variant="headline">
                     <Box className={classes.title} color="white" m={0}>
-                      Practice
+                      Lesson
                     </Box>
                   </Typography>
+                </Grid> 
+                <br/>
+                <br/>
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                className={classes.instructions}
+                >
+                  Pick the correct meaning of the word to continue.
                 </Grid> 
                 <br/>
                 <form className={classes.container}>
