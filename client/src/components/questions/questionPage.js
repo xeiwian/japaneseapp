@@ -495,7 +495,7 @@ class QuestionPage extends Component {
                 >
                   <Typography variant="headline">
                     <Box className={classes.title} color="white" m={0}>
-                      Learning
+                      Early Test
                     </Box>
                   </Typography>
                 </Grid> 

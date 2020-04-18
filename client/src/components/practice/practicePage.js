@@ -408,7 +408,7 @@ class PracticePage extends Component {
                 >
                   <Typography variant="headline">
                     <Box className={classes.title} color="white" m={0}>
-                      Test
+                      Final Test
                     </Box>
                   </Typography>
                 </Grid> 
