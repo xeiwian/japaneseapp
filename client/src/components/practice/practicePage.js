@@ -382,11 +382,12 @@ class PracticePage extends Component {
               >
                 <Typography variant="headline">
                   <Box className={classes.finalresult} m={0}>
-                    Congratulations {name}! Your final score is {this.state.finalscore} out of 9. 
+                    Congratulations {name}! Your final test score is {this.state.finalscore} out of 9. 
                   </Box>
                   <br/>
                   <Box className={classes.finalresult} m={0}>
-                    Are your final result better than early result? You can participate in the lesson again by refreshing the page. 
+                    We hope your final test score is better than your early test score. 
+                    You can participate in the lesson again by refreshing the page. 
                   </Box>
                 </Typography>
               </Grid>
@@ -421,7 +422,7 @@ class PracticePage extends Component {
                 justify="center"
                 className={classes.instructions}
                 >
-                  Please answer all the questions and select the button when you are finished.
+                  Now let's test how many words you have learned from the lesson that is prepared for you.
                 </Grid> 
                 <br/>
                 <form className={classes.container}>     

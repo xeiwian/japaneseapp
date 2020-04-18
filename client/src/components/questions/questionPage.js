@@ -453,8 +453,12 @@ class QuestionPage extends Component {
                     You scored {this.state.foodscore} out of 3 for words in Food category.
                   </Box>
                   <Box className={classes.earlyResult} m={0}>
-                    Your early results are evaluated and now let's begin the lesson that is planned based on your results. 
-                    When the lesson is finished, a test will be given to you.
+                    We have prepared a lesson for you based on your strongest and weakest score in each category of Japanese words 
+                    to help you improve.
+                  </Box>
+                  <Box className={classes.earlyResult} m={0}>
+                    When the lesson is finished, another test will be given to you to determine whether you have improved from your 
+                    early score or not.
                   </Box>
                 </Typography>
               </Grid>
@@ -615,103 +619,7 @@ class QuestionPage extends Component {
                 )}
               </Grid>
             </div>
-          )
-          // return (
-          //   <Grid
-          //   container
-          //   spacing={0}
-          //   direction="column"
-          //   alignItems="center"
-          //   justify="center"
-          //   style={{ minHeight: '100vh' }}
-          //   >
-          //     <Typography variant="headline" component="h1">
-          //     Learning
-          //     </Typography> <br/>
-          //     <Typography>
-          //     Please answer these 3 questions and select the button to continue.
-          //     </Typography> <br/>
-
-          //     <Grid item xs={12}>        
-          //       <Typography className={classes.questionfont}>
-          //         {this.state.emotionQuestion}
-          //       </Typography>
-          //       <RadioGroup 
-          //         row
-          //         aria-label="Emotion"
-          //         name="emotionQuestion"
-          //         className={classes.group}
-          //         value={this.state.value}
-          //         onChange={(value) => this.handleOnChangeEmotion(value)}
-          //         // onChange={this.handleChange}
-          //       >
-          //         <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio />} label={this.state.possibleEmotionAnswer[0]}/>
-          //         <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio />} label={this.state.possibleEmotionAnswer[1]}/>
-          //         <FormControlLabel value={this.state.possibleEmotionAnswer[2]} control={<Radio />} label={this.state.possibleEmotionAnswer[2]}/>
-          //       </RadioGroup>
-          //     </Grid> <br/>
-
-          //     <Grid item xs={12}>        
-          //       <Typography className={classes.questionfont}>
-          //         {this.state.familyQuestion}
-          //       </Typography>
-          //       <RadioGroup 
-          //         row
-          //         aria-label="Family"
-          //         name="familyQuestion"
-          //         className={classes.group}
-          //         value={this.state.value}
-          //         onChange={(value) => this.handleOnChangeFamily(value)}
-          //         // onChange={this.handleChange}
-          //       >
-          //         <FormControlLabel value={this.state.possibleFamilyAnswer[0]} control={<Radio />} label={this.state.possibleFamilyAnswer[0]}/>
-          //         <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio />} label={this.state.possibleFamilyAnswer[1]}/>
-          //         <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio />} label={this.state.possibleFamilyAnswer[2]}/>
-          //       </RadioGroup>
-          //     </Grid> <br/>
-
-          //     <Grid item xs={12}>        
-          //       <Typography className={classes.questionfont}>
-          //         {this.state.foodQuestion}
-          //       </Typography>
-          //       <RadioGroup 
-          //         row
-          //         aria-label="Food"
-          //         name="foodQuestion"
-          //         className={classes.group}
-          //         value={this.state.value}
-          //         onChange={(value) => this.handleOnChangeFood(value)}
-          //       >
-          //         <FormControlLabel value={this.state.possibleFoodAnswer[0]} control={<Radio />} label={this.state.possibleFoodAnswer[0]}/>
-          //         <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio />} label={this.state.possibleFoodAnswer[1]}/>
-          //         <FormControlLabel value={this.state.possibleFoodAnswer[2]} control={<Radio />} label={this.state.possibleFoodAnswer[2]}/>
-          //       </RadioGroup>
-          //     </Grid> <br/>
-            
-          //   {this.state.emotioncounter < 2 && (
-          //     <Button
-          //     color="primary"
-          //     variant="contained"
-          //     className={classes.formItems}
-          //     onClick={this.nextQuestionHandler}
-          //     >
-          //       Continue
-          //     </Button>
-          //   )}
-
-          //   {this.state.emotioncounter >= 2 && (
-          //     <Button
-          //     color="primary"
-          //     variant="contained"
-          //     className={classes.formItems}
-          //     onClick={this.finishHandler}
-          //     >
-          //       Finish
-          //     </Button>
-          //   )}
-
-          // </Grid>
-          // )
+          )       
         }
     };
 
