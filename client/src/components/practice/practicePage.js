@@ -199,27 +199,27 @@ class PracticePage extends Component {
         myTestAnswer9
       } = this.state;
       
-      if (myTestAnswer1 === this.chosenwords[0].correctAnswer) {
+      if (myTestAnswer1 === this.chosenwords[3].correctAnswer) {
         this.state.finalscore += 1;
       }
       
-      if (myTestAnswer2 === this.chosenwords[1].correctAnswer) {
+      if (myTestAnswer2 === this.chosenwords[4].correctAnswer) {
         this.state.finalscore += 1;
       }
 
-      if (myTestAnswer3 === this.chosenwords[2].correctAnswer) {
+      if (myTestAnswer3 === this.chosenwords[8].correctAnswer) {
         this.state.finalscore += 1;
       }
 
-      if (myTestAnswer4 === this.chosenwords[3].correctAnswer) {
+      if (myTestAnswer4 === this.chosenwords[2].correctAnswer) {
         this.state.finalscore += 1;
       }
 
-      if (myTestAnswer5 === this.chosenwords[4].correctAnswer) {
+      if (myTestAnswer5 === this.chosenwords[0].correctAnswer) {
         this.state.finalscore += 1;
       }
 
-      if (myTestAnswer6 === this.chosenwords[5].correctAnswer) {
+      if (myTestAnswer6 === this.chosenwords[1].correctAnswer) {
         this.state.finalscore += 1;
       }
 
@@ -231,7 +231,7 @@ class PracticePage extends Component {
         this.state.finalscore += 1;
       }
 
-      if (myTestAnswer9 === this.chosenwords[8].correctAnswer) {
+      if (myTestAnswer9 === this.chosenwords[5].correctAnswer) {
         this.state.finalscore += 1;
       }
 
@@ -427,15 +427,15 @@ class PracticePage extends Component {
                 <br/>
                 <form className={classes.container}>     
 
-                  { this.renderTestQuestion(0, 'myTestAnswer1') } 
-                  { this.renderTestQuestion(1, 'myTestAnswer2') } 
-                  { this.renderTestQuestion(2, 'myTestAnswer3') } 
-                  { this.renderTestQuestion(3, 'myTestAnswer4') } 
-                  { this.renderTestQuestion(4, 'myTestAnswer5') }
-                  { this.renderTestQuestion(5, 'myTestAnswer6') } 
+                  { this.renderTestQuestion(3, 'myTestAnswer1') } 
+                  { this.renderTestQuestion(4, 'myTestAnswer2') } 
+                  { this.renderTestQuestion(8, 'myTestAnswer3') } 
+                  { this.renderTestQuestion(2, 'myTestAnswer4') } 
+                  { this.renderTestQuestion(0, 'myTestAnswer5') }
+                  { this.renderTestQuestion(1, 'myTestAnswer6') } 
                   { this.renderTestQuestion(6, 'myTestAnswer7') } 
                   { this.renderTestQuestion(7, 'myTestAnswer8') } 
-                  { this.renderTestQuestion(8, 'myTestAnswer9') } 
+                  { this.renderTestQuestion(5, 'myTestAnswer9') } 
                 </form>
                 <Grid
                 container
