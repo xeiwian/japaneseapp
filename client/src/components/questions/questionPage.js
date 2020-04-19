@@ -15,7 +15,7 @@ const styles = theme => ({
     display: 'flex'
   },
   questionfont: {
-    fontSize: 22,
+    fontSize: 24,
     textAlign: 'center'
   },
   formControl: {
@@ -26,6 +26,7 @@ const styles = theme => ({
   },
   group: {
     margin: `${theme.spacing.unit}px 0`,
+    marginLeft: theme.spacing(8),
   },
   title: {
     fontFamily: 'sans-serif',
@@ -40,7 +41,14 @@ const styles = theme => ({
     fontFamily: 'sans-serif',
     fontSize: 18,
     marginTop: theme.spacing(4)
-  }
+  },
+  container: {
+    display: 'column',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    width: 350,
+    margin: `${theme.spacing(0)} auto`
+  },
 });
 
 class QuestionPage extends Component {
@@ -144,6 +152,7 @@ class QuestionPage extends Component {
     }
 
     componentDidMount = () => {   
+        window.scrollTo(0, 0)
         this.setState({
           emotionQuestion: quizQuestions[this.state.emotioncounter].question,
           correctEmotionAnswer: quizQuestions[this.state.emotioncounter].correctAnswer,
@@ -462,7 +471,7 @@ class QuestionPage extends Component {
                   </Box>
                 </Typography>
               </Grid>
-    
+              <br/>
               <Grid
               container
               spacing={0}
@@ -480,6 +489,9 @@ class QuestionPage extends Component {
                     Proceed to lesson
                 </Button>
               </Grid>
+              <br/>
+              <br/>
+              <br/>
             </div>
           )
         } else {
@@ -513,18 +525,12 @@ class QuestionPage extends Component {
                 </Grid> 
                 <br/>
                 <br/>
-                <Grid
-                container
-                spacing={0}
-                direction="column"
-                align="center"
-                justify="center"
-                >       
+                <form className={classes.container}>      
                  <Typography className={classes.questionfont}>
                    {this.state.emotionQuestion}
                  </Typography>
                  <RadioGroup 
-                  row
+                  column
                   aria-label="Emotion"
                   name="emotionQuestion"
                   className={classes.group}
@@ -534,22 +540,13 @@ class QuestionPage extends Component {
                   <FormControlLabel value={this.state.possibleEmotionAnswer[0]} control={<Radio color='primary'/>} label={this.state.possibleEmotionAnswer[0]}/>
                   <FormControlLabel value={this.state.possibleEmotionAnswer[1]} control={<Radio color='primary'/>} label={this.state.possibleEmotionAnswer[1]}/>
                   <FormControlLabel value={this.state.possibleEmotionAnswer[2]} control={<Radio color='primary'/>} label={this.state.possibleEmotionAnswer[2]}/>
-                </RadioGroup>
-              </Grid> 
-              <br/>
-              <Grid
-                container
-                spacing={0}
-                direction="column"
-                align="center"
-                justify="center"
-                className={classes.instructions}
-              >      
+                </RadioGroup> 
+                <br/>      
                 <Typography className={classes.questionfont}>
                   {this.state.familyQuestion}
                 </Typography>
                 <RadioGroup 
-                  row
+                  column
                   aria-label="Family"
                   name="familyQuestion"
                   className={classes.group}
@@ -560,21 +557,12 @@ class QuestionPage extends Component {
                   <FormControlLabel value={this.state.possibleFamilyAnswer[1]} control={<Radio color='primary'/>} label={this.state.possibleFamilyAnswer[1]}/>
                   <FormControlLabel value={this.state.possibleFamilyAnswer[2]} control={<Radio color='primary'/>} label={this.state.possibleFamilyAnswer[2]}/>
                 </RadioGroup>
-              </Grid> 
-              <br/>
-              <Grid
-                container
-                spacing={0}
-                direction="column"
-                align="center"
-                justify="center"
-                className={classes.instructions}
-              >      
+                <br/>  
                 <Typography className={classes.questionfont}>
                   {this.state.foodQuestion}
                 </Typography>
                 <RadioGroup 
-                  row
+                  column
                   aria-label="Food"
                   name="foodQuestion"
                   className={classes.group}
@@ -585,39 +573,41 @@ class QuestionPage extends Component {
                   <FormControlLabel value={this.state.possibleFoodAnswer[1]} control={<Radio color='primary'/>} label={this.state.possibleFoodAnswer[1]}/>
                   <FormControlLabel value={this.state.possibleFoodAnswer[2]} control={<Radio color='primary'/>} label={this.state.possibleFoodAnswer[2]}/>
                 </RadioGroup>
-              </Grid> 
-
-              <Grid
-                container
-                spacing={0}
-                direction="column"
-                align="center"
-                justify="center"
-              >   
-                {this.state.emotioncounter < 2 && (
-                <Button
-                color="primary"
-                variant="contained"
-                size="large"
-                className={classes.button}
-                onClick={this.nextQuestionHandler}
-                >
-                  Continue
-                </Button>
-                )}
-
-                {this.state.emotioncounter >= 2 && (
+                </form>
+                <Grid
+                  container
+                  spacing={0}
+                  direction="column"
+                  align="center"
+                  justify="center"
+                >   
+                  {this.state.emotioncounter < 2 && (
                   <Button
                   color="primary"
                   variant="contained"
                   size="large"
                   className={classes.button}
-                  onClick={this.finishHandler}
+                  onClick={this.nextQuestionHandler}
                   >
-                    Finish
+                    Continue
                   </Button>
-                )}
-              </Grid>
+                  )}
+
+                  {this.state.emotioncounter >= 2 && (
+                    <Button
+                    color="primary"
+                    variant="contained"
+                    size="large"
+                    className={classes.button}
+                    onClick={this.finishHandler}
+                    >
+                      Finish
+                    </Button>
+                  )}
+                </Grid>
+              <br/>
+              <br/>
+              <br/>
             </div>
           )       
         }
