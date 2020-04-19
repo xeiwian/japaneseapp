@@ -189,7 +189,7 @@ Question.insertMany(
             content: "Milk => ミルク (miruku)",
             question: "Milk",
             correctAnswer: "ミルク (miruku)",
-            possibleAnswer: ["チーズ (chīzu)", "ミルク (miruku)", "ヨーグルト (yōguruto) "]
+            possibleAnswer: ["チーズ (chīzu)", "ミルク (miruku)", "ヨーグルト (yōguruto)"]
         },
         {
             type: "Food",
