@@ -3,6 +3,7 @@ import quizQuestions from '../questions';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -105,6 +106,7 @@ class PracticePage extends Component {
       wrong: false,
       cont: false,
       done: false,
+      donePractice: false,
       result: false,
       counter: 0,
       finalscore: 0
@@ -178,6 +180,12 @@ class PracticePage extends Component {
         counter: this.state.counter + 1,
         cont: false
       });
+    }
+
+    donePracticeHandler = () => {
+      this.setState({
+        donePractice: true
+      })
     }
 
     doneHandler = () => {
@@ -309,7 +317,7 @@ class PracticePage extends Component {
         color="primary"
         variant="contained"
         className={classes.practiceBtn}
-        onClick={this.doneHandler}
+        onClick={this.donePracticeHandler}
         >
           Finish
         </Button>
@@ -350,7 +358,7 @@ class PracticePage extends Component {
   
     render() {
         const { classes, name } = this.props;
-        const { cont, done, result } = this.state;
+        const { cont, done, result, donePractice } = this.state;
 
         if (result) {
           return(
@@ -457,6 +465,69 @@ class PracticePage extends Component {
                 <br/>
                 <br/>
                 <br/>
+              </div>
+            )
+          }
+
+          if (donePractice) {
+            return(
+              <div>
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                style={{  backgroundColor: '#3d5afe', height: 80 }}
+                >
+                  <Typography variant="headline">
+                    <Box className={classes.title} color="white" m={0}>
+                      Lesson
+                    </Box>
+                  </Typography>
+                </Grid> 
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                >
+                  <Typography variant="headline">
+                  <Box className={classes.finalresult} m={0}>
+                    The lesson is over! You have finished rehearsing all the words. 
+                  </Box>
+                  <br/>
+                  <Box className={classes.finalresult} m={0}>
+                    Now let's test how many words you have learned from the lesson that is prepared for you.
+                  </Box>
+                  <br/>
+                  <Box className={classes.finalresult} m={0}>
+                    Please select the button below to begin the final test.
+                  </Box>
+                </Typography>
+                </Grid> 
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                align="center"
+                justify="center"
+                >
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    size="large"
+                    className={classes.button}
+                    onClick={this.doneHandler}
+                  >
+                    Begin Final Test 
+                  </Button>
+                </Grid>
               </div>
             )
           }
@@ -568,17 +639,13 @@ class PracticePage extends Component {
                   </Card>
                 </form>
                 <br/>
-                <Grid
-                container
-                spacing={0}
-                direction="column"
+                <Container
                 align="center"
-                justify="center"
                 >
                   { this.renderMessage() }
                   <br/>
                   { this.renderButton() }
-                </Grid>
+                </Container>
               </div>
             )
           }
