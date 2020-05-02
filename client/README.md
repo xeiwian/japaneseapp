@@ -66,11 +66,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-
-DONE:
-1) made front end react and back end express run tgt concurrently
-
-TODO: 
-1) store info into mongodb
-2) find a way to display the info with express  
